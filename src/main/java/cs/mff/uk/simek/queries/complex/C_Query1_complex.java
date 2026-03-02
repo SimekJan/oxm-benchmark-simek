@@ -1,22 +1,22 @@
-package cs.mff.uk.simek.queries.basic_queries;
-
-import java.util.List;
+package cs.mff.uk.simek.queries.complex;
 
 import cs.mff.uk.simek.queries.Query;
 import org.hibernate.Session;
 
+import java.util.List;
+
 /**
  * Aggregation + sorting + join
  */
-public class Query8 implements Query {
+public class C_Query1_complex implements Query {
 
     @Override
     public void perform(Session session) {
         String hql =    "SELECT c.customerId, c.companyName, COUNT(o.orderId) " +
-                        "FROM Customers c " +
-                        "JOIN c.orders o " +
-                        "GROUP BY c.customerId, c.companyName " +
-                        "ORDER BY COUNT(o.orderId) DESC";
+                "FROM Customers c " +
+                "JOIN c.orders o " +
+                "GROUP BY c.customerId, c.companyName " +
+                "ORDER BY COUNT(o.orderId) DESC";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 

@@ -54,7 +54,7 @@ public class Supplier implements java.io.Serializable {
     @Column(name = "homepage")
     private String homepage;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "suppliers")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supplier")
     private Set<Product> products = new HashSet<>();
 
     public Supplier(short supplierId, String companyName) {

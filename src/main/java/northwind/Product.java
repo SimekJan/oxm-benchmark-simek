@@ -27,7 +27,7 @@ public class Product implements java.io.Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id")
-    private Supplier suppliers;
+    private Supplier supplier;
 
     @Column(name = "product_name", nullable = false, length = 40)
     private String productName;

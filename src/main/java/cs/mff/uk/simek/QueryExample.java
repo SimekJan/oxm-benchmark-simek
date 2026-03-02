@@ -1,7 +1,8 @@
 package cs.mff.uk.simek;
 
-import cs.mff.uk.simek.queries.*;
-import cs.mff.uk.simek.queries.basic_queries.Query0;
+import cs.mff.uk.simek.queries.Query;
+import cs.mff.uk.simek.queries.basic_queries_refined.*;
+import cs.mff.uk.simek.queries.schema.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,7 +16,7 @@ public class QueryExample {
         Transaction tx = session.beginTransaction();
 
         // Queries
-        Query q = new Query0();
+        Query q = new Query18_map_reduce();
         q.perform(session);
 
         // End session

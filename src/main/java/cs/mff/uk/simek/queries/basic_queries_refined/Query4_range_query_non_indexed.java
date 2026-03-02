@@ -1,0 +1,28 @@
+package cs.mff.uk.simek.queries.basic_queries_refined;
+
+import cs.mff.uk.simek.queries.Query;
+import northwind.Employee;
+import org.hibernate.Session;
+
+import java.time.LocalDate;
+import java.util.List;
+
+/*
+    Get all users born between 1.1.1950 and 1.1.1960 (Range query).
+ */
+public class Query4_range_query_non_indexed implements Query {
+    @Override
+    public void perform(Session session) {
+        String hql =    "FROM Employees e " +
+                        "WHERE e.birthDate BETWEEN :birth_from AND :birth_to";
+
+        List<Employee> empls = session.createQuery(hql, Employee.class)
+                                    .setParameter("birth_from", LocalDate.of(1950, 1, 1))
+                                    .setParameter("birth_to", LocalDate.of(1960,1,1))
+                                    .getResultList();
+
+        for (Employee e : empls) {
+            System.out.println(e.getFirstName() + " " + e.getLastName() + ": " + e.getBirthDate());
+        }
+    }
+}

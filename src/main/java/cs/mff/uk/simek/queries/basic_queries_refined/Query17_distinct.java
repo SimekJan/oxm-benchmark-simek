@@ -1,18 +1,19 @@
-package cs.mff.uk.simek.queries.basic_queries;
+package cs.mff.uk.simek.queries.basic_queries_refined;
 
 import cs.mff.uk.simek.queries.Query;
 import org.hibernate.Session;
 
 import java.util.List;
 
-/**
- * Distinct
+/*
+    find distinct customer cities
+    TODO: should also cover when GROUP BY is used without aggregation
  */
-public class Query5 implements Query {
+public class Query17_distinct implements Query {
     @Override
     public void perform(Session session) {
-        String hql =    "SELECT DISTINCT (e.city) " +
-                        "FROM Employees e ";
+        String hql =    "SELECT DISTINCT (c.city) " +
+                        "FROM Customers c ";
 
         List<String> results = session.createQuery(hql, String.class).getResultList();
 

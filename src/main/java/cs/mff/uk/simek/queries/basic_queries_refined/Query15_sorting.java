@@ -1,19 +1,20 @@
-package cs.mff.uk.simek.queries.basic_queries;
+package cs.mff.uk.simek.queries.basic_queries_refined;
 
 import cs.mff.uk.simek.queries.Query;
 import org.hibernate.Session;
 
 import java.util.List;
 
-/**
- * Sorting
+/*
+    Orders based on unit price
+    (not indexed column)
  */
-public class Query2 implements Query {
+public class Query15_sorting implements Query {
     @Override
     public void perform(Session session) {
-        String hql = "SELECT p.productName, p.unitPrice " +
-                "FROM Products p " +
-                "ORDER BY p.unitPrice";
+        String hql =    "SELECT p.productName, p.unitPrice " +
+                        "FROM Products p " +
+                        "ORDER BY p.unitPrice";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 

@@ -1,10 +1,13 @@
-package cs.mff.uk.simek.queries.basic_queries;
+package cs.mff.uk.simek.queries.basic_queries_refined;
 
 import cs.mff.uk.simek.queries.Query;
 import northwind.Employee;
 import org.hibernate.Session;
 
-public class Query0 implements Query {
+/*
+    Get employee with specific id. That is filter by indexed column.
+ */
+public class Query1_select_indexed implements Query {
     @Override
     public void perform(Session session) {
         String hql =    "FROM Employees e " +
@@ -15,3 +18,7 @@ public class Query0 implements Query {
         System.out.println(e.getFirstName() + " - " + e.getLastName());
     }
 }
+
+/*
+    TODO: co víc komplexní filtrování přes více sloupců ?
+ */

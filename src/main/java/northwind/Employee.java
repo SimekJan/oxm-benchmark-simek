@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,13 +38,11 @@ public class Employee implements java.io.Serializable {
     @Column(name = "title_of_courtesy", length = 25)
     private String titleOfCourtesy;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "birth_date", length = 13)
-    private Date birthDate;
+    private LocalDate birthDate;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "hire_date", length = 13)
-    private Date hireDate;
+    private LocalDate hireDate;
 
     @Column(name = "address", length = 60)
     private String address;

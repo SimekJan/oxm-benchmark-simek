@@ -12,11 +12,11 @@ public class Query1 implements Query {
 
     @Override
     public void perform(Session session) {
-        String hql = "SELECT p.productName, p.unitsInStock, p.unitPrice " +
-                "FROM Products p " +
-                "WHERE p.productName LIKE 'S%' " +
-                "AND p.unitsInStock <= 50 " +
-                "AND p.unitPrice >= 15.0";
+        String hql =    "SELECT p.productName, p.unitsInStock, p.unitPrice " +
+                        "FROM Products p " +
+                        "WHERE p.productName LIKE 'S%' " +
+                        "AND p.unitsInStock <= 50 " +
+                        "AND p.unitPrice >= 15.0";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 

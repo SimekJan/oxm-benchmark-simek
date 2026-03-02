@@ -29,7 +29,7 @@ public class Main {
             List<Product> products = session.createQuery("from Products", Product.class).getResultList();
             List<Order> orders = session.createQuery("from Orders", Order.class).getResultList();
 
-            for (Category c : categories) {
+         /*   for (Category c : categories) {
                 System.out.println(c.getCategoryId() + " - " + c.getCategoryName());
             }
             System.out.println("-------------------------------------------------------------------------");
@@ -39,21 +39,21 @@ public class Main {
             System.out.println("-------------------------------------------------------------------------");
             for (OrderDetail o : orderDetails) {
                 System.out.println(o.getId() + " - " + o.getQuantity() + " - " + o.getDiscount());
-            }
+            }*/
             System.out.println("-------------------------------------------------------------------------");
             for (Employee e : employees) {
                 String managerName = (e.getManager() != null) ? e.getManager().getLastName() : "-";
                 System.out.println(e.getLastName() + " - " + e.getFirstName() + " - " + e.getCountry()
                         + " - " + e.getBirthDate() + " - " + managerName + " - " + e.getEmployeeId());
             }
-            System.out.println("-------------------------------------------------------------------------");
+       /*     System.out.println("-------------------------------------------------------------------------");
             for (Product p : products) {
                 System.out.println(p.getProductName() + " - " + p.getUnitPrice() + " - " + p.getUnitsInStock());
             }
             System.out.println("-------------------------------------------------------------------------");
             for (Order o : orders) {
                 System.out.println(o.getShipName() + " - " + o.getShipRegion());
-            }
+            }*/
 
             session.getTransaction().commit();
         } catch (Exception e) {
