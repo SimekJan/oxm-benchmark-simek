@@ -35,4 +35,6 @@ public class Query9_neighbors implements Query {
         TODO: nefunguje správně
 
         TODO: ověřit, že opravdu nejde jinak
+
+        TODO: změnit na procházení supplierů
  */

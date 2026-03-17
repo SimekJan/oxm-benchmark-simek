@@ -1,7 +1,7 @@
 package cs.mff.uk.simek.relational;
 
 import cs.mff.uk.simek.relational.queries.Query;
-import cs.mff.uk.simek.relational.queries.basic.Query18_map_reduce;
+import cs.mff.uk.simek.relational.queries.basic.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,7 +15,7 @@ public class QueryExample {
         Transaction tx = session.beginTransaction();
 
         // Queries
-        Query q = new Query18_map_reduce();
+        Query q = new Query6_max();
         q.perform(session);
 
         // End session

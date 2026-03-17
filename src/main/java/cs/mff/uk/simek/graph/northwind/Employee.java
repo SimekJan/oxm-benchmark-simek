@@ -1,20 +1,32 @@
 package cs.mff.uk.simek.graph.northwind;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.Index;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @NodeEntity
 public class Employee {
+
+    public Employee(String firstName, String lastName, LocalDate date, String city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = date;
+        this.city = city;
+    }
 
     @Id
     @GeneratedValue
@@ -22,16 +34,37 @@ public class Employee {
 
     private String firstName;
 
+    @Index
     private String lastName;
 
     private LocalDate birthDate;
 
     private String city;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Relationship(type = "REPORTS_TO")
     private Employee reportsTo;
 
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Relationship(type = "REPORTS_TO", direction = Relationship.INCOMING)
-    private List<Employee> subordinates;
+    private Set<Employee> subordinates;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @Relationship(type = "IS_RESPONSIBLE_FOR")
+    private List<Order> orders;
+
+    public void addOrder(Order o) {
+        if (orders == null) orders = new ArrayList<>();
+        orders.add(o);
+        o.setEmployee(this);
+    }
+
+    public void addSubordinate(Employee e) {
+        if (subordinates == null) subordinates = new HashSet<>();
+        subordinates.add(e);
+        e.setReportsTo(this);
+    }
 }

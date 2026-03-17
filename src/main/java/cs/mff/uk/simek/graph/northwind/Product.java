@@ -1,6 +1,7 @@
 package cs.mff.uk.simek.graph.northwind;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -15,6 +16,11 @@ import java.util.Set;
 @NodeEntity
 public class Product {
 
+    public Product(String name, Integer unitPrice) {
+        this.productName = name;
+        this.unitPrice = unitPrice;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
@@ -23,10 +29,13 @@ public class Product {
 
     private Integer unitPrice;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Relationship(type = "IS_PRODUCED_BY")
     private Supplier supplier;
 
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Relationship(type = "INCLUDES", direction = Relationship.INCOMING)
     private Set<Order> orders;
 }

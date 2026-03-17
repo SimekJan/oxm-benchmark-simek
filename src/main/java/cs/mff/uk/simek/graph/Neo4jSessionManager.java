@@ -7,7 +7,7 @@ import org.neo4j.ogm.session.SessionFactory;
 public class Neo4jSessionManager {
 
     private static final String DOMAIN_PACKAGE = "cs.mff.uk.simek.graph.northwind";
-    private static SessionFactory sessionFactory;
+    private static final SessionFactory sessionFactory;
 
     static {
         Configuration configuration = new Configuration.Builder()

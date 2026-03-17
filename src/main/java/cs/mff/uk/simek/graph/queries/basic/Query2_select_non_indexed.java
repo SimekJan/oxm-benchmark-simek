@@ -8,19 +8,14 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Collection;
 
-public class Query1_select_indexed implements Query {
+public class Query2_select_non_indexed implements Query {
     @Override
     public void perform(Session session) {
 
-        Filter filter = new Filter("lastName", ComparisonOperator.EQUALS, "CEO");
+        Filter filter = new Filter("firstName", ComparisonOperator.EQUALS, "Alice");
 
         Collection<Employee> result = session.loadAll(Employee.class, filter);
 
         System.out.println("Found " + result.size() + " employee.");
     }
 }
-
-/*
-    TODO: problém s indexovanými sloupci, nepovedlo se mi uložit id, aby bylo při každém spuštění stejné
-            zatím je lastName indexed explicitně
- */
