@@ -10,7 +10,7 @@ public class QueryExample {
 
         Session session = Neo4jSessionManager.getSession();
 
-        Query q = new Query12_union();
+        Query q = new Query18_map_reduce();
 
         q.perform(session);
     }

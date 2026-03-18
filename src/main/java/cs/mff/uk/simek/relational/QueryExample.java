@@ -15,7 +15,7 @@ public class QueryExample {
         Transaction tx = session.beginTransaction();
 
         // Queries
-        Query q = new Query6_max();
+        Query q = new Query13_intersect();
         q.perform(session);
 
         // End session
