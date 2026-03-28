@@ -27,4 +27,5 @@ public class Query18_map_reduce implements Query {
 
 /*
     TODO: není map reduce
+    uplne pryc
  */

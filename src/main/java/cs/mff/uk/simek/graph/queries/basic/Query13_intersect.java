@@ -29,4 +29,5 @@ public class Query13_intersect implements Query {
 
 /*
     TODO: není úplně 1:1 intersect, ale asi lepší není
+    APOC knihovna
  */
