@@ -7,10 +7,13 @@ import org.bson.types.ObjectId;
 @Data
 @NoArgsConstructor
 public class Customer {
+
+    public Customer(String companyName, String city) {
+        this.companyName = companyName;
+        this.city = city;
+    }
+
     private ObjectId id;
     private String companyName;
-
-    public Customer(String companyName) {
-        this.companyName = companyName;
-    }
+    private String city;
 }
