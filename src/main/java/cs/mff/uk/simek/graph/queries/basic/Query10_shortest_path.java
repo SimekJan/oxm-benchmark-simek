@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Find shortest path between two given suppliers
+ */
 public class Query10_shortest_path implements Query {
     @Override
     public void perform(Session session) {

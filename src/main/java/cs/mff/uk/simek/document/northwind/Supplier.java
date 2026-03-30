@@ -18,8 +18,8 @@ public class Supplier {
         suppliedBy = new ArrayList<>();
     }
 
-    ObjectId id;
-    String companyName;
-    String city;
-    List<ObjectId> suppliedBy;
+    private ObjectId id;
+    private String companyName;
+    private String city;
+    private List<ObjectId> suppliedBy;
 }

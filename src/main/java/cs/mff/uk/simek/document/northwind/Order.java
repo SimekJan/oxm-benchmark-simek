@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,8 +16,8 @@ public class Order {
         this.products = productIds;
     }
 
-    ObjectId id;
-    ObjectId employee;
-    ObjectId customer;
-    List<ObjectId> products;
+    private ObjectId id;
+    private ObjectId employee;
+    private ObjectId customer;
+    private List<ObjectId> products;
 }

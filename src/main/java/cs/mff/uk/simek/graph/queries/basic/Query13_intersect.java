@@ -5,6 +5,9 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Map;
 
+/*
+    Find all cities in both Customers and Suppliers
+ */
 public class Query13_intersect implements Query {
     @Override
     public void perform(Session session) {

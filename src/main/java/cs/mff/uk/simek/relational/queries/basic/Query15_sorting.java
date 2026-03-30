@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 /*
-    Orders based on unit price
+    Products based on unit price
     (not indexed column)
  */
 public class Query15_sorting implements Query {

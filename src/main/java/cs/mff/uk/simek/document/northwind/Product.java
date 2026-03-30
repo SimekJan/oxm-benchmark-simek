@@ -13,8 +13,8 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-    ObjectId id;
-    String productName;
-    Integer unitPrice;
-    ObjectId supplier;
+    private ObjectId id;
+    private String productName;
+    private Integer unitPrice;
+    private ObjectId supplier;
 }

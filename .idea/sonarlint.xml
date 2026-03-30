@@ -3,7 +3,7 @@
   <component name="SonarLintProjectSettings">
     <option name="moduleMapping">
       <map>
-        <entry key="hibernate_test_app" value="jdbc_test_app" />
+        <entry key="oxm-benchmark-simek" value="hibernate_test_app" />
       </map>
     </option>
   </component>

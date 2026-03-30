@@ -10,17 +10,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Employee {
 
-    public Employee(String firstName, String lastName, LocalDate birthDate, String city) {
+    public Employee(String firstName, String lastName, LocalDate birthDate, LocalDate hireDate, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.hireDate = hireDate;
         this.city = city;
     }
 
-    ObjectId id;
-    String firstName;
-    String lastName;
-    LocalDate birthDate;
-    String city;
-    ObjectId reportsTo;
+    private ObjectId id;
+    private String firstName;
+    private String lastName;
+    private LocalDate birthDate;
+    private LocalDate hireDate;
+    private String city;
+    private ObjectId reportsTo;
 }
