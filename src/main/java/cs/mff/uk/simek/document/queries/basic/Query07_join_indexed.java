@@ -13,7 +13,7 @@ import java.util.List;
 import static com.mongodb.client.model.Aggregates.lookup;
 
 /**
- * Join orders with customers on employee ID
+ * Join orders with employees on employee ID
  */
 public class Query07_join_indexed implements Query {
     @Override
@@ -24,7 +24,7 @@ public class Query07_join_indexed implements Query {
                 lookup("Employees",       // from collection
                         "employee",             // local field
                         "_id",                  // foreign field
-                        "employee")           // output array field
+                        "employee")             // output array field
         ), Document.class).into(new ArrayList<>());
 
         for (Document doc : result) {

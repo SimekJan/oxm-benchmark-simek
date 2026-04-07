@@ -5,46 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d9ed907-1c72-4f78-abdd-54d4ac452013" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query01_select_indexed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query02_select_non_indexed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query03_range_query_indexed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query04_range_query_non_indexed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query05_count.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query06_max.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query07_join_indexed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query08_join_non_indexed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query09_neighbours.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query10_shortest_path.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query11_optional_traversal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query12_union.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query13_intersect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query14_diff.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query15_sorting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query16_sorting_indexed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query17_distinct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query18_map_reduce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/MongoDbManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/MongoDbManger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/QueryExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/northwind/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/northwind/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/northwind/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/northwind/helper/PopulateWithDummyData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/queries/Query.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/queries/basic/Query7_join_indexed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/oxm-benchmark-simek/cs/mff/uk/simek/document/QueryExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/oxm-benchmark-simek/cs/mff/uk/simek/document/QueryExample.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/oxm-benchmark-simek/cs/mff/uk/simek/document/queries/basic/Query06_max.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/oxm-benchmark-simek/cs/mff/uk/simek/document/queries/basic/Query06_max.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/oxm-benchmark-simek/cs/mff/uk/simek/document/queries/basic/Query18_map_reduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/oxm-benchmark-simek/cs/mff/uk/simek/document/queries/basic/Query18_map_reduce.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/QueryExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/QueryExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Supplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/PopulateWithDummyData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/PopulateWithDummyData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/Query.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/QueryExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/QueryExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query10_shortest_path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query10_shortest_path.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query12_union.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query12_union.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query13_intersect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query13_intersect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query14_diff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query14_diff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/queries/basic/Query15_sorting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/queries/basic/Query15_sorting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query06_max.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query06_max.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query07_join_indexed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query07_join_indexed.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,32 +47,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.CriteriaExample.executor": "Run",
-    "Application.DropMongoDb.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.PopulateWithDummyData.executor": "Run",
-    "Application.QueryExample.executor": "Run",
-    "Application.cs.mff.uk.simek.Main.executor": "Run",
-    "Application.cs.mff.uk.simek.QueryExample.executor": "Run",
-    "Application.cs.mff.uk.simek.document.northwind.helper.PopulateWithDummyData.executor": "Run",
-    "Application.cs.mff.uk.simek.graph.QueryExample.executor": "Run",
-    "Application.cs.mff.uk.simek.relational.QueryExample.executor": "Run",
-    "Maven.hibernate_test_app [install].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/drtic/Desktop/diplomka",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CriteriaExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DropMongoDb.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PopulateWithDummyData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.QueryExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.cs.mff.uk.simek.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.cs.mff.uk.simek.QueryExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.cs.mff.uk.simek.document.northwind.helper.PopulateWithDummyData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.cs.mff.uk.simek.graph.QueryExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.cs.mff.uk.simek.relational.QueryExample.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.hibernate_test_app [install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/drtic/Desktop/diplomka&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\drtic\Desktop\jdbc_test_app\src\main\java" />
@@ -113,13 +87,26 @@
       <recent name="cs.mff.uk.simek.graph.queries.basic" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.QueryExample">
+  <component name="RunManager" selected="Application.cs.mff.uk.simek.document_embedded.QueryExample">
     <configuration name="DropMongoDb" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.document.northwind.helper.DropMongoDb" />
       <module name="oxm-benchmark-simek" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="cs.mff.uk.simek.document.northwind.helper.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PopulateWithDummyData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.document_embedded.northwind.helper.PopulateWithDummyData" />
+      <module name="oxm-benchmark-simek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs.mff.uk.simek.document_embedded.northwind.helper.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -140,6 +127,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="cs.mff.uk.simek.document_embedded.QueryExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.document_embedded.QueryExample" />
+      <module name="oxm-benchmark-simek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs.mff.uk.simek.document_embedded.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="cs.mff.uk.simek.document.northwind.helper.PopulateWithDummyData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.document.northwind.helper.PopulateWithDummyData" />
       <module name="oxm-benchmark-simek" />
@@ -153,50 +153,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cs.mff.uk.simek.graph.QueryExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.graph.QueryExample" />
-      <module name="oxm-benchmark-simek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs.mff.uk.simek.graph.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="cs.mff.uk.simek.relational.QueryExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.relational.QueryExample" />
-      <module name="oxm-benchmark-simek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs.mff.uk.simek.relational.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="oxm-benchmark-simek" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="oxm-benchmark-simek" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.cs.mff.uk.simek.document_embedded.QueryExample" />
+        <item itemvalue="Application.PopulateWithDummyData" />
+        <item itemvalue="Application.DropMongoDb" />
         <item itemvalue="Application.QueryExample" />
         <item itemvalue="Application.cs.mff.uk.simek.document.northwind.helper.PopulateWithDummyData" />
-        <item itemvalue="Application.DropMongoDb" />
-        <item itemvalue="Application.cs.mff.uk.simek.graph.QueryExample" />
-        <item itemvalue="Application.cs.mff.uk.simek.relational.QueryExample" />
       </list>
     </recent_temporary>
   </component>

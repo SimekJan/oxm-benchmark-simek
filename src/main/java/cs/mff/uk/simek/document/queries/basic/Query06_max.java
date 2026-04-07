@@ -2,7 +2,6 @@ package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import cs.mff.uk.simek.document.northwind.Employee;
 import cs.mff.uk.simek.document.northwind.Product;
 import cs.mff.uk.simek.document.queries.Query;
 import org.bson.Document;

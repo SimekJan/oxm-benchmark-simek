@@ -9,7 +9,7 @@ public class QueryExample {
     public static void main(String[] args) {
         MongoDatabase db = MongoDbManger.getDb();
 
-        Query q = new Query18_map_reduce();
+        Query q = new Query07_join_indexed();
 
         q.runQuery(db);
     }
