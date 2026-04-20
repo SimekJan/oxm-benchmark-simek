@@ -9,23 +9,17 @@ import java.time.LocalDate;
 
 import static com.mongodb.client.model.Filters.eq;
 
-/**
- * Find Employee hired on specific date.
- * Hire date is indexed.
+/*
+    Get employee with specific id. That is filter by indexed column.
  */
 public class Query01_select_indexed implements Query {
     @Override
     public void runQuery(MongoDatabase db) {
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
 
-        Employee found = employees.find(eq("hireDate", LocalDate.of(2018,3,4))).first();
+        Employee found = employees.find(eq("employeeId", 5L)).first();
         assert found != null;
 
         System.out.println(found.getFirstName() + " " + found.getLastName());
     }
 }
-
-/*
-    TODO: přišlo mi, jako dobré řešení, ale není konzistentní s ostatními verzemi
-            což obecně platí pro více query
- */

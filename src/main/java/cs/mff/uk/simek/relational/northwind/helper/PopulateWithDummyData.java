@@ -1,8 +1,9 @@
-package cs.mff.uk.simek.graph.northwind.helper;
+package cs.mff.uk.simek.relational.northwind.helper;
 
-import cs.mff.uk.simek.graph.Neo4jSessionManager;
-import cs.mff.uk.simek.graph.northwind.*;
-import org.neo4j.ogm.session.Session;
+import cs.mff.uk.simek.relational.northwind.*;
+import cs.mff.uk.simek.relational.HibernateSessionManager;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -11,7 +12,8 @@ public class PopulateWithDummyData {
 
     public static void main(String[] args) {
 
-        Session session = Neo4jSessionManager.getSession();
+        Session session = HibernateSessionManager.getSession();
+        Transaction tx = session.beginTransaction();
 
         // ---------- SUPPLIERS ----------
 
@@ -21,7 +23,6 @@ public class PopulateWithDummyData {
         Supplier delta = new Supplier(4L, "Delta", "Plzen");
         Supplier epsilon = new Supplier(5L, "Epsilon", "Liberec");
 
-// bidirectional supplier chain
         alpha.addSuppliesTo(beta);
         alpha.addSuppliesTo(gamma);
 
@@ -35,16 +36,15 @@ public class PopulateWithDummyData {
         delta.addSuppliesTo(gamma);
 
 
-// ---------- PRODUCTS ----------
+        // ---------- PRODUCTS ----------
 
-        Product p1 = new Product(1L, "Bolt", 10);
-        Product p2 = new Product(2L, "Nut", 15);
-        Product p3 = new Product(3L, "Screw", 9);
-        Product p4 = new Product(4L, "Steel Plate", 12);
-        Product p5 = new Product(5L, "Gear", 12);
-        Product p6 = new Product(6L, "Valve", 16);
+        Product p1 = new Product(1L, "Bolt", 10F);
+        Product p2 = new Product(2L, "Nut", 15F);
+        Product p3 = new Product(3L, "Screw", 9F);
+        Product p4 = new Product(4L, "Steel Plate", 12F);
+        Product p5 = new Product(5L, "Gear", 12F);
+        Product p6 = new Product(6L, "Valve", 16F);
 
-// connect BOTH sides
         alpha.addProduct(p1);
         alpha.addProduct(p2);
 
@@ -54,16 +54,15 @@ public class PopulateWithDummyData {
         epsilon.addProduct(p6);
 
 
-// ---------- EMPLOYEES ----------
+        // ---------- EMPLOYEES ----------
 
         Employee ceo = new Employee(1L, "Alice", "CEO", LocalDate.of(1985,1,1), LocalDate.of(2020,3,15), "Karlovy Vary");
-        Employee manager1 = new Employee(2L, "Bob", "Manager", LocalDate.of(1990,1,1), LocalDate.of(2020,4,15),  "Praha");
+        Employee manager1 = new Employee(2L, "Bob", "Manager", LocalDate.of(1990,1,1), LocalDate.of(2020,4,15), "Praha");
         Employee manager2 = new Employee(3L, "Carol", "Manager", LocalDate.of(1992,1,1), LocalDate.of(2018,3,4), "Brno");
         Employee worker1 = new Employee(4L, "David", "Worker", LocalDate.of(1994,1,1), LocalDate.of(2005,7,28), "Liberec");
         Employee worker2 = new Employee(5L, "Eva", "Worker", LocalDate.of(1995,1,1), LocalDate.of(2008,4,26), "Ostrava");
         Employee worker3 = new Employee(6L, "Steve", "Worker", LocalDate.of(2001,1,1), LocalDate.of(2024,1,1), "Liberec");
 
-// hierarchy (both sides)
         ceo.addSubordinate(manager1);
         ceo.addSubordinate(manager2);
 
@@ -72,7 +71,7 @@ public class PopulateWithDummyData {
         manager2.addSubordinate(worker3);
 
 
-// ---------- CUSTOMERS ----------
+        // ---------- CUSTOMERS ----------
 
         Customer c1 = new Customer(1L, "A", "Karlovy Vary");
         Customer c2 = new Customer(2L, "B", "Praha");
@@ -81,7 +80,7 @@ public class PopulateWithDummyData {
         Customer c5 = new Customer(5L, "E", "Brno");
 
 
-// ---------- ORDERS ----------
+        // ---------- ORDERS ----------
 
         Order o1 = new Order();
         Order o2 = new Order();
@@ -90,7 +89,6 @@ public class PopulateWithDummyData {
         Order o5 = new Order();
         Order o6 = new Order();
 
-// customer ↔ order
         c1.addOrder(o1);
         c2.addOrder(o2);
         c3.addOrder(o3);
@@ -98,7 +96,6 @@ public class PopulateWithDummyData {
         c5.addOrder(o5);
         c5.addOrder(o6);
 
-// employee ↔ order
         manager1.addOrder(o1);
         manager1.addOrder(o2);
 
@@ -109,7 +106,6 @@ public class PopulateWithDummyData {
 
         worker2.addOrder(o5);
 
-// order ↔ products
         o1.addProduct(p1);
         o1.addProduct(p3);
 
@@ -124,45 +120,62 @@ public class PopulateWithDummyData {
         o5.addProduct(p2);
         o5.addProduct(p3);
 
-// o6 empty intentionally
 
+        // ---------- PERSIST ----------
 
-// ---------- SAVE ----------
-        session.save(ceo);
-        session.save(manager1);
-        session.save(manager2);
-        session.save(worker1);
-        session.save(worker2);
-        session.save(worker3);
+        session.persist(ceo);
+        session.persist(manager1);
+        session.persist(manager2);
+        session.persist(worker1);
+        session.persist(worker2);
+        session.persist(worker3);
 
-        session.save(alpha);
-        session.save(beta);
-        session.save(gamma);
-        session.save(delta);
-        session.save(epsilon);
+        session.persist(alpha);
+        session.persist(beta);
+        session.persist(gamma);
+        session.persist(delta);
+        session.persist(epsilon);
 
-        session.save(c1);
-        session.save(c2);
-        session.save(c3);
-        session.save(c4);
-        session.save(c5);
+        session.persist(p1);
+        session.persist(p2);
+        session.persist(p3);
+        session.persist(p4);
+        session.persist(p5);
+        session.persist(p6);
 
+        session.persist(c1);
+        session.persist(c2);
+        session.persist(c3);
+        session.persist(c4);
+        session.persist(c5);
+
+        session.persist(o1);
+        session.persist(o2);
+        session.persist(o3);
+        session.persist(o4);
+        session.persist(o5);
+        session.persist(o6);
+
+        tx.commit();
 
         // ---------- VERIFY ----------
 
-        Collection<Supplier> suppliers = session.loadAll(Supplier.class);
+        Collection<Supplier> suppliers = session.createQuery("from Suppliers", Supplier.class).list();
         suppliers.forEach(System.out::println);
 
-        Collection<Employee> employees = session.loadAll(Employee.class);
+        Collection<Employee> employees = session.createQuery("from Employees", Employee.class).list();
         employees.forEach(System.out::println);
 
-        Collection<Order> orders = session.loadAll(Order.class);
+        Collection<Order> orders = session.createQuery("from Orders", Order.class).list();
         orders.forEach(System.out::println);
 
-        Collection<Product> products = session.loadAll(Product.class);
+        Collection<Product> products = session.createQuery("from Products", Product.class).list();
         products.forEach(System.out::println);
 
-        Collection<Customer> customers = session.loadAll(Customer.class);
+        Collection<Customer> customers = session.createQuery("from Customers", Customer.class).list();
         customers.forEach(System.out::println);
+
+        session.close();
+
     }
 }

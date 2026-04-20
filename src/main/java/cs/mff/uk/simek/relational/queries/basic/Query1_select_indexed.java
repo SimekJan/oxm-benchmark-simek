@@ -13,12 +13,8 @@ public class Query1_select_indexed implements Query {
         String hql =    "FROM Employees e " +
                         "WHERE e.employeeId = :id";
 
-        Employee e = session.createQuery(hql, Employee.class).setParameter("id", (short) 5).uniqueResult();
+        Employee e = session.createQuery(hql, Employee.class).setParameter("id", 5L).uniqueResult();
 
         System.out.println(e.getFirstName() + " - " + e.getLastName());
     }
 }
-
-/*
-    TODO: co víc komplexní filtrování přes více sloupců ?
- */

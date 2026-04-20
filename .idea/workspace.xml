@@ -5,9 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d9ed907-1c72-4f78-abdd-54d4ac452013" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/helper/DropDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/helper/PopulateWithDummyData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/oxm-benchmark-simek/cs/mff/uk/simek/relational/HibernateSessionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/oxm-benchmark-simek/cs/mff/uk/simek/relational/HibernateSessionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/QueryExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/QueryExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/northwind/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/northwind/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/northwind/helper/PopulateWithDummyData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/northwind/helper/PopulateWithDummyData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query1_select_indexed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries/basic/Query1_select_indexed.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/HibernateSessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/HibernateSessionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/CustomerDemographic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/OrderDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/OrderDetailsId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Region.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Shipper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/Territory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/UsState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/queries/basic/Query1_select_indexed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/queries/basic/Query1_select_indexed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +59,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.CriteriaExample.executor": "Run",
+    "Application.DropDatabase.executor": "Run",
     "Application.DropMongoDb.executor": "Run",
     "Application.HibernateSessionManager.executor": "Run",
     "Application.Main.executor": "Run",
@@ -46,10 +67,13 @@
     "Application.QueryExample.executor": "Run",
     "Application.cs.mff.uk.simek.Main.executor": "Run",
     "Application.cs.mff.uk.simek.QueryExample.executor": "Run",
+    "Application.cs.mff.uk.simek.document.QueryExample.executor": "Run",
     "Application.cs.mff.uk.simek.document.northwind.helper.PopulateWithDummyData.executor": "Run",
     "Application.cs.mff.uk.simek.document_embedded.QueryExample.executor": "Run",
     "Application.cs.mff.uk.simek.graph.QueryExample.executor": "Run",
+    "Application.cs.mff.uk.simek.graph.northwind.helper.PopulateWithDummyData.executor": "Run",
     "Application.cs.mff.uk.simek.relational.QueryExample.executor": "Run",
+    "Application.cs.mff.uk.simek.relational.northwind.helper.PopulateWithDummyData.executor": "Run",
     "Maven.hibernate_test_app [install].executor": "Run",
     "Maven.oxm-benchmark-simek [clean].executor": "Run",
     "Maven.oxm-benchmark-simek [compile].executor": "Run",
@@ -83,39 +107,13 @@
       <recent name="cs.mff.uk.simek.graph.queries.basic" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.QueryExample">
-    <configuration name="DropMongoDb" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.document.northwind.helper.DropMongoDb" />
+  <component name="RunManager" selected="Application.cs.mff.uk.simek.relational.QueryExample">
+    <configuration name="DropDatabase" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.relational.northwind.helper.DropDatabase" />
       <module name="oxm-benchmark-simek" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cs.mff.uk.simek.document.northwind.helper.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HibernateSessionManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.relational.HibernateSessionManager" />
-      <module name="oxm-benchmark-simek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs.mff.uk.simek.relational.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PopulateWithDummyData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.document_embedded.northwind.helper.PopulateWithDummyData" />
-      <module name="oxm-benchmark-simek" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs.mff.uk.simek.document_embedded.northwind.helper.*" />
+          <option name="PATTERN" value="cs.mff.uk.simek.relational.northwind.helper.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -124,6 +122,32 @@
       </method>
     </configuration>
     <configuration name="QueryExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.graph.QueryExample" />
+      <module name="oxm-benchmark-simek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs.mff.uk.simek.graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cs.mff.uk.simek.document.QueryExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.document.QueryExample" />
+      <module name="oxm-benchmark-simek" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs.mff.uk.simek.document.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cs.mff.uk.simek.relational.QueryExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.relational.QueryExample" />
       <module name="oxm-benchmark-simek" />
       <extension name="coverage">
@@ -136,12 +160,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cs.mff.uk.simek.document_embedded.QueryExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.document_embedded.QueryExample" />
+    <configuration name="cs.mff.uk.simek.relational.northwind.helper.PopulateWithDummyData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cs.mff.uk.simek.relational.northwind.helper.PopulateWithDummyData" />
       <module name="oxm-benchmark-simek" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cs.mff.uk.simek.document_embedded.*" />
+          <option name="PATTERN" value="cs.mff.uk.simek.relational.northwind.helper.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -151,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.cs.mff.uk.simek.relational.QueryExample" />
+        <item itemvalue="Application.cs.mff.uk.simek.relational.northwind.helper.PopulateWithDummyData" />
+        <item itemvalue="Application.cs.mff.uk.simek.document.QueryExample" />
         <item itemvalue="Application.QueryExample" />
-        <item itemvalue="Application.HibernateSessionManager" />
-        <item itemvalue="Application.cs.mff.uk.simek.document_embedded.QueryExample" />
-        <item itemvalue="Application.PopulateWithDummyData" />
-        <item itemvalue="Application.DropMongoDb" />
+        <item itemvalue="Application.DropDatabase" />
       </list>
     </recent_temporary>
   </component>

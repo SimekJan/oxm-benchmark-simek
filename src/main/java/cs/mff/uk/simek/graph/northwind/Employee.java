@@ -21,11 +21,12 @@ import java.util.Set;
 @NodeEntity
 public class Employee {
 
-    public Employee(Long employeeId, String firstName, String lastName, LocalDate date, String city) {
+    public Employee(Long employeeId, String firstName, String lastName, LocalDate birthDate, LocalDate hireDate, String city) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = date;
+        this.birthDate = birthDate;
+        this.hireDate = hireDate;
         this.city = city;
     }
 
@@ -41,6 +42,8 @@ public class Employee {
     private String lastName;
 
     private LocalDate birthDate;
+
+    private LocalDate hireDate;
 
     private String city;
 

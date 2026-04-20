@@ -13,49 +13,34 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Products")
-@Table(name = "products", schema = "public")
+@Entity(name = "Products")
+@Table(name = "products")
 public class Product implements java.io.Serializable {
 
     @Id
-    @Column(name = "product_id", unique = true, nullable = false)
-    private short productId;
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "product_name", nullable = false, length = 40)
+    private String productName;
+
+    @Column(name = "unit_price", precision = 8, scale = 8)
+    private Float unitPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    @Column(name = "product_name", nullable = false, length = 40)
-    private String productName;
+    @ManyToMany(mappedBy = "products")
+    private Set<Order> orders = new HashSet<>();
 
-    @Column(name = "quantity_per_unit", length = 20)
-    private String quantityPerUnit;
-
-    @Column(name = "unit_price", precision = 8, scale = 8)
-    private Float unitPrice;
-
-    @Column(name = "units_in_stock")
-    private Short unitsInStock;
-
-    @Column(name = "units_on_order")
-    private Short unitsOnOrder;
-
-    @Column(name = "reorder_level")
-    private Short reorderLevel;
-
-    @Column(name = "discontinued", nullable = false)
-    private int discontinued;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
-    private Set<OrderDetail> orderDetails = new HashSet<>();
-
-    public Product(short productId, String productName, int discontinued) {
+    public Product(Long productId, String productName, Float unitPrice) {
         this.productId = productId;
         this.productName = productName;
-        this.discontinued = discontinued;
+        this.unitPrice = unitPrice;
     }
 }

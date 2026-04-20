@@ -10,7 +10,7 @@ public class QueryExample {
 
         Session session = Neo4jSessionManager.getSession();
 
-        Query q = new Query14_diff();
+        Query q = new Query1_select_indexed();
 
         q.perform(session);
     }

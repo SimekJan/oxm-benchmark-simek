@@ -17,18 +17,11 @@ public class HibernateSessionManager {
                 .configure(
                         new File("src/main/resources/hibernate.cfg.xml")
                 )
-                .addAnnotatedClass(Category.class)
                 .addAnnotatedClass(Customer.class)
-                .addAnnotatedClass(CustomerDemographic.class)
                 .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Order.class)
-                .addAnnotatedClass(OrderDetail.class)
                 .addAnnotatedClass(Product.class)
-                .addAnnotatedClass(Region.class)
-                .addAnnotatedClass(Shipper.class)
                 .addAnnotatedClass(Supplier.class)
-                .addAnnotatedClass(Territory.class)
-                .addAnnotatedClass(UsState.class)
                 .buildSessionFactory();
 
         return sessionFactory.openSession();
@@ -41,28 +34,20 @@ public class HibernateSessionManager {
         try {
             session.beginTransaction();
 
-            List<Category> categories = session.createQuery("from Categories", Category.class).getResultList();
             List<Customer> customers = session.createQuery("from Customers", Customer.class).getResultList();
-            List<OrderDetail> orderDetails = session.createQuery("from OrderDetails", OrderDetail.class).getResultList();
             List<Employee> employees = session.createQuery("from Employees", Employee.class).getResultList();
             List<Product> products = session.createQuery("from Products", Product.class).getResultList();
             List<Order> orders = session.createQuery("from Orders", Order.class).getResultList();
 
-            for (Category c : categories) {
-                System.out.println(c.getCategoryId() + " - " + c.getCategoryName());
-            }
             System.out.println("-------------------------------------------------------------------------");
             for (Customer c : customers) {
                 System.out.println(c.getCustomerId() + " - " + c.getCompanyName());
             }
             System.out.println("-------------------------------------------------------------------------");
-            for (OrderDetail o : orderDetails) {
-                System.out.println(o.getId() + " - " + o.getQuantity() + " - " + o.getDiscount());
-            }
             System.out.println("-------------------------------------------------------------------------");
             for (Employee e : employees) {
-                String managerName = (e.getManager() != null) ? e.getManager().getLastName() : "-";
-                System.out.println(e.getLastName() + " - " + e.getFirstName() + " - " + e.getCountry()
+                String managerName = (e.getReportsTo() != null) ? e.getReportsTo().getLastName() : "-";
+                System.out.println(e.getLastName() + " - " + e.getFirstName() + " - " + e.getCity()
                         + " - " + e.getBirthDate() + " - " + managerName + " - " + e.getEmployeeId());
             }
        /*     System.out.println("-------------------------------------------------------------------------");

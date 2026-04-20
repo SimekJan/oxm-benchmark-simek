@@ -13,52 +13,51 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Suppliers")
-@Table(name = "suppliers", schema = "public")
+@Entity(name = "Suppliers")
+@Table(name = "suppliers")
 public class Supplier implements java.io.Serializable {
 
     @Id
-    @Column(name = "supplier_id", unique = true, nullable = false)
-    private short supplierId;
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
+
+    @Column(name = "supplier_id")
+    private Long supplierId;
 
     @Column(name = "company_name", nullable = false, length = 40)
     private String companyName;
 
-    @Column(name = "contact_name", length = 30)
-    private String contactName;
-
-    @Column(name = "contact_title", length = 30)
-    private String contactTitle;
-
-    @Column(name = "address", length = 60)
-    private String address;
-
     @Column(name = "city", length = 15)
     private String city;
-
-    @Column(name = "region", length = 15)
-    private String region;
-
-    @Column(name = "postal_code", length = 10)
-    private String postalCode;
-
-    @Column(name = "country", length = 15)
-    private String country;
-
-    @Column(name = "phone", length = 24)
-    private String phone;
-
-    @Column(name = "fax", length = 24)
-    private String fax;
-
-    @Column(name = "homepage")
-    private String homepage;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "supplier")
     private Set<Product> products = new HashSet<>();
 
-    public Supplier(short supplierId, String companyName) {
+    @ManyToMany
+    @JoinTable(
+            name = "supplier_relationship",
+            joinColumns = @JoinColumn(name = "supplier_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "supplied_to_id", referencedColumnName = "id")
+    )
+    private Set<Supplier> suppliesTo = new HashSet<>();
+
+    @ManyToMany(mappedBy = "suppliesTo")
+    private Set<Supplier> suppliedBy = new HashSet<>();
+
+    public Supplier(Long supplierId, String companyName, String city) {
         this.supplierId = supplierId;
         this.companyName = companyName;
+        this.city = city;
+    }
+
+    public void addSuppliesTo(Supplier target) {
+        this.suppliesTo.add(target);
+        target.getSuppliedBy().add(this);
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
+        product.setSupplier(this);
     }
 }
