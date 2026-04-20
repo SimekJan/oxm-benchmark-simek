@@ -10,20 +10,21 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Collection;
 
+/*
+    Get all users with employee_id between 5 and 10 (Range query).
+ */
 public class Query3_range_query_indexed implements Query {
     @Override
     public void perform(Session session) {
 
-        Filter maxLastName = new Filter("lastName", ComparisonOperator.LESS_THAN, "N");
-        Filter minLastName = new Filter("lastName", ComparisonOperator.GREATER_THAN, "D");
+        Filter minLastName = new Filter("employeeId", ComparisonOperator.GREATER_THAN_EQUAL, 5L);
+        Filter maxLastName = new Filter("employeeId", ComparisonOperator.LESS_THAN, 10L);
         minLastName.setBooleanOperator(BooleanOperator.AND);
 
-        Filters range = new Filters();
-        range.add(maxLastName);
-        range.add(minLastName);
+        Filters range = maxLastName.and(minLastName);
 
         Collection<Employee> result = session.loadAll(Employee.class, range);
 
-        System.out.println("Found " + result.size() + " employees in lastname range.");
+        System.out.println("Found " + result.size() + " employees in range.");
     }
 }

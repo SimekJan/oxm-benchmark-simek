@@ -10,7 +10,7 @@ public class QueryExample {
 
         Session session = Neo4jSessionManager.getSession();
 
-        Query q = new Query1_select_indexed();
+        Query q = new Query4_range_query_non_indexed();
 
         q.perform(session);
     }

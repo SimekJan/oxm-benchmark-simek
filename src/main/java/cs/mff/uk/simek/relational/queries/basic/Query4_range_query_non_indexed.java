@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /*
-    Get all users born between 1.1.1950 and 1.1.1960 (Range query).
+    Get all users born between 1.1.1991 and 1.1.1996 (Range query).
  */
 public class Query4_range_query_non_indexed implements Query {
     @Override
@@ -17,8 +17,8 @@ public class Query4_range_query_non_indexed implements Query {
                         "WHERE e.birthDate BETWEEN :birth_from AND :birth_to";
 
         List<Employee> empls = session.createQuery(hql, Employee.class)
-                                    .setParameter("birth_from", LocalDate.of(1950, 1, 1))
-                                    .setParameter("birth_to", LocalDate.of(1960,1,1))
+                                    .setParameter("birth_from", LocalDate.of(1991, 1, 1))
+                                    .setParameter("birth_to", LocalDate.of(1996,1,1))
                                     .getResultList();
 
         for (Employee e : empls) {

@@ -54,7 +54,7 @@ public class Employee implements java.io.Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private Set<Order> orders = new HashSet<>();
 
-    public Employee(Long employeeId, String lastName, String firstName, LocalDate birthDate, LocalDate hireDate, String city) {
+    public Employee(Long employeeId, String firstName, String lastName, LocalDate birthDate, LocalDate hireDate, String city) {
         this.employeeId = employeeId;
         this.lastName = lastName;
         this.firstName = firstName;

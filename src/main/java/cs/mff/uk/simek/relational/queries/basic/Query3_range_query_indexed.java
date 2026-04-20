@@ -16,8 +16,8 @@ public class Query3_range_query_indexed implements Query {
                         "WHERE e.employeeId BETWEEN :id_min AND :id_max";
 
         List<Employee> empls = session.createQuery(hql, Employee.class)
-                        .setParameter("id_min", (short) 5)
-                        .setParameter("id_max", (short) 10)
+                        .setParameter("id_min", 5L)
+                        .setParameter("id_max", 10L)
                         .getResultList();
 
         for (Employee e : empls) {

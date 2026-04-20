@@ -11,8 +11,8 @@ import java.util.List;
 
 import static com.mongodb.client.model.Filters.*;
 
-/**
-    Find all Employees born between 1991 and 1996.
+/*
+    Get all users born between 1.1.1991 and 1.1.1996 (Range query).
  */
 public class Query04_range_query_non_indexed implements Query {
     @Override

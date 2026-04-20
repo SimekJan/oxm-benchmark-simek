@@ -13,7 +13,7 @@ public class Query2_select_non_indexed implements Query {
         String hql =    "FROM Employees e " +
                         "WHERE e.firstName = :first_name";
 
-        Employee e = session.createQuery(hql, Employee.class).setParameter("first_name", "Steven").uniqueResult();
+        Employee e = session.createQuery(hql, Employee.class).setParameter("first_name", "Steve").uniqueResult();
 
         System.out.println(e.getFirstName() + " - " + e.getLastName());
     }

@@ -9,6 +9,8 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotation.Index;
+import org.neo4j.ogm.annotation.typeconversion.Convert;
+import org.neo4j.ogm.typeconversion.LocalDateStringConverter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
