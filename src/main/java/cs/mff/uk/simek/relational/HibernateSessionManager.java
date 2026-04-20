@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.io.File;
 import java.util.List;
 
 public class HibernateSessionManager {
@@ -12,14 +13,22 @@ public class HibernateSessionManager {
     public static Session getSession() {
         SessionFactory sessionFactory = new Configuration()
                 // Workaround needed, IntelliJ did not copy the config file to target/ or out/
-                // .configure("hibernate.cfg.xml")
+                // .configure("hibernate.cfg.xml.xml")
                 .configure(
-                        new java.io.File("src/main/resources/hibernate.cfg.xml")
+                        new File("src/main/resources/hibernate.cfg.xml")
                 )
                 .addAnnotatedClass(Category.class)
-                .addAnnotatedClass(Product.class)
-                .addAnnotatedClass(OrderDetail.class)
+                .addAnnotatedClass(Customer.class)
+                .addAnnotatedClass(CustomerDemographic.class)
                 .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(Order.class)
+                .addAnnotatedClass(OrderDetail.class)
+                .addAnnotatedClass(Product.class)
+                .addAnnotatedClass(Region.class)
+                .addAnnotatedClass(Shipper.class)
+                .addAnnotatedClass(Supplier.class)
+                .addAnnotatedClass(Territory.class)
+                .addAnnotatedClass(UsState.class)
                 .buildSessionFactory();
 
         return sessionFactory.openSession();
@@ -27,19 +36,7 @@ public class HibernateSessionManager {
 
     public static void main(String[] args) {
 
-        SessionFactory sessionFactory = new Configuration()
-                // Workaround needed, IntelliJ did not copy the config file to target/ or out/
-                // .configure("hibernate.cfg.xml")
-                .configure(
-                        new java.io.File("src/main/resources/hibernate.cfg.xml")
-                )
-                .addAnnotatedClass(Category.class)
-                .addAnnotatedClass(Product.class)
-                .addAnnotatedClass(OrderDetail.class)
-                .addAnnotatedClass(Employee.class)
-                .buildSessionFactory();
-
-        Session session = sessionFactory.openSession();
+        Session session = getSession();
 
         try {
             session.beginTransaction();
@@ -80,9 +77,6 @@ public class HibernateSessionManager {
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            session.close();
-            sessionFactory.close();
         }
     }
 }
