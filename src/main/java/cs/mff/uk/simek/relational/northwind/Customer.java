@@ -29,10 +29,10 @@ public class Customer implements java.io.Serializable {
 
     @Id
     @Column(name="customer_id", unique=true, nullable=false, length=5)
-     private String customerId;
+    private String customerId;
 
     @Column(name="company_name", nullable=false, length=40)
-     private String companyName;
+    private String companyName;
 
     @Column(name="contact_name", length=30)
     private String contactName;

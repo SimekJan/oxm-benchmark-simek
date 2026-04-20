@@ -21,7 +21,8 @@ import java.util.Set;
 @NodeEntity
 public class Employee {
 
-    public Employee(String firstName, String lastName, LocalDate date, String city) {
+    public Employee(Long employeeId, String firstName, String lastName, LocalDate date, String city) {
+        this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = date;
@@ -32,9 +33,11 @@ public class Employee {
     @GeneratedValue
     private Long id;
 
+    @Index
+    private Long employeeId;
+
     private String firstName;
 
-    @Index
     private String lastName;
 
     private LocalDate birthDate;

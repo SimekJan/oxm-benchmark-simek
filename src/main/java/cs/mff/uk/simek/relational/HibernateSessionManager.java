@@ -7,10 +7,32 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
-public class Main {
-    public static void main(String[] args) {
+public class HibernateSessionManager {
+
+    public static Session getSession() {
         SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
+                // Workaround needed, IntelliJ did not copy the config file to target/ or out/
+                // .configure("hibernate.cfg.xml")
+                .configure(
+                        new java.io.File("src/main/resources/hibernate.cfg.xml")
+                )
+                .addAnnotatedClass(Category.class)
+                .addAnnotatedClass(Product.class)
+                .addAnnotatedClass(OrderDetail.class)
+                .addAnnotatedClass(Employee.class)
+                .buildSessionFactory();
+
+        return sessionFactory.openSession();
+    }
+
+    public static void main(String[] args) {
+
+        SessionFactory sessionFactory = new Configuration()
+                // Workaround needed, IntelliJ did not copy the config file to target/ or out/
+                // .configure("hibernate.cfg.xml")
+                .configure(
+                        new java.io.File("src/main/resources/hibernate.cfg.xml")
+                )
                 .addAnnotatedClass(Category.class)
                 .addAnnotatedClass(Product.class)
                 .addAnnotatedClass(OrderDetail.class)

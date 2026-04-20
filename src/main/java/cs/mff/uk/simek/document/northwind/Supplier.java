@@ -11,7 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Supplier {
 
-    public Supplier(String companyName, String city) {
+    public Supplier(Long supplierId, String companyName, String city) {
+        this.supplierId = supplierId;
         this.id = new ObjectId();
         this.companyName = companyName;
         this.city = city;
@@ -19,6 +20,8 @@ public class Supplier {
     }
 
     private ObjectId id;
+
+    private Long supplierId;
     private String companyName;
     private String city;
     private List<ObjectId> suppliedBy;

@@ -10,7 +10,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Employee {
 
-    public Employee(String firstName, String lastName, LocalDate birthDate, LocalDate hireDate, String city) {
+    public Employee(Long employeeId, String firstName, String lastName, LocalDate birthDate, LocalDate hireDate, String city) {
+        this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -19,6 +20,8 @@ public class Employee {
     }
 
     private ObjectId id;
+
+    private Long employeeId;
     private String firstName;
     private String lastName;
     private LocalDate birthDate;

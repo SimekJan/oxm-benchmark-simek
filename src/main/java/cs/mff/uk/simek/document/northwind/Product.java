@@ -8,12 +8,15 @@ import org.bson.types.ObjectId;
 @NoArgsConstructor
 public class Product {
 
-    public Product(String productName, Integer unitPrice) {
+    public Product(Long productId, String productName, Integer unitPrice) {
+        this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;
     }
 
     private ObjectId id;
+
+    private Long productId;
     private String productName;
     private Integer unitPrice;
     private ObjectId supplier;

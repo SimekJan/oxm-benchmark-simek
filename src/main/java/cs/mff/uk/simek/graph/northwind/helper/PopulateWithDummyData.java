@@ -15,11 +15,11 @@ public class PopulateWithDummyData {
 
         // ---------- SUPPLIERS ----------
 
-        Supplier alpha = new Supplier("Alpha", "Prague");
-        Supplier beta = new Supplier("Beta", "Brno");
-        Supplier gamma = new Supplier("Gamma", "Ostrava");
-        Supplier delta = new Supplier("Delta", "Plzen");
-        Supplier epsilon = new Supplier("Epsilon", "Liberec");
+        Supplier alpha = new Supplier(1L, "Alpha", "Prague");
+        Supplier beta = new Supplier(2L, "Beta", "Brno");
+        Supplier gamma = new Supplier(3L, "Gamma", "Ostrava");
+        Supplier delta = new Supplier(4L, "Delta", "Plzen");
+        Supplier epsilon = new Supplier(5L, "Epsilon", "Liberec");
 
 // bidirectional supplier chain
         alpha.addSuppliesTo(beta);
@@ -37,12 +37,12 @@ public class PopulateWithDummyData {
 
 // ---------- PRODUCTS ----------
 
-        Product p1 = new Product("Bolt", 10);
-        Product p2 = new Product("Nut", 15);
-        Product p3 = new Product("Screw", 9);
-        Product p4 = new Product("Steel Plate", 12);
-        Product p5 = new Product("Gear", 12);
-        Product p6 = new Product("Valve", 16);
+        Product p1 = new Product(1L, "Bolt", 10);
+        Product p2 = new Product(2L, "Nut", 15);
+        Product p3 = new Product(3L, "Screw", 9);
+        Product p4 = new Product(4L, "Steel Plate", 12);
+        Product p5 = new Product(5L, "Gear", 12);
+        Product p6 = new Product(6L, "Valve", 16);
 
 // connect BOTH sides
         alpha.addProduct(p1);
@@ -56,12 +56,12 @@ public class PopulateWithDummyData {
 
 // ---------- EMPLOYEES ----------
 
-        Employee ceo = new Employee("Alice", "CEO", LocalDate.now(), "Karlovy Vary");
-        Employee manager1 = new Employee("Bob", "Manager", LocalDate.now(), "Praha");
-        Employee manager2 = new Employee("Carol", "Manager", LocalDate.now(), "Brno");
-        Employee worker1 = new Employee("David", "Worker", LocalDate.now(), "Liberec");
-        Employee worker2 = new Employee("Eva", "Worker", LocalDate.now(), "Ostrava");
-        Employee worker3 = new Employee("Steve", "Worker", LocalDate.now(), "Liberec");
+        Employee ceo = new Employee(1L, "Alice", "CEO", LocalDate.now(), "Karlovy Vary");
+        Employee manager1 = new Employee(2L, "Bob", "Manager", LocalDate.now(), "Praha");
+        Employee manager2 = new Employee(3L, "Carol", "Manager", LocalDate.now(), "Brno");
+        Employee worker1 = new Employee(4L, "David", "Worker", LocalDate.now(), "Liberec");
+        Employee worker2 = new Employee(5L, "Eva", "Worker", LocalDate.now(), "Ostrava");
+        Employee worker3 = new Employee(6L, "Steve", "Worker", LocalDate.now(), "Liberec");
 
 // hierarchy (both sides)
         ceo.addSubordinate(manager1);
@@ -74,11 +74,11 @@ public class PopulateWithDummyData {
 
 // ---------- CUSTOMERS ----------
 
-        Customer c1 = new Customer("A", "Karlovy Vary");
-        Customer c2 = new Customer("B", "Praha");
-        Customer c3 = new Customer("C", "Olomouc");
-        Customer c4 = new Customer("D", "Ostrava");
-        Customer c5 = new Customer("E", "Brno");
+        Customer c1 = new Customer(1L, "A", "Karlovy Vary");
+        Customer c2 = new Customer(2L, "B", "Praha");
+        Customer c3 = new Customer(3L, "C", "Olomouc");
+        Customer c4 = new Customer(4L, "D", "Ostrava");
+        Customer c5 = new Customer(5L, "E", "Brno");
 
 
 // ---------- ORDERS ----------

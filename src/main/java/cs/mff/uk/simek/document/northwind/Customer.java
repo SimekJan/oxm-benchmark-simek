@@ -8,12 +8,15 @@ import org.bson.types.ObjectId;
 @NoArgsConstructor
 public class Customer {
 
-    public Customer(String companyName, String city) {
+    public Customer(Long customerId, String companyName, String city) {
+        this.customerId = customerId;
         this.companyName = companyName;
         this.city = city;
     }
 
     private ObjectId id;
+
+    private Long customerId;
     private String companyName;
     private String city;
 }

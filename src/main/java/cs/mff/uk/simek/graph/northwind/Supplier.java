@@ -1,10 +1,7 @@
 package cs.mff.uk.simek.graph.northwind;
 
 import lombok.*;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -14,7 +11,8 @@ import java.util.HashSet;
 @NodeEntity
 public class Supplier {
 
-    public Supplier(String name, String city) {
+    public Supplier(Long supplierId, String name, String city) {
+        this.supplierId = supplierId;
         this.companyName = name;
         this.city = city;
     }
@@ -22,6 +20,9 @@ public class Supplier {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Index
+    private Long supplierId;
 
     private String companyName;
 

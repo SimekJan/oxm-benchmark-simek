@@ -1,10 +1,7 @@
 package cs.mff.uk.simek.graph.northwind;
 
 import lombok.*;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +11,16 @@ import java.util.Set;
 @NodeEntity
 public class Order {
 
+    public Order(Long orderId) {
+        this.orderId = orderId;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
+
+    @Index
+    private Long orderId;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

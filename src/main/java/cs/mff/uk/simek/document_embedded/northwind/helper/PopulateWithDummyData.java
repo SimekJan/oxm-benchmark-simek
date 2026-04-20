@@ -34,12 +34,12 @@ public class PopulateWithDummyData {
         employees.insertOne(ceo);
 
         // ---------- ORDERS ----------
-        Order o1 = new Order(null, List.of(p1, p3));
-        Order o2 = new Order(null, List.of(p2, p4));
-        Order o3 = new Order(null, List.of(p5));
-        Order o4 = new Order(null, List.of(p1, p6));
-        Order o5 = new Order(null, List.of(p2, p3));
-        Order o6 = new Order(null, List.of());
+        Order o1 = new Order(null, LocalDate.of(2025,1,1), List.of(p1, p3));
+        Order o2 = new Order(null, LocalDate.of(2025,10,11), List.of(p2, p4));
+        Order o3 = new Order(null, LocalDate.of(2025,9,2), List.of(p5));
+        Order o4 = new Order(null, LocalDate.of(2025,4,21), List.of(p1, p6));
+        Order o5 = new Order(null, LocalDate.of(2025,2,11), List.of(p2, p3));
+        Order o6 = new Order(null, LocalDate.of(2025,12,15), List.of());
 
         Employee manager1 = new Employee("Bob", "Manager", LocalDate.of(1990,1,1), LocalDate.of(2020,4,15), "Praha");
         manager1.setReportsTo(ceo.getId());

@@ -25,7 +25,7 @@ public class Employee {
     private LocalDate birthDate;
     private LocalDate hireDate;
     private String city;
-    private ObjectId reportsTo; // ??
+    private ObjectId reportsTo; // TODO ??
 
     private List<Order> orders;
 }

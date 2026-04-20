@@ -8,7 +8,7 @@ import cs.mff.uk.simek.document_embedded.queries.Query;
 import org.bson.Document;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,13 +20,17 @@ public class Query7_join_indexed implements Query {
     public void runQuery(MongoDatabase db) {
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
 
-        // Asi chceme každý zvlášť
-        List<Document> results = employees.aggregate(Arrays.asList(
+        List<Document> results = employees.aggregate(List.of(
                 Aggregates.unwind("$orders")
         ), Document.class).into(new ArrayList<>());
 
         for (Document d: results) {
-            System.out.println(d.toJson());
+            String firstName = d.getString("firstName");
+            String lastName = d.getString("lastName");
+            Document order = (Document) d.get("orders");
+            Date orderDate = order.getDate("orderDate");
+
+            System.out.println(firstName + " " + lastName + ": " + orderDate);
         }
     }
 }

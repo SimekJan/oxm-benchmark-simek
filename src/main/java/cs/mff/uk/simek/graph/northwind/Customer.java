@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +14,8 @@ import java.util.List;
 @NodeEntity
 public class Customer {
 
-    public Customer(String name, String city) {
+    public Customer(Long customerId, String name, String city) {
+        this.customerId = customerId;
         this.companyName = name;
         this.city = city;
     }
@@ -25,6 +23,9 @@ public class Customer {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Index
+    private Long customerId;
 
     private String companyName;
 
