@@ -1,28 +1,31 @@
 package cs.mff.uk.simek.relational.queries.basic;
 
+import cs.mff.uk.simek.relational.northwind.Product;
 import cs.mff.uk.simek.relational.queries.Query;
 import cs.mff.uk.simek.relational.northwind.Employee;
 import org.hibernate.Session;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 /*
-    Get all users born between 1.1.1991 and 1.1.1996 (Range query).
+    Get all products in price range 9.5 - 12.5 (Range query).
  */
 public class Query4_range_query_non_indexed implements Query {
     @Override
     public void perform(Session session) {
-        String hql =    "FROM Employees e " +
-                        "WHERE e.birthDate BETWEEN :birth_from AND :birth_to";
+        String hql =    "FROM Products p " +
+                        "WHERE p.unitPrice BETWEEN :price_from AND :price_to";
 
-        List<Employee> empls = session.createQuery(hql, Employee.class)
-                                    .setParameter("birth_from", LocalDate.of(1991, 1, 1))
-                                    .setParameter("birth_to", LocalDate.of(1996,1,1))
+        List<Product> products = session.createQuery(hql, Product.class)
+                                    .setParameter("price_from", 9.5D)
+                                    .setParameter("price_to", 12.5D)
                                     .getResultList();
 
-        for (Employee e : empls) {
-            System.out.println(e.getFirstName() + " " + e.getLastName() + ": " + e.getBirthDate());
+        System.out.println("Found: " + products.size() + " products.");
+        for (Product p : products) {
+            System.out.println(p.getProductName() + ": " + p.getUnitPrice());
         }
     }
 }

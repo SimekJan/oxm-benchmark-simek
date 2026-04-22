@@ -9,8 +9,8 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *  Find all direct and indirect connections between suppliers
+/*
+    Find all direct and indirect connections between suppliers (max depth = 2).
  */
 public class Query09_neighbours implements Query {
     @Override

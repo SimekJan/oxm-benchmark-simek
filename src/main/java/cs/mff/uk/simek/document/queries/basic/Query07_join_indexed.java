@@ -11,8 +11,8 @@ import java.util.List;
 
 import static com.mongodb.client.model.Aggregates.lookup;
 
-/**
- * Join orders with employees on employee ID
+/*
+   Join orders with employees on employee ID (indexed).
  */
 public class Query07_join_indexed implements Query {
     @Override
@@ -28,7 +28,7 @@ public class Query07_join_indexed implements Query {
 
         for (Document doc : result) {
             List<Document> emp = (List<Document>) doc.get("employee");
-            System.out.println(doc.get("_id") + ": " + emp.get(0).get("firstName"));
+            System.out.println("Order " + doc.getLong("orderId") + " -> " + emp.getFirst().get("firstName") + " " + emp.getFirst().get("lastName"));
         }
     }
 }

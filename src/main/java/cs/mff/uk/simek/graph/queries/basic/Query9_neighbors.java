@@ -6,7 +6,7 @@ import org.neo4j.ogm.session.Session;
 import java.util.Map;
 
 /*
-    Find all direct and indirect connections between suppliers
+    Find all direct and indirect connections between suppliers (max depth = 2).
  */
 public class Query9_neighbors implements Query {
     @Override
@@ -14,6 +14,7 @@ public class Query9_neighbors implements Query {
 
         String query = """
             MATCH (s:Supplier)-[:SUPPLIES_TO*1..2]->(other:Supplier)
+            WHERE s <> other
             RETURN s.companyName AS fromSupplier, other.companyName AS toSupplier
         """;
 
@@ -26,7 +27,3 @@ public class Query9_neighbors implements Query {
         }
     }
 }
-
-/*
-    TODO: je to trochu chaos, duplikáty, taky můžou dojít samy k sobě
- */

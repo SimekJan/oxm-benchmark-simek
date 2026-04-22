@@ -12,8 +12,8 @@ import java.util.List;
 import static com.mongodb.client.model.Accumulators.sum;
 import static com.mongodb.client.model.Aggregates.group;
 
-/**
- * Count Employees from each city.
+/*
+    Count the number of employees per city.
  */
 public class Query05_count implements Query {
 

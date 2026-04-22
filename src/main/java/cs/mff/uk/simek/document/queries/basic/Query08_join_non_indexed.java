@@ -12,8 +12,8 @@ import java.util.List;
 import static com.mongodb.client.model.Aggregates.*;
 import static com.mongodb.client.model.Projections.*;
 
-/**
- * Join customers and employees on city (non indexed)
+/*
+   Join customers and employees on city (non-indexed)
  */
 public class Query08_join_non_indexed implements Query {
     @Override

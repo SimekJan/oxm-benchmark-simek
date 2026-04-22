@@ -40,17 +40,17 @@ public class PopulateWithDummyData {
         suppliers.createIndex(ascending("supplierId"));
 
         // ---------- PRODUCTS ----------
-        Product p1 = new Product(1L, "Bolt", 10);
+        Product p1 = new Product(1L, "Bolt", 10F);
         p1.setSupplier(alpha.getId());
-        Product p2 = new Product(2L, "Nut", 15);
+        Product p2 = new Product(2L, "Nut", 15F);
         p2.setSupplier(alpha.getId());
-        Product p3 = new Product(3L, "Screw", 9);
+        Product p3 = new Product(3L, "Screw", 9F);
         p3.setSupplier(beta.getId());
-        Product p4 = new Product(4L, "Steel Plate", 12);
+        Product p4 = new Product(4L, "Steel Plate", 12F);
         p4.setSupplier(gamma.getId());
-        Product p5 = new Product(5L, "Gear", 12);
+        Product p5 = new Product(5L, "Gear", 12F);
         p5.setSupplier(delta.getId());
-        Product p6 = new Product(6L, "Valve", 16);
+        Product p6 = new Product(6L, "Valve", 16F);
         p6.setSupplier(epsilon.getId());
 
         products.insertMany(Arrays.asList(p1, p2, p3, p4, p5, p6));

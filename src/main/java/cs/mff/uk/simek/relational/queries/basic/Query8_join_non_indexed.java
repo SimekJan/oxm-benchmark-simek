@@ -5,8 +5,8 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-/**
- * Join customers and employees on city (non indexed)
+/*
+   Join customers and employees on city (non-indexed)
  */
 public class Query8_join_non_indexed implements Query {
     @Override

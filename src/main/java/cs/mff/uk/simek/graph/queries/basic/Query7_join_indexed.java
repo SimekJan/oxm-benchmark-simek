@@ -5,21 +5,25 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Map;
 
+/*
+   Join orders with employees on employee ID (indexed).
+ */
 public class Query7_join_indexed implements Query {
     @Override
     public void perform(Session session) {
 
         String query = """
-            MATCH (p:Product)-[:IS_PRODUCED_BY]->(s:Supplier)
-            RETURN s.companyName AS supplier, p.productName AS product
+            MATCH (e:Employee)-[:IS_RESPONSIBLE_FOR]->(o:Order)
+            RETURN o.orderId AS order, e.firstName AS firstName, e.lastName AS lastName
         """;
 
         Iterable<Map<String, Object>> results = session.query(query, Map.of());
 
         for (Map<String, Object> row : results) {
-            String supplier = (String) row.get("supplier");
-            String product = (String) row.get("product");
-            System.out.println(supplier + ": " + product);
+            Long orderId = (Long) row.get("order");
+            String firstName = (String) row.get("firstName");
+            String lastName = (String) row.get("lastName");
+            System.out.println("Order " + orderId + " -> " + firstName + " " + lastName);
         }
     }
 }

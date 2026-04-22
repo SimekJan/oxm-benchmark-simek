@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,8 +29,8 @@ public class Product implements java.io.Serializable {
     @Column(name = "product_name", nullable = false, length = 40)
     private String productName;
 
-    @Column(name = "unit_price", precision = 8, scale = 8)
-    private Float unitPrice;
+    @Column(name = "unit_price", precision = 10, scale = 2)
+    private Double unitPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id")
@@ -38,7 +39,7 @@ public class Product implements java.io.Serializable {
     @ManyToMany(mappedBy = "products")
     private Set<Order> orders = new HashSet<>();
 
-    public Product(Long productId, String productName, Float unitPrice) {
+    public Product(Long productId, String productName, Double unitPrice) {
         this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;

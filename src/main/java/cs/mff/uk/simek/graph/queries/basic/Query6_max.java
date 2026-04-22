@@ -5,6 +5,9 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Map;
 
+/*
+    Find the most expensive product per supplier (maximum).
+ */
 public class Query6_max implements Query {
     @Override
     public void perform(Session session) {
@@ -18,7 +21,7 @@ public class Query6_max implements Query {
 
         for (Map<String, Object> row : results) {
             String supplier = (String) row.get("supplier");
-            Long maxUnitPrice = (Long) row.get("maxUnitPrice");
+            Double maxUnitPrice = (Double) row.get("maxUnitPrice");
             System.out.println(supplier + ": " + maxUnitPrice);
         }
     }

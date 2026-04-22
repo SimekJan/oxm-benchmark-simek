@@ -12,8 +12,8 @@ import java.util.List;
 import static com.mongodb.client.model.Accumulators.max;
 import static com.mongodb.client.model.Aggregates.group;
 
-/**
- * Find the most expensive product per supplier.
+/*
+    Find the most expensive product per supplier (maximum).
  */
 public class Query06_max implements Query {
     @Override
@@ -26,7 +26,7 @@ public class Query06_max implements Query {
         ), Document.class).into(new ArrayList<>());
 
         for (Document doc : result) {
-            System.out.println(doc.get("_id") + ": " + doc.getInteger("maxPrice"));
+            System.out.println(doc.getString("companyName") + ": " + doc.getInteger("maxPrice"));
         }
     }
 }

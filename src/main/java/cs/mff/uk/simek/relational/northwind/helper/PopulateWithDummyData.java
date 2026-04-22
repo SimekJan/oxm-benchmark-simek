@@ -38,12 +38,12 @@ public class PopulateWithDummyData {
 
         // ---------- PRODUCTS ----------
 
-        Product p1 = new Product(1L, "Bolt", 10F);
-        Product p2 = new Product(2L, "Nut", 15F);
-        Product p3 = new Product(3L, "Screw", 9F);
-        Product p4 = new Product(4L, "Steel Plate", 12F);
-        Product p5 = new Product(5L, "Gear", 12F);
-        Product p6 = new Product(6L, "Valve", 16F);
+        Product p1 = new Product(1L, "Bolt",10D);
+        Product p2 = new Product(2L, "Nut", 15D);
+        Product p3 = new Product(3L, "Screw", 9D);
+        Product p4 = new Product(4L, "Steel Plate", 12D);
+        Product p5 = new Product(5L, "Gear", 12D);
+        Product p6 = new Product(6L, "Valve", 16D);
 
         alpha.addProduct(p1);
         alpha.addProduct(p2);
@@ -82,12 +82,12 @@ public class PopulateWithDummyData {
 
         // ---------- ORDERS ----------
 
-        Order o1 = new Order();
-        Order o2 = new Order();
-        Order o3 = new Order();
-        Order o4 = new Order();
-        Order o5 = new Order();
-        Order o6 = new Order();
+        Order o1 = new Order(1L);
+        Order o2 = new Order(2L);
+        Order o3 = new Order(3L);
+        Order o4 = new Order(4L);
+        Order o5 = new Order(5L);
+        Order o6 = new Order(6L);
 
         c1.addOrder(o1);
         c2.addOrder(o2);

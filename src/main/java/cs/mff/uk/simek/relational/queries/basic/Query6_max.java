@@ -6,19 +6,19 @@ import org.hibernate.Session;
 import java.util.List;
 
 /*
-    Find the most expensive product per supplier. Minimum
+    Find the most expensive product per supplier (maximum).
  */
 public class Query6_max implements Query {
     @Override
     public void perform(Session session) {
-        String hql =    "SELECT p.supplier.supplierId, MAX(p.unitPrice) " +
+        String hql =    "SELECT p.supplier.supplierId, p.supplier.companyName, MAX(p.unitPrice) " +
                         "FROM Products p " +
-                        "GROUP BY p.supplier.supplierId";
+                        "GROUP BY p.supplier.supplierId, p.supplier.companyName";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 
         for (Object[] line: results) {
-            System.out.println(line[0] + ": " + line[1]);
+            System.out.println(line[0] + " " + line[1] + ": " + line[2]);
         }
     }
 }

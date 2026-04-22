@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.neo4j.ogm.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Data
@@ -13,7 +14,7 @@ import java.util.Set;
 @NodeEntity
 public class Product {
 
-    public Product(Long productId, String name, Integer unitPrice) {
+    public Product(Long productId, String name, Double unitPrice) {
         this.productId = productId;
         this.productName = name;
         this.unitPrice = unitPrice;
@@ -28,7 +29,7 @@ public class Product {
 
     private String productName;
 
-    private Integer unitPrice;
+    private Double unitPrice;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
