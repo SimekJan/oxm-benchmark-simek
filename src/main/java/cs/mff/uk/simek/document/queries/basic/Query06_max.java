@@ -13,7 +13,7 @@ import static com.mongodb.client.model.Accumulators.max;
 import static com.mongodb.client.model.Aggregates.group;
 
 /*
-    Find the most expensive product per supplier (maximum).
+    Find the most expensive product per category (maximum).
  */
 public class Query06_max implements Query {
     @Override
@@ -22,11 +22,11 @@ public class Query06_max implements Query {
         MongoCollection<Product> products = db.getCollection("Products", Product.class);
 
         List<Document> result = products.aggregate(List.of(
-                group("$supplier", max("maxPrice", "$unitPrice" ))
+                group("$category", max("maxPrice", "$unitPrice" ))
         ), Document.class).into(new ArrayList<>());
 
         for (Document doc : result) {
-            System.out.println(doc.getString("companyName") + ": " + doc.getInteger("maxPrice"));
+            System.out.println(doc.getString("_id") + ": " + doc.getDouble("maxPrice"));
         }
     }
 }

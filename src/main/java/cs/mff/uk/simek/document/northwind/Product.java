@@ -8,10 +8,11 @@ import org.bson.types.ObjectId;
 @NoArgsConstructor
 public class Product {
 
-    public Product(Long productId, String productName, Float unitPrice) {
+    public Product(Long productId, String productName, Float unitPrice, String category) {
         this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;
+        this.category = category;
     }
 
     private ObjectId id;
@@ -19,5 +20,6 @@ public class Product {
     private Long productId;
     private String productName;
     private Float unitPrice;
+    private String category;
     private ObjectId supplier;
 }

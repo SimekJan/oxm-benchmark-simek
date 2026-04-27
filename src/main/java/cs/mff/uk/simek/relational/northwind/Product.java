@@ -39,9 +39,13 @@ public class Product implements java.io.Serializable {
     @ManyToMany(mappedBy = "products")
     private Set<Order> orders = new HashSet<>();
 
-    public Product(Long productId, String productName, Double unitPrice) {
+    @Column(name = "category")
+    private String category;
+
+    public Product(Long productId, String productName, Double unitPrice, String category) {
         this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;
+        this.category = category;
     }
 }

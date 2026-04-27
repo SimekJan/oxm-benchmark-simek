@@ -10,7 +10,7 @@ public class QueryExample {
 
         Session session = Neo4jSessionManager.getSession();
 
-        Query q = new Query9_neighbors();
+        Query q = new Query6_max();
 
         q.perform(session);
     }

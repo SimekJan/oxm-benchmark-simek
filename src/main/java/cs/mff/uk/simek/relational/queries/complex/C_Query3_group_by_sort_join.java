@@ -6,9 +6,9 @@ import org.hibernate.Session;
 import java.util.List;
 
 /**
- * Aggregation + sorting + join
+ * Order customers from most orders to least (include order count).
  */
-public class C_Query1_complex implements Query {
+public class C_Query3_group_by_sort_join implements Query {
 
     @Override
     public void perform(Session session) {
@@ -21,7 +21,7 @@ public class C_Query1_complex implements Query {
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 
         for (Object[] row : results) {
-            String customerId = (String) row[0];
+            Long customerId = (Long) row[0];
             String companyName = (String) row[1];
             Long totalOrders = (Long) row[2];
 

@@ -14,10 +14,11 @@ import java.util.Set;
 @NodeEntity
 public class Product {
 
-    public Product(Long productId, String name, Double unitPrice) {
+    public Product(Long productId, String name, Double unitPrice, String category) {
         this.productId = productId;
         this.productName = name;
         this.unitPrice = unitPrice;
+        this.category = category;
     }
 
     @Id
@@ -30,6 +31,8 @@ public class Product {
     private String productName;
 
     private Double unitPrice;
+
+    private String category;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

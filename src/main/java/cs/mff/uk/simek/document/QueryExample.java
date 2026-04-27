@@ -9,7 +9,7 @@ public class QueryExample {
     public static void main(String[] args) {
         MongoDatabase db = MongoDbManger.getDb();
 
-        Query q = new Query09_neighbours();
+        Query q = new Query06_max();
 
         q.runQuery(db);
     }

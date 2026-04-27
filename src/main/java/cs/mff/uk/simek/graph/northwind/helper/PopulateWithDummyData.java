@@ -37,12 +37,12 @@ public class PopulateWithDummyData {
 
 // ---------- PRODUCTS ----------
 
-        Product p1 = new Product(1L, "Bolt", 10D);
-        Product p2 = new Product(2L, "Nut", 15D);
-        Product p3 = new Product(3L, "Screw", 9D);
-        Product p4 = new Product(4L, "Steel Plate", 12D);
-        Product p5 = new Product(5L, "Gear", 12D);
-        Product p6 = new Product(6L, "Valve", 16D);
+        Product p1 = new Product(1L, "S-Bolt", 10D, "cat1");
+        Product p2 = new Product(2L, "Nut", 15D, "cat2");
+        Product p3 = new Product(3L, "Screw", 9D, "cat1");
+        Product p4 = new Product(4L, "Steel Plate", 12D, "cat2");
+        Product p5 = new Product(5L, "Gear", 12D, "cat2");
+        Product p6 = new Product(6L, "Valve", 16D, "cat3");
 
 // connect BOTH sides
         alpha.addProduct(p1);
