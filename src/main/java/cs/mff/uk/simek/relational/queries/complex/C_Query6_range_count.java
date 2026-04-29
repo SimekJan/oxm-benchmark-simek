@@ -6,27 +6,26 @@ import org.hibernate.Session;
 import java.util.List;
 
 /**
- * TODO !!!
- * Count products with unitPrice between
+ * Count products with unitPrice between 10 and 15 per category
  */
 public class C_Query6_range_count implements Query {
 
     @Override
     public void perform(Session session) {
-        String hql =    "SELECT c.customerId, c.companyName, COUNT(o.orderId) " +
-                        "FROM Customers c " +
-                        "JOIN c.orders o " +
-                        "GROUP BY c.customerId, c.companyName " +
-                        "ORDER BY COUNT(o.orderId) DESC";
+        String hql =    "SELECT p.category, COUNT(p.unitPrice) " +
+                        "FROM Products p " +
+                        "WHERE p.unitPrice BETWEEN :price_min AND :price_max " +
+                        "GROUP BY p.category";
 
-        List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
+        List<Object[]> results = session.createQuery(hql, Object[].class)
+                .setParameter("price_min", 10D)
+                .setParameter("price_max", 15D)
+                .getResultList();
 
         for (Object[] row : results) {
-            Long customerId = (Long) row[0];
-            String companyName = (String) row[1];
-            Long totalOrders = (Long) row[2];
-
-            System.out.println(customerId + " - " + companyName + " - " + totalOrders);
+            String category = (String) row[0];
+            Long count = (Long) row[1];
+            System.out.println(category + " - " + count);
         }
     }
 }
