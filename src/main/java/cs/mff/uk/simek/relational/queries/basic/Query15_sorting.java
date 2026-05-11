@@ -20,7 +20,7 @@ public class Query15_sorting implements Query {
 
         for (Object[] row : results) {
             String productName = (String) row[0];
-            Float unitPrice = (Float) row[1];
+            Double unitPrice = (Double) row[1];
             System.out.println(productName + " - " + unitPrice);
         }
     }

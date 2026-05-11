@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 /*
-    sort based on product_id
+    sort products based on product_id
     (indexed column)
  */
 public class Query16_sorting_indexed implements Query {
@@ -19,7 +19,7 @@ public class Query16_sorting_indexed implements Query {
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 
         for (Object[] row : results) {
-            Short productId = (Short) row[0];
+            Long productId = (Long) row[0];
             String productName = (String) row[1];
             System.out.println(productId + ": " + productName);
         }

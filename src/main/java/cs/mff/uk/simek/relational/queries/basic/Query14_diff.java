@@ -6,8 +6,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 /*
-    find customers without orders =
-        all customer_ids - customers_ids in orders
+    Find all Customers without an order (all customers - (diff) customer_ids in orders)
 
     this is not a best example for set operation, there are better alternatives for this task
     like NOT EXIST / LEFT JOIN
@@ -15,16 +14,20 @@ import java.util.List;
 public class Query14_diff implements Query {
     @Override
     public void perform(Session session) {
-        String sql =    "SELECT customer_id " +
-                        "FROM Customers " +
-                        "EXCEPT " +
-                        "SELECT customer_id " +
-                        "FROM Orders";
+        String hql = """
+                        SELECT c.companyName
+                        FROM Customers c
+                        WHERE NOT EXISTS (
+                            SELECT 1
+                            FROM Orders o
+                            WHERE o.customer.id = c.id
+                        )
+                    """;
 
-        List<?> results = session.createNativeQuery(sql).getResultList();
+        List<String> results = session.createQuery(hql, String.class).getResultList();
 
-        for (Object line: results) {
-            System.out.println(line);
+        for (String companyName : results) {
+            System.out.println(companyName);
         }
     }
 }

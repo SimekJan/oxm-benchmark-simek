@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 /*
- * Join Customers, Employees, Orders, Products and Suppliers.
+ * Join Customers, Employees, Orders, Products and Suppliers. (Indexed)
  */
 public class C_Query8_multi_join implements Query {
     @Override

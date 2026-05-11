@@ -14,7 +14,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Customers")
-@Table(name="customers")
+@Table(name = "customers",
+        indexes = {
+                @Index(name = "idx_customer_id", columnList = "customer_id")
+        })
 public class Customer implements java.io.Serializable {
 
     @Id

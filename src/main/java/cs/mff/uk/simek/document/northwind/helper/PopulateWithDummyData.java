@@ -74,17 +74,15 @@ public class PopulateWithDummyData {
         worker3.setReportsTo(manager2.getId());
         employees.insertMany(Arrays.asList(worker1, worker2, worker3));
 
-        // CREATE index over hire date -> hire date is indexed!!!
-        // employees.createIndex(ascending("hireDate"));
         employees.createIndex(ascending("employeeId"));
 
         // ---------- CUSTOMERS ----------
         Customer c1 = new Customer(1L, "A", "Karlovy Vary");
-        Customer c2 = new Customer(2L, "B", "Praha");
+        Customer c2 = new Customer(2L, "B", "Prague");
         Customer c3 = new Customer(3L, "C", "Olomouc");
         Customer c4 = new Customer(4L, "D", "Ostrava");
         Customer c5 = new Customer(5L, "E", "Brno");
-        Customer c6 = new Customer(6L, "F", "Karlovy Vary");
+        Customer c6 = new Customer(6L, "F", "Prague");
 
         customers.insertMany(Arrays.asList(c1, c2, c3, c4, c5, c6));
         customers.createIndex(ascending("customerId"));

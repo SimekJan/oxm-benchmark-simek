@@ -6,7 +6,7 @@ import org.neo4j.ogm.session.Session;
 import java.util.Map;
 
 /*
-    Find all Customers without an order
+    Find all Customers without an order (all customers - (diff) customer_ids in orders)
  */
 public class Query14_diff implements Query {
     @Override

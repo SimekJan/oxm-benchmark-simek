@@ -74,11 +74,11 @@ public class PopulateWithDummyData {
         // ---------- CUSTOMERS ----------
 
         Customer c1 = new Customer(1L, "A", "Karlovy Vary");
-        Customer c2 = new Customer(2L, "B", "Praha");
+        Customer c2 = new Customer(2L, "B", "Prague");
         Customer c3 = new Customer(3L, "C", "Olomouc");
         Customer c4 = new Customer(4L, "D", "Ostrava");
         Customer c5 = new Customer(5L, "E", "Brno");
-
+        Customer c6 = new Customer(6L, "F", "Prague");
 
         // ---------- ORDERS ----------
 
@@ -148,6 +148,7 @@ public class PopulateWithDummyData {
         session.persist(c3);
         session.persist(c4);
         session.persist(c5);
+        session.persist(c6);
 
         session.persist(o1);
         session.persist(o2);

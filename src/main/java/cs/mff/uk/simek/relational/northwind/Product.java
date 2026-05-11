@@ -15,7 +15,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Products")
-@Table(name = "products")
+@Table(name = "products",
+        indexes = {
+                @Index(name = "idx_product_id", columnList = "product_id")
+        })
 public class Product implements java.io.Serializable {
 
     @Id

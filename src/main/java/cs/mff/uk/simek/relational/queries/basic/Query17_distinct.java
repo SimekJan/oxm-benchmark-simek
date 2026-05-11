@@ -7,7 +7,6 @@ import java.util.List;
 
 /*
     find distinct customer cities
-    TODO: should also cover when GROUP BY is used without aggregation
  */
 public class Query17_distinct implements Query {
     @Override

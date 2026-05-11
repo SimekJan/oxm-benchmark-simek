@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Find shortest path between two given suppliers
+ * Find the shortest path between two given suppliers
  */
 public class Query10_shortest_path implements Query {
     @Override

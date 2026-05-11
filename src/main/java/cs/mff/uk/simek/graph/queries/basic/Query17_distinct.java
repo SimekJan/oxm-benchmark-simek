@@ -5,13 +5,16 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Map;
 
+/*
+    find distinct customer cities
+ */
 public class Query17_distinct implements Query {
     @Override
     public void perform(Session session) {
 
         String query = """
-                    MATCH (e:Employee)
-                    RETURN DISTINCT e.city AS city
+                    MATCH (c:Customer)
+                    RETURN DISTINCT c.city AS city
                 """;
 
         Iterable<Map<String,Object>> results = session.query(query, Map.of());

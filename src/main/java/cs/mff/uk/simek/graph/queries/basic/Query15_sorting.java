@@ -5,6 +5,10 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Map;
 
+/*
+    Products based on unit price
+    (not indexed column)
+ */
 public class Query15_sorting implements Query {
     @Override
     public void perform(Session session) {
@@ -19,7 +23,7 @@ public class Query15_sorting implements Query {
 
         for (Map<String,Object> row : results) {
             String product = (String) row.get("product");
-            Long price = (Long) row.get("price");
+            Double price = (Double) row.get("price");
             System.out.println(product + ": " + price);
         }
     }

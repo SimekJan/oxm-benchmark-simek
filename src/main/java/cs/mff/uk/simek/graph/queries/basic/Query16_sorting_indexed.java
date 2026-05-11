@@ -5,22 +5,26 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Map;
 
+/*
+    sort products based on product_id
+    (indexed column)
+ */
 public class Query16_sorting_indexed implements Query {
     @Override
     public void perform(Session session) {
 
         String query = """
-                    MATCH (e:Employee)
-                    RETURN e.firstName AS firstName, e.lastName AS lastName
-                    ORDER BY lastName
+                    MATCH (p:Product)
+                    RETURN p.productId, p.productName
+                    ORDER BY p.productId
                 """;
 
         Iterable<Map<String,Object>> results = session.query(query, Map.of());
 
         for (Map<String,Object> row : results) {
-            String firstName = (String) row.get("firstName");
-            String lastName = (String) row.get("lastName");
-            System.out.println(lastName + " " + firstName);
+            Long productId = (Long) row.get("p.productId");
+            String productName = (String) row.get("p.productName");
+            System.out.println(productId + ": " + productName);
         }
     }
 }

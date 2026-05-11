@@ -44,11 +44,11 @@ public class Query10_shortest_path implements Query {
                 ))
         ), Document.class).into(new ArrayList<>());
 
-
         for (Document doc: result) {
             System.out.println(doc.toJson());
         }
 
+        System.out.println("Note that depth starts as 0 for the first neighbour.");
     }
 }
 
