@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries.complex;
+package cs.mff.uk.simek.document_embedded.queries.complex;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import cs.mff.uk.simek.document.queries.Query;
+import cs.mff.uk.simek.document_embedded.queries.Query;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -20,13 +20,6 @@ public class C_Query2_join_sort implements Query {
 
         List<Document> results = employees.aggregate(List.of(
 
-                new Document("$lookup",
-                        new Document("from", "Orders")
-                                .append("localField", "_id")
-                                .append("foreignField", "employee")
-                                .append("as", "orders")
-                ),
-
                 new Document("$unwind", "$orders"),
 
                 new Document("$project",
@@ -36,7 +29,6 @@ public class C_Query2_join_sort implements Query {
                                 .append("lastName", "$lastName")
                 ),
 
-                // sort
                 new Document("$sort",
                         new Document("lastName", 1)
                                 .append("firstName", 1)

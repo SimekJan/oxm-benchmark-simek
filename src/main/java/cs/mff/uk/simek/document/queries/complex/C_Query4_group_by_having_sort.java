@@ -17,23 +17,22 @@ public class C_Query4_group_by_having_sort implements Query {
     @Override
     public void runQuery(MongoDatabase db) {
 
-        MongoCollection<Document> orders = db.getCollection("Orders");
+        MongoCollection<Document> employees = db.getCollection("Employees");
 
-        List<Document> results = orders.aggregate(List.of(
-
-                new Document("$group",
-                        new Document("_id", "$employee")
-                                .append("orderCount", new Document("$sum", 1))
-                ),
+        List<Document> results = employees.aggregate(List.of(
 
                 new Document("$lookup",
-                        new Document("from", "Employees")
+                        new Document("from", "Orders")
                                 .append("localField", "_id")
-                                .append("foreignField", "_id")
-                                .append("as", "employee")
+                                .append("foreignField", "employee")
+                                .append("as", "orders")
                 ),
 
-                new Document("$unwind", "$employee"),
+                new Document("$addFields",
+                        new Document("orderCount",
+                                new Document("$size", "$orders")
+                        )
+                ),
 
                 new Document("$match",
                         new Document("orderCount",
@@ -43,8 +42,8 @@ public class C_Query4_group_by_having_sort implements Query {
 
                 new Document("$project",
                         new Document("_id", 0)
-                                .append("firstName", "$employee.firstName")
-                                .append("lastName", "$employee.lastName")
+                                .append("firstName", 1)
+                                .append("lastName", 1)
                                 .append("orderCount", 1)
                 ),
 

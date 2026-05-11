@@ -5,8 +5,6 @@ import com.mongodb.client.MongoDatabase;
 import cs.mff.uk.simek.document.queries.Query;
 import cs.mff.uk.simek.document.northwind.Employee;
 
-import java.time.LocalDate;
-
 import static com.mongodb.client.model.Filters.eq;
 
 /*

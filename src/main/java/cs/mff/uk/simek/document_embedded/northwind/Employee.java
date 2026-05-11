@@ -11,7 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Employee {
 
-    public Employee(String firstName, String lastName, LocalDate birthDate, LocalDate hireDate, String city) {
+    public Employee(Long employeeId, String firstName, String lastName, LocalDate birthDate, LocalDate hireDate, String city) {
+        this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -20,12 +21,14 @@ public class Employee {
     }
 
     private ObjectId id;
+
+    private Long employeeId;
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
     private LocalDate hireDate;
     private String city;
-    private ObjectId reportsTo; // TODO ??
+    private ObjectId reportsTo;
 
-    private List<Order> orders;
+    private List<OrderSnapshot> orders;
 }

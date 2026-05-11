@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries.complex;
+package cs.mff.uk.simek.document_embedded.queries.complex;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import cs.mff.uk.simek.document.queries.Query;
+import cs.mff.uk.simek.document_embedded.queries.Query;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -24,13 +24,6 @@ public class C_Query5_filter_join implements Query {
                         new Document("city",
                                 new Document("$regex", "^P")
                         )
-                ),
-
-                new Document("$lookup",
-                        new Document("from", "Products")
-                                .append("localField", "_id")
-                                .append("foreignField", "supplier")
-                                .append("as", "products")
                 ),
 
                 new Document("$unwind", "$products"),

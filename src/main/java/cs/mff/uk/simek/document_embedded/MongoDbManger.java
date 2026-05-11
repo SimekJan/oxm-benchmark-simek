@@ -1,4 +1,4 @@
-package cs.mff.uk.simek.document;
+package cs.mff.uk.simek.document_embedded;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -13,7 +13,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoDbManger {
 
-    private static final String DB_NAME = "document";
+    private static final String DB_NAME = "document_embedded";
 
     public static MongoDatabase getDb() {
 

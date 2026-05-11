@@ -8,16 +8,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Same as in 'document' version
+ * Inserted into Employee and Customer for query optimization.
+ * Does not include Products to avoid size explosion.
  */
 @Data
 @NoArgsConstructor
-public class Order {
+public class OrderSnapshot {
 
-    public Order(Long orderId, LocalDate orderDate, List<ObjectId> productIds) {
-        this.orderId = orderId;
-        this.orderDate = orderDate;
-        this.products = productIds;
+    public OrderSnapshot(Order order) {
+        this.orderId = order.getOrderId();
+        this.employee = order.getEmployee();
+        this.customer = order.getCustomer();
+        this.orderDate = order.getOrderDate();
     }
 
     private ObjectId id;
@@ -26,5 +28,4 @@ public class Order {
     private ObjectId employee;
     private ObjectId customer;
     private LocalDate orderDate;
-    private List<ObjectId> products;
 }

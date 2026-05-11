@@ -7,7 +7,6 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Max price of products with name starting with "S" per category.
