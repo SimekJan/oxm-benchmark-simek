@@ -1,7 +1,5 @@
 package cs.mff.uk.simek.graph.queries.complex;
 
-
-
 import cs.mff.uk.simek.graph.queries.Query;
 import org.neo4j.ogm.session.Session;
 

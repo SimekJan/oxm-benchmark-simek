@@ -24,7 +24,7 @@ public class PopulateWithDummyData {
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
         // ---------- SUPPLIERS ----------
-        Supplier alpha = new Supplier(1L, "Alpha", "Praha");
+        Supplier alpha = new Supplier(1L, "Alpha", "Prague");
         Supplier beta = new Supplier(2L, "Beta", "Brno");
         Supplier gamma = new Supplier(3L, "Gamma", "Ostrava");
         Supplier delta = new Supplier(4L, "Delta", "Plzen");
@@ -60,7 +60,7 @@ public class PopulateWithDummyData {
         Employee ceo = new Employee(1L, "Alice", "CEO", LocalDate.of(1985,1,1), LocalDate.of(2020,3,15), "Karlovy Vary");
         employees.insertOne(ceo);
 
-        Employee manager1 = new Employee(2L, "Bob", "Manager", LocalDate.of(1990,1,1), LocalDate.of(2020,4,15), "Praha");
+        Employee manager1 = new Employee(2L, "Bob", "Manager", LocalDate.of(1990,1,1), LocalDate.of(2020,4,15), "Prague");
         manager1.setReportsTo(ceo.getId());
         Employee manager2 = new Employee(3L, "Carol", "Manager", LocalDate.of(1992,1,1), LocalDate.of(2018,3,4), "Brno");
         manager2.setReportsTo(ceo.getId());

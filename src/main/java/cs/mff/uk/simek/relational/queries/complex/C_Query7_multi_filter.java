@@ -9,7 +9,7 @@ import java.util.List;
 
 /*
  * Select only employees with firstname starting with B, lastname starting with M,
- * city 'Praha' birthdate before 1991 and date of hire after 2018.
+ * city 'Prague' birthdate before 1991 and date of hire after 2018.
  */
 public class C_Query7_multi_filter implements Query {
     @Override
@@ -17,7 +17,7 @@ public class C_Query7_multi_filter implements Query {
         String hql =    "FROM Employees e " +
                         "WHERE e.firstName LIKE 'B%' " +
                         "AND e.lastName LIKE 'M%' " +
-                        "AND e.city = 'Praha' " +
+                        "AND e.city = 'Prague' " +
                         "AND e.birthDate <= :birth_date " +
                         "AND e.hireDate >= :start_date ";
 

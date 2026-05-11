@@ -14,7 +14,7 @@ public class C_Query3_group_by_sort_join implements Query {
     public void perform(Session session) {
         String hql =    "SELECT c.customerId, c.companyName, COUNT(o.orderId) " +
                         "FROM Customers c " +
-                        "JOIN c.orders o " +
+                        "LEFT JOIN c.orders o " +
                         "GROUP BY c.customerId, c.companyName " +
                         "ORDER BY COUNT(o.orderId) DESC";
 

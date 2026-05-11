@@ -3,7 +3,6 @@ package cs.mff.uk.simek.graph.queries.complex;
 import cs.mff.uk.simek.graph.queries.Query;
 import org.neo4j.ogm.session.Session;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,7 +24,7 @@ public class C_Query5_filter_join implements Query {
         for (Map<String, Object> row : results) {
             String product = (String) row.get("product");
             String company = (String) row.get("company");
-            System.out.println(company + " " + product);
+            System.out.println(company + " - " + product);
         }
     }
 }

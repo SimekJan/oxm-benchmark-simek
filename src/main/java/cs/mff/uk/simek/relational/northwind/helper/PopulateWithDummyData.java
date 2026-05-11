@@ -57,7 +57,7 @@ public class PopulateWithDummyData {
         // ---------- EMPLOYEES ----------
 
         Employee ceo = new Employee(1L, "Alice", "CEO", LocalDate.of(1985,1,1), LocalDate.of(2020,3,15), "Karlovy Vary");
-        Employee manager1 = new Employee(2L, "Bob", "Manager", LocalDate.of(1990,1,1), LocalDate.of(2020,4,15), "Praha");
+        Employee manager1 = new Employee(2L, "Bob", "Manager", LocalDate.of(1990,1,1), LocalDate.of(2020,4,15), "Prague");
         Employee manager2 = new Employee(3L, "Carol", "Manager", LocalDate.of(1992,1,1), LocalDate.of(2018,3,4), "Brno");
         Employee worker1 = new Employee(4L, "David", "Worker", LocalDate.of(1994,1,1), LocalDate.of(2005,7,28), "Liberec");
         Employee worker2 = new Employee(5L, "Eva", "Worker", LocalDate.of(1995,1,1), LocalDate.of(2008,4,26), "Ostrava");

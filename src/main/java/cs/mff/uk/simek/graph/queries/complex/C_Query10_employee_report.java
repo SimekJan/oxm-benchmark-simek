@@ -6,7 +6,7 @@ import org.neo4j.ogm.session.Session;
 import java.util.Map;
 
 /**
- *
+ *  Create a complex real-world-like report including employee info
  */
 public class C_Query10_employee_report implements Query {
     @Override

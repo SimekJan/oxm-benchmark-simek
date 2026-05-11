@@ -11,7 +11,7 @@ public class QueryExample {
 
         Session session = Neo4jSessionManager.getSession();
 
-        Query q = new Query17_distinct();
+        Query q = new C_Query10_employee_report();
 
         q.perform(session);
     }

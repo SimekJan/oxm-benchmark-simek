@@ -3,8 +3,6 @@ package cs.mff.uk.simek.graph.queries.complex;
 import cs.mff.uk.simek.graph.queries.Query;
 import org.neo4j.ogm.session.Session;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 /*
@@ -18,7 +16,7 @@ public class C_Query7_multi_filter implements Query {
         String query = """
             MATCH (e:Employee)
             WHERE e.firstName STARTS WITH 'B'
-            AND e.city = 'Praha'
+            AND e.city = 'Prague'
             AND e.birthDate < '1991-01-01'
             AND e.hireDate > '2019-01-01'
             RETURN e.firstName AS firstName, e.lastName AS lastName

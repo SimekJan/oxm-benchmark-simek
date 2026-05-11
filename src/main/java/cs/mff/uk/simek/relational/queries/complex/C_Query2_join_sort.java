@@ -15,7 +15,7 @@ public class C_Query2_join_sort implements Query {
         String hql =    "SELECT e.firstName, e.lastName, o.orderId " +
                         "FROM Employees e " +
                         "JOIN e.orders o " +
-                        "ORDER BY e.lastName, e.firstName DESC";
+                        "ORDER BY e.lastName, e.firstName";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 
