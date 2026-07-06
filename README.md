@@ -1,8 +1,10 @@
 # OXM-benchmark 
 
-## ~ 7/2026
+```
+ ~ 7/2026
+```
 
-### Filtering by Regex
+## Filtering by Regex
 
 - **PostgreSQL**: LIKE, SIMILAR TO, POSIX Regular Expressions
 
@@ -10,10 +12,24 @@
 
 - **Neo4j**: STARTS WITH, Regex (=~)
 
-#### Non-indexed columns -> Sequential (probably not interesting)
+### Differences
 
-#### Indexed -> differs (**Starts with** vs. **General regex**)
+- Non-indexed columns -> Sequential (probably not interesting)
 
-#### **Starts with** -> possibly better optimization with MongoDB
+- Indexed -> differs (**Starts with** vs. **General regex**)
 
-#### **General Regex** -> all full scan, PostgreSQL improvement using *pg_trgm* (filters results before regex is applied using 3-character chunks)
+- **Starts with** -> possibly better optimization with MongoDB
+
+- **General Regex** -> all full scan, PostgreSQL improvement using *pg_trgm* (filters results before regex is applied using 3-character chunks)
+
+## Northwind generated sources sizes
+
+- Suppliers < Employees < Products < Customers < Orders
+
+## Multi-join query
+
+- Optimized so smaller collections are joined first (to avoid pottential issues with inner oprimization differences)
+
+- Added filtering so the join is not too large when using larger generated data
+
+- For chosen document embedded model this query is not possible to be optimized, so the query was deleted 

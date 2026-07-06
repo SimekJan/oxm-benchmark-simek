@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 /**
- * Filtering
+ * Filtering using regex
  */
 public class Query1 implements Query {
 

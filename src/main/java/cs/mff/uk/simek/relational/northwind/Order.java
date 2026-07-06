@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +30,8 @@ public class Order implements java.io.Serializable {
     @Column(name = "order_id")
     private Long orderId;
 
+    private LocalDate orderDate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
@@ -45,8 +48,9 @@ public class Order implements java.io.Serializable {
     )
     private Set<Product> products = new HashSet<>();
 
-    public Order(Long orderId) {
+    public Order(Long orderId, LocalDate orderDate) {
         this.orderId = orderId;
+        this.orderDate = orderDate;
     }
 
     public void addProduct(Product product) {

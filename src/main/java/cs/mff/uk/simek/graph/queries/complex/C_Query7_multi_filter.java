@@ -16,9 +16,9 @@ public class C_Query7_multi_filter implements Query {
         String query = """
             MATCH (e:Employee)
             WHERE e.firstName STARTS WITH 'B'
-            AND e.city = 'Prague'
-            AND e.birthDate < '1991-01-01'
-            AND e.hireDate > '2019-01-01'
+                AND e.city = 'Prague'
+                AND e.birthDate < '1991-01-01'
+                AND e.hireDate > '2019-01-01'
             RETURN e.firstName AS firstName, e.lastName AS lastName
         """;
 

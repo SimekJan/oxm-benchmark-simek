@@ -3,6 +3,7 @@ package cs.mff.uk.simek.graph.queries.complex;
 import cs.mff.uk.simek.graph.queries.Query;
 import org.neo4j.ogm.session.Session;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 /*
@@ -13,14 +14,18 @@ public class C_Query8_multi_join implements Query {
     public void perform(Session session) {
 
         String query = """
-                    MATCH (o:Order)-[:INCLUDES]->(p:Product)
-                    MATCH (p)-[:IS_PRODUCED_BY]->(s:Supplier)
+                    MATCH (s:Supplier)<-[:IS_PRODUCED_BY]-(p:Product)
+                    MATCH (p)<-[:INCLUDES]-(o:Order)
+                    MATCH (o)<-[:IS_RESPONSIBLE_FOR]-(e:Employee)
                     MATCH (o)-[:IS_CUSTOMERS_ORDER]->(c:Customer)
-                    MATCH (e:Employee)-[:IS_RESPONSIBLE_FOR]->(o)
-                    RETURN\s
+                    WHERE s.companyName = 'Alpha'
+                        AND p.productName = 'Nut'
+                        AND e.firstName = 'Eva'
+                        AND c.companyName = 'E'
+                    RETURN
                         c.companyName AS customerName,
                         e.firstName AS employeeFirstName,
-                        o.orderId AS orderId,
+                        o.orderDate AS orderDate,
                         p.productName AS productName,
                         s.companyName AS supplierName
                 """;
@@ -30,10 +35,10 @@ public class C_Query8_multi_join implements Query {
         for (Map<String, Object> row : results) {
             String customerName = (String) row.get("customerName");
             String employeeFirstName = (String) row.get("employeeFirstName");
-            Long orderId = (Long) row.get("orderId");
+            String orderId = (String) row.get("orderDate");
             String productName = (String) row.get("productName");
             String supplierName = (String) row.get("supplierName");
-            System.out.println(customerName + " " + employeeFirstName + " " + orderId + " " + productName + " " + supplierName);
+            System.out.println(customerName + " - " + employeeFirstName + " - " + orderId + " - " + productName + " - " + supplierName);
         }
     }
 }

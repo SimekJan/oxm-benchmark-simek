@@ -82,12 +82,12 @@ public class PopulateWithDummyData {
 
         // ---------- ORDERS ----------
 
-        Order o1 = new Order(1L);
-        Order o2 = new Order(2L);
-        Order o3 = new Order(3L);
-        Order o4 = new Order(4L);
-        Order o5 = new Order(5L);
-        Order o6 = new Order(6L);
+        Order o1 = new Order(1L, LocalDate.of(2025,1,1));
+        Order o2 = new Order(2L, LocalDate.of(2025,10,11));
+        Order o3 = new Order(3L, LocalDate.of(2025,8,21));
+        Order o4 = new Order(4L, LocalDate.of(2025,9,15));
+        Order o5 = new Order(5L, LocalDate.of(2025,7,4));
+        Order o6 = new Order(6L, LocalDate.of(2025,12,9));
 
         c1.addOrder(o1);
         c2.addOrder(o2);

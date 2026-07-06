@@ -3,6 +3,7 @@ package cs.mff.uk.simek.graph.northwind;
 import lombok.*;
 import org.neo4j.ogm.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,8 +12,9 @@ import java.util.Set;
 @NodeEntity
 public class Order {
 
-    public Order(Long orderId) {
+    public Order(Long orderId, LocalDate orderDate) {
         this.orderId = orderId;
+        this.orderDate = orderDate;
     }
 
     @Id
@@ -21,6 +23,8 @@ public class Order {
 
     @Index
     private Long orderId;
+
+    private LocalDate orderDate;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

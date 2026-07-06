@@ -5,6 +5,7 @@ import com.mongodb.client.MongoDatabase;
 import cs.mff.uk.simek.document.queries.Query;
 import org.bson.Document;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,60 +16,78 @@ public class C_Query8_multi_join implements Query {
     @Override
     public void runQuery(MongoDatabase db) {
 
-        MongoCollection<Document> orders = db.getCollection("Orders");
+        MongoCollection<Document> suppliers = db.getCollection("Suppliers");
 
-        List<Document> results = orders.aggregate(List.of(
+        // Order is optimized by collection sizes and existing connection between tables
+        List<Document> results = suppliers.aggregate(List.of(
+
+                new Document("$match",
+                        new Document("companyName", "Alpha")
+                ),
 
                 new Document("$lookup",
-                        new Document("from", "Customers")
-                                .append("localField", "customer")
-                                .append("foreignField", "_id")
-                                .append("as", "customer")
+                        new Document("from", "Products")
+                                .append("localField", "_id")
+                                .append("foreignField", "supplier")
+                                .append("as", "product")
                 ),
-                new Document("$unwind", "$customer"),
+                new Document("$unwind", "$product"),
+
+                new Document("$match",
+                        new Document("product.productName", "Nut")
+                ),
+
+                new Document("$lookup",
+                        new Document("from", "Orders")
+                                .append("localField", "product._id")
+                                .append("foreignField", "products")
+                                .append("as", "order")
+                ),
+                new Document("$unwind", "$order"),
+
+                // No filter here, no suitable filter found
 
                 new Document("$lookup",
                         new Document("from", "Employees")
-                                .append("localField", "employee")
+                                .append("localField", "order.employee")
                                 .append("foreignField", "_id")
                                 .append("as", "employee")
                 ),
                 new Document("$unwind", "$employee"),
 
-                new Document("$lookup",
-                        new Document("from", "Products")
-                                .append("localField", "products")
-                                .append("foreignField", "_id")
-                                .append("as", "products")
+                new Document("$match",
+                        new Document("employee.firstName", "Eva")
                 ),
 
-                new Document("$unwind", "$products"),
-
                 new Document("$lookup",
-                        new Document("from", "Suppliers")
-                                .append("localField", "products.supplier")
+                        new Document("from", "Customers")
+                                .append("localField", "order.customer")
                                 .append("foreignField", "_id")
-                                .append("as", "supplier")
+                                .append("as", "customer")
                 ),
-                new Document("$unwind", "$supplier"),
+                new Document("$unwind", "$customer"),
+
+                new Document("$match",
+                        new Document("customer.companyName", "E")
+                ),
 
                 new Document("$project",
                         new Document("_id", 0)
                                 .append("customerName", "$customer.companyName")
                                 .append("employeeFirstName", "$employee.firstName")
-                                .append("orderId", "$orderId")
-                                .append("productName", "$products.productName")
-                                .append("supplierName", "$supplier.companyName")
+                                .append("orderDate", "$order.orderDate")
+                                .append("productName", "$product.productName")
+                                .append("supplierName", "$companyName")
                 )
 
         ), Document.class).into(new ArrayList<>());
 
         for (Document row : results) {
             System.out.println(
-                    row.getString("customerName") + " " +
-                            row.getString("employeeFirstName") + " " +
-                            row.get("orderId") + " " +
-                            row.getString("productName") + " " +
+                    row.getString("customerName") + " - " +
+                            row.getString("employeeFirstName") + " - " +
+                            row.get("orderDate") + " - " +
+                            row.getString("productName") + " - " +
                             row.getString("supplierName")
             );
         }

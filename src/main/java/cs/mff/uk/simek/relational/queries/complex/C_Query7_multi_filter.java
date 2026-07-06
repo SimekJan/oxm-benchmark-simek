@@ -16,10 +16,10 @@ public class C_Query7_multi_filter implements Query {
     public void perform(Session session) {
         String hql =    "FROM Employees e " +
                         "WHERE e.firstName LIKE 'B%' " +
-                        "AND e.lastName LIKE 'M%' " +
-                        "AND e.city = 'Prague' " +
-                        "AND e.birthDate <= :birth_date " +
-                        "AND e.hireDate >= :start_date ";
+                            "AND e.lastName LIKE 'M%' " +
+                            "AND e.city = 'Prague' " +
+                            "AND e.birthDate <= :birth_date " +
+                            "AND e.hireDate >= :start_date ";
 
         List<Employee> result = session.createQuery(hql, Employee.class)
                 .setParameter("birth_date", LocalDate.of(1991,1,1))

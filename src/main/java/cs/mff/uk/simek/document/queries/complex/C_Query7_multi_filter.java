@@ -21,6 +21,7 @@ public class C_Query7_multi_filter implements Query {
 
         List<Document> results = employees.aggregate(List.of(
 
+                // order can be optimized internally by Mongo, so it does not matter much
                 new Document("$match",
                         new Document("firstName",
                                 new Document("$regex", "^B")
