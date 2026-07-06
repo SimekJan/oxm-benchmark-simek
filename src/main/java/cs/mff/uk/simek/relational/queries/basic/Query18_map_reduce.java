@@ -5,8 +5,8 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-/**
- *  Number of products by supplier (one order or more)
+/*
+     Number of products by supplier
  */
 public class Query18_map_reduce implements Query {
     @Override
@@ -25,6 +25,6 @@ public class Query18_map_reduce implements Query {
 }
 
 /*
-    TODO: Tohle už jsme vlastně zkoušeli, ale je možné, že u jiného dotazovacího frameworku se bude vykonávat jinak?
-    Ano, v jiných db bude fungovat jinak, tady je obojí vlastně stejné
+    This is not a true map-reduce
+    Included only for comparison
  */

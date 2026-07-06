@@ -5,6 +5,9 @@ import org.neo4j.ogm.session.Session;
 
 import java.util.Map;
 
+/*
+     Number of products by supplier
+ */
 public class Query18_map_reduce implements Query {
     @Override
     public void perform(Session session) {
@@ -26,6 +29,6 @@ public class Query18_map_reduce implements Query {
 }
 
 /*
-    TODO: není map reduce
-    uplne pryc
+    This is not a true map-reduce
+    Included only for comparison
  */

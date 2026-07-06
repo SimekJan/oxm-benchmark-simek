@@ -10,7 +10,7 @@ public class QueryExample {
     public static void main(String[] args) {
         MongoDatabase db = MongoDbManger.getDb();
 
-        Query q = new C_Query10_employee_report();
+        Query q = new Query18_map_reduce();
 
         q.runQuery(db);
     }
