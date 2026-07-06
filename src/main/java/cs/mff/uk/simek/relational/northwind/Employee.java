@@ -32,7 +32,7 @@ public class Employee implements java.io.Serializable {
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
 
-    @Column(name = "first_name", nullable = false, length = 10)
+    @Column(name = "first_name", nullable = false, length = 20)
     private String firstName;
 
     @Column(name = "birth_date", length = 13)
@@ -41,7 +41,7 @@ public class Employee implements java.io.Serializable {
     @Column(name = "hire_date", length = 13)
     private LocalDate hireDate;
 
-    @Column(name = "city", length = 15)
+    @Column(name = "city", length = 25)
     private String city;
 
     @ManyToOne(fetch = FetchType.LAZY)

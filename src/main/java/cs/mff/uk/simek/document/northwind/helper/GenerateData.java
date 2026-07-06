@@ -16,13 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.mongodb.client.model.Indexes.ascending;
-
 public class GenerateData {
 
     private static final int SUPPLIER_COUNT = 1_000;
-    private static final int PRODUCT_COUNT = 5_000;
     private static final int EMPLOYEE_COUNT = 2_000;
+    private static final int PRODUCT_COUNT = 5_000;
     private static final int CUSTOMER_COUNT = 10_000;
     private static final int ORDER_COUNT = 50_000;
 
@@ -40,18 +38,18 @@ public class GenerateData {
 
         BenchmarkDataGenerator gen = new BenchmarkDataGenerator();
 
-        Map<Long, ObjectId> supplierIdsMap = generateSuppliers(suppliers, gen);
-        generateSupplierRelations(suppliers, gen, supplierIdsMap);
-        // generateProducts(products, gen);
-        // generateEmployees(employees, gen);
-        // generateCustomers(customers, gen);
-        // generateOrders(orders, gen);
+        Map<Long, ObjectId> supplierIds = generateSuppliers(suppliers, gen);
+        generateSupplierRelations(suppliers, gen, supplierIds);
 
-        suppliers.createIndex(ascending("supplierId"));
-        products.createIndex(ascending("productId"));
-        employees.createIndex(ascending("employeeId"));
-        customers.createIndex(ascending("customerId"));
-        orders.createIndex(ascending("orderId"));
+        Map<Long, ObjectId> productIds = generateProducts(products, gen, supplierIds);
+
+        Map<Long, ObjectId> employeeIds = generateEmployees(employees, gen);
+
+        generateEmployeeHierarchy(gen, employees, employeeIds);
+
+        Map<Long, ObjectId> customerIds = generateCustomers(customers, gen);
+
+        generateOrders(orders, gen, customerIds, employeeIds, productIds);
     }
 
     private static Map<Long, ObjectId> generateSuppliers(MongoCollection<Supplier> suppliers, BenchmarkDataGenerator gen) {
@@ -91,7 +89,7 @@ public class GenerateData {
 
         for (long i = 1; i <= SUPPLIER_COUNT; i++) {
 
-            int depCount = gen.nextInt(0, 4);
+            int depCount = gen.nextInt(2, 8);
 
             List<ObjectId> dependencies = new ArrayList<>();
 
@@ -120,6 +118,220 @@ public class GenerateData {
             suppliers.bulkWrite(updates);
     }
 
-    // TODO: rest
+    private static Map<Long, ObjectId> generateProducts(MongoCollection<Product> products,
+                                                        BenchmarkDataGenerator gen,
+                                                        Map<Long, ObjectId> supplierIds) {
 
+        Map<Long, ObjectId> productIds = new HashMap<>();
+        List<Product> batch = new ArrayList<>();
+
+        for (long i = 1; i <= PRODUCT_COUNT; i++) {
+
+            ObjectId supplier =
+                    supplierIds.get((long) gen.nextInt(1, SUPPLIER_COUNT + 1));
+
+            Product product = new Product(
+                    i,
+                    gen.nextProductName(),
+                    gen.nextPrice(),
+                    gen.nextCategory(),
+                    supplier
+            );
+
+            batch.add(product);
+
+            if (batch.size() >= BATCH_SIZE) {
+                products.insertMany(batch);
+
+                for (Product p : batch)
+                    productIds.put(p.getProductId(), p.getId());
+
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+            products.insertMany(batch);
+
+            for (Product p : batch)
+                productIds.put(p.getProductId(), p.getId());
+        }
+
+        return productIds;
+    }
+
+    private static Map<Long, ObjectId> generateEmployees(MongoCollection<Employee> employees,
+                                                         BenchmarkDataGenerator gen) {
+
+        Map<Long, ObjectId> employeeIds = new HashMap<>();
+
+        List<Employee> batch = new ArrayList<>();
+
+        for (long i = 1; i <= EMPLOYEE_COUNT; i++) {
+
+            Employee employee = new Employee(
+                    i,
+                    gen.nextFirstName(),
+                    gen.nextLastName(),
+                    gen.nextBirthDate(),
+                    gen.nextHireDate(),
+                    gen.nextCity()
+            );
+
+            batch.add(employee);
+
+            if (batch.size() >= BATCH_SIZE) {
+                employees.insertMany(batch);
+
+                for (Employee e : batch)
+                    employeeIds.put(e.getEmployeeId(), e.getId());
+
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+
+            employees.insertMany(batch);
+
+            for (Employee e : batch)
+                employeeIds.put(e.getEmployeeId(), e.getId());
+        }
+
+        return employeeIds;
+    }
+
+    private static void generateEmployeeHierarchy(
+            BenchmarkDataGenerator gen,
+            MongoCollection<Employee> employees,
+            Map<Long, ObjectId> employeeIds) {
+
+        List<WriteModel<Employee>> updates = new ArrayList<>();
+
+        List<Long> potentialManagers = new ArrayList<>();
+        potentialManagers.add(1L); // CEO
+
+        int managerIndex = 0;
+        int reportsAssigned = 0;
+        int nextReportsToAssign = gen.nextInt(3,8);
+
+        for (long employee = 2; employee <= EMPLOYEE_COUNT; employee++) {
+
+            long manager = potentialManagers.get(managerIndex);
+
+            updates.add(
+                    new UpdateOneModel<>(
+                            Filters.eq("employeeId", employee),
+                            Updates.set("reportsTo", employeeIds.get(manager))
+                    )
+            );
+
+            potentialManagers.add(employee);
+
+            reportsAssigned++;
+
+            if (reportsAssigned == nextReportsToAssign) {
+                nextReportsToAssign = gen.nextInt(3,8);
+                reportsAssigned = 0;
+                managerIndex++;
+            }
+
+            if (updates.size() >= BATCH_SIZE) {
+                employees.bulkWrite(updates);
+                updates.clear();
+            }
+        }
+
+        if (!updates.isEmpty()) {
+            employees.bulkWrite(updates);
+        }
+    }
+
+    private static Map<Long, ObjectId> generateCustomers(MongoCollection<Customer> customers,
+                                                         BenchmarkDataGenerator gen) {
+
+        Map<Long, ObjectId> customerIds = new HashMap<>();
+
+        List<Customer> batch = new ArrayList<>();
+
+        for (long i = 1; i <= CUSTOMER_COUNT; i++) {
+
+            Customer customer = new Customer(
+                    i,
+                    gen.nextCompanyName(),
+                    gen.nextCity()
+            );
+
+            batch.add(customer);
+
+            if (batch.size() >= BATCH_SIZE) {
+
+                customers.insertMany(batch);
+
+                for (Customer c : batch)
+                    customerIds.put(c.getCustomerId(), c.getId());
+
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+
+            customers.insertMany(batch);
+
+            for (Customer c : batch)
+                customerIds.put(c.getCustomerId(), c.getId());
+        }
+
+        return customerIds;
+    }
+
+    private static void generateOrders(MongoCollection<Order> orders,
+                                       BenchmarkDataGenerator gen,
+                                       Map<Long, ObjectId> customerIds,
+                                       Map<Long, ObjectId> employeeIds,
+                                       Map<Long, ObjectId> productIds) {
+
+        List<Order> batch = new ArrayList<>();
+
+        for (long i = 1; i <= ORDER_COUNT; i++) {
+
+            ObjectId customer =
+                    customerIds.get((long) gen.nextInt(1, CUSTOMER_COUNT + 1));
+
+            ObjectId employee =
+                    employeeIds.get((long) gen.nextInt(1, EMPLOYEE_COUNT + 1));
+
+            int productCount = gen.nextInt(0, 8);
+
+            List<ObjectId> orderedProducts = new ArrayList<>();
+
+            while (orderedProducts.size() < productCount) {
+
+                ObjectId product =
+                        productIds.get((long) gen.nextInt(1, PRODUCT_COUNT + 1));
+
+                if (!orderedProducts.contains(product))
+                    orderedProducts.add(product);
+            }
+
+            Order order = new Order(
+                    i,
+                    customer,
+                    employee,
+                    gen.nextOrderDate(),
+                    orderedProducts
+            );
+
+            batch.add(order);
+
+            if (batch.size() >= BATCH_SIZE) {
+                orders.insertMany(batch);
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty())
+            orders.insertMany(batch);
+    }
 }

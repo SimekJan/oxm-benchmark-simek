@@ -124,8 +124,7 @@ public class PopulateWithDummyData {
         o5.addProduct(p2);
         o5.addProduct(p3);
 
-// o6 empty intentionally
-
+        // o6 empty intentionally
 
 // ---------- SAVE ----------
         session.save(ceo);

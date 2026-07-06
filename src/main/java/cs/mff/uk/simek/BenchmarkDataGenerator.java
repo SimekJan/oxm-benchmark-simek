@@ -53,11 +53,19 @@ public class BenchmarkDataGenerator {
         );
     }
 
-    public float nextPrice() {
+    public Float nextPrice() {
         return random.nextFloat(5F, 500F);
     }
 
     public LocalDate nextHireDate() {
+
+        int year = random.nextInt(2011, 2026);
+        int day = random.nextInt(1, 365);
+
+        return LocalDate.ofYearDay(year, day);
+    }
+
+    public LocalDate nextOrderDate() {
 
         int year = random.nextInt(2011, 2026);
         int day = random.nextInt(1, 365);

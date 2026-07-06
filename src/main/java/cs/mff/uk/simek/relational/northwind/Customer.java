@@ -31,7 +31,7 @@ public class Customer implements java.io.Serializable {
     @Column(name="company_name", nullable=false, length=40)
     private String companyName;
 
-    @Column(name="city", length=15)
+    @Column(name="city", length=25)
     private String city;
 
     @OneToMany(fetch=FetchType.LAZY, mappedBy="customer")
