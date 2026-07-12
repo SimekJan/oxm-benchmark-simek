@@ -10,11 +10,11 @@ import java.util.*;
 
 public class GenerateData {
 
-    private static final int SUPPLIER_COUNT = 1000;
-    private static final int EMPLOYEE_COUNT = 2000;
-    private static final int PRODUCT_COUNT = 5000;
-    private static final int CUSTOMER_COUNT = 10000;
-    private static final int ORDER_COUNT = 50000;
+    private static final int SUPPLIER_COUNT = 1_000;
+    private static final int EMPLOYEE_COUNT = 2_000;
+    private static final int PRODUCT_COUNT = 5_000;
+    private static final int CUSTOMER_COUNT = 10_000;
+    private static final int ORDER_COUNT = 20_000;
 
     public static void main(String[] args) {
 
@@ -173,7 +173,7 @@ public class GenerateData {
             c.addOrder(o);
             e.addOrder(o);
 
-            int productCount = gen.nextInt(0, 8);
+            int productCount = gen.nextInt(0, 4);
 
             for (int i = 0; i < productCount; i++) {
                 Product p = products.get(gen.nextInt(0, products.size()));

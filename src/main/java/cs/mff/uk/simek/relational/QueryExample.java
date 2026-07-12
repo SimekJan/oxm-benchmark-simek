@@ -11,7 +11,7 @@ public class QueryExample {
         Session session = HibernateSessionManager.getSession();
         Transaction tx = session.beginTransaction();
 
-        Query q = new C_Query8_multi_join();
+        Query q = new Query1_select_indexed();
         q.perform(session);
 
         tx.commit();

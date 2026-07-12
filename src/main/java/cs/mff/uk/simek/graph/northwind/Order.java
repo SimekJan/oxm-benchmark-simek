@@ -17,18 +17,17 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
-    @Index
+    @Index(unique = true)
     private Long orderId;
 
     private LocalDate orderDate;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Relationship(type = "IS_RESPONSIBLE_FOR", direction = Relationship.INCOMING)
+    @Relationship(type = "IS_RESPONSIBLE_FOR", direction = Relationship.Direction.INCOMING)
     private Employee employee;
 
     @Relationship(type = "IS_CUSTOMERS_ORDER")
@@ -39,10 +38,11 @@ public class Order {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Relationship(type = "INCLUDES")
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 
     public void addProduct(Product p) {
-        if (products == null) products = new HashSet<>();
-        products.add(p);
+        if (products.add(p)) {
+            p.addOrder(this);
+        }
     }
 }

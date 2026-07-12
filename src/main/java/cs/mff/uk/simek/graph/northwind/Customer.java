@@ -20,11 +20,10 @@ public class Customer {
         this.city = city;
     }
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
-    @Index
+    @Index(unique = true)
     private Long customerId;
 
     private String companyName;
@@ -33,11 +32,10 @@ public class Customer {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Relationship(type = "IS_CUSTOMERS_ORDER", direction = Relationship.INCOMING)
-    private List<Order> orders;
+    @Relationship(type = "IS_CUSTOMERS_ORDER", direction = Relationship.Direction.INCOMING)
+    private List<Order> orders = new ArrayList<>();
 
     public void addOrder(Order o) {
-        if (orders == null) orders = new ArrayList<>();
         orders.add(o);
         o.setCustomer(this);
     }

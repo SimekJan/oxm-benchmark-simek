@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.neo4j.ogm.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -21,11 +22,10 @@ public class Product {
         this.category = category;
     }
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
-    @Index
+    @Index(unique = true)
     private Long productId;
 
     private String productName;
@@ -41,6 +41,10 @@ public class Product {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Relationship(type = "INCLUDES", direction = Relationship.INCOMING)
-    private Set<Order> orders;
+    @Relationship(type = "INCLUDES", direction = Relationship.Direction.INCOMING)
+    private Set<Order> orders = new HashSet<>();
+
+    public void addOrder(Order o) {
+        orders.add(o);
+    }
 }

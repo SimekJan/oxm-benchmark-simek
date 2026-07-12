@@ -2,27 +2,20 @@ package cs.mff.uk.simek.graph.northwind.helper;
 
 import cs.mff.uk.simek.BenchmarkDataGenerator;
 import cs.mff.uk.simek.graph.Neo4jSessionManager;
+import lombok.extern.slf4j.Slf4j;
 import org.neo4j.ogm.session.Session;
 import cs.mff.uk.simek.graph.northwind.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
+@Slf4j
 public class GenerateData {
-/*
+
     private static final int SUPPLIER_COUNT = 1_000;
     private static final int EMPLOYEE_COUNT = 2_000;
     private static final int PRODUCT_COUNT = 5_000;
     private static final int CUSTOMER_COUNT = 10_000;
-    private static final int ORDER_COUNT = 50_000;
-*/
-    private static final int SUPPLIER_COUNT = 1_0;
-    private static final int EMPLOYEE_COUNT = 2_0;
-    private static final int PRODUCT_COUNT = 5_0;
-    private static final int CUSTOMER_COUNT = 10_0;
-    private static final int ORDER_COUNT = 50_0;
+    private static final int ORDER_COUNT = 20_000;
 
     public static void main(String[] args) {
 
@@ -35,16 +28,44 @@ public class GenerateData {
         List<Customer> customers = generateCustomers(gen);
         List<Order> orders = generateOrders(gen);
 
-        linkSupplierProducts(suppliers, products, gen);
-        generateEmployeeHierarchy(employees, gen);
-        linkOrders(orders, customers, employees, products, gen);
+        for (int i = 0; i < suppliers.size(); i += 100) {
+            session.save(suppliers.subList(i, Math.min(i + 100, suppliers.size())));
+        }
+        for (int i = 0; i < employees.size(); i += 100) {
+            session.save(employees.subList(i, Math.min(i + 100, employees.size())));
+        }
+        for (int i = 0; i < products.size(); i += 100) {
+            session.save(products.subList(i, Math.min(i + 100, products.size())));
+        }
+        for (int i = 0; i < customers.size(); i += 100) {
+            session.save(customers.subList(i, Math.min(i + 100, customers.size())));
+        }
+        for (int i = 0; i < orders.size(); i += 100) {
+            session.save(orders.subList(i, Math.min(i + 100, orders.size())));
+        }
 
-        // SAVE (bulk-friendly in Neo4j OGM)
-        suppliers.forEach(session::save);
-        products.forEach(session::save);
-        employees.forEach(session::save);
-        customers.forEach(session::save);
-        orders.forEach(session::save);
+        log.info("All nodes saved");
+
+        linkSuppliers(suppliers, gen);
+        for (int i = 0; i < suppliers.size(); i += 100) {
+            session.save(suppliers.subList(i, Math.min(i + 100, suppliers.size())), 1);
+        }
+
+        log.info("Suppliers linked");
+
+        generateEmployeeHierarchy(employees, gen);
+        for (int i = 0; i < employees.size(); i += 100) {
+            session.save(employees.subList(i, Math.min(i + 100, employees.size())), 1);
+        }
+
+        log.info("Employees linked");
+
+        linkOrders(orders, customers, employees, products, gen);
+        for (int i = 0; i < orders.size(); i += 100) {
+            session.save(orders.subList(i, Math.min(i + 100, orders.size())), 1);
+        }
+
+        log.info("Orders and products linked");
     }
 
     private static List<Supplier> generateSuppliers(BenchmarkDataGenerator gen) {
@@ -58,15 +79,17 @@ public class GenerateData {
         return list;
     }
 
-    private static void linkSupplierProducts(List<Supplier> suppliers, List<Product> products,
-                                             BenchmarkDataGenerator gen) {
+    private static void linkSuppliers(List<Supplier> suppliers,
+                                      BenchmarkDataGenerator gen) {
 
         for (Supplier s : suppliers) {
 
             int links = gen.nextInt(1, 5);
 
             for (int i = 0; i < links; i++) {
+
                 Supplier target = suppliers.get(gen.nextInt(0, suppliers.size()));
+
                 if (target != s) {
                     s.addSuppliesTo(target);
                 }
@@ -173,7 +196,7 @@ public class GenerateData {
             c.addOrder(o);
             e.addOrder(o);
 
-            int productCount = gen.nextInt(0, 8);
+            int productCount = gen.nextInt(0, 4);
 
             for (int i = 0; i < productCount; i++) {
                 Product p = products.get(gen.nextInt(0, products.size()));

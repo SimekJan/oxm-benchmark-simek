@@ -17,11 +17,10 @@ public class Supplier {
         this.city = city;
     }
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
-    @Index
+    @Index(unique = true)
     private Long supplierId;
 
     private String companyName;
@@ -30,27 +29,32 @@ public class Supplier {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Relationship(type = "IS_PRODUCED_BY", direction = Relationship.INCOMING)
-    private Set<Product> products;
+    @Relationship(type = "IS_PRODUCED_BY", direction = Relationship.Direction.INCOMING)
+    private Set<Product> products = new HashSet<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Relationship(type = "SUPPLIES_TO")
-    private Set<Supplier> suppliesTo;
+    private Set<Supplier> suppliesTo = new HashSet<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Relationship(type = "SUPPLIES_TO", direction = Relationship.INCOMING)
-    private Set<Supplier> suppliedBy;
+    @Relationship(type = "SUPPLIES_TO", direction = Relationship.Direction.INCOMING)
+    private Set<Supplier> suppliedBy = new HashSet<>();
 
     public void addProduct(Product p) {
-        if (products == null) products = new HashSet<>();
-        products.add(p);
-        p.setSupplier(this);
+        if (products.add(p)) {
+            p.setSupplier(this);
+        }
     }
 
     public void addSuppliesTo(Supplier s) {
-        if (suppliesTo == null) suppliesTo = new HashSet<>();
-        suppliesTo.add(s);
+        if (suppliesTo.add(s)) {
+            s.addSuppliedBy(this);
+        }
+    }
+
+    public void addSuppliedBy(Supplier s) {
+        suppliedBy.add(s);
     }
 }

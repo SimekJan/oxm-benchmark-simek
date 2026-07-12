@@ -22,7 +22,7 @@ public class GenerateData {
     private static final int EMPLOYEE_COUNT = 2_000;
     private static final int PRODUCT_COUNT = 5_000;
     private static final int CUSTOMER_COUNT = 10_000;
-    private static final int ORDER_COUNT = 50_000;
+    private static final int ORDER_COUNT = 20_000;
 
     private static final int BATCH_SIZE = 2_000;
 

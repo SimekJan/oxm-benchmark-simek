@@ -32,11 +32,10 @@ public class Employee {
         this.city = city;
     }
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
-    @Index
+    @Index(unique = true)
     private Long employeeId;
 
     private String firstName;
@@ -56,23 +55,22 @@ public class Employee {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Relationship(type = "REPORTS_TO", direction = Relationship.INCOMING)
-    private Set<Employee> subordinates;
+    @Relationship(type = "REPORTS_TO", direction = Relationship.Direction.INCOMING)
+    private Set<Employee> subordinates = new HashSet<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Relationship(type = "IS_RESPONSIBLE_FOR")
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
     public void addOrder(Order o) {
-        if (orders == null) orders = new ArrayList<>();
         orders.add(o);
         o.setEmployee(this);
     }
 
     public void addSubordinate(Employee e) {
-        if (subordinates == null) subordinates = new HashSet<>();
-        subordinates.add(e);
-        e.setReportsTo(this);
+        if (subordinates.add(e)) {
+            e.setReportsTo(this);
+        }
     }
 }

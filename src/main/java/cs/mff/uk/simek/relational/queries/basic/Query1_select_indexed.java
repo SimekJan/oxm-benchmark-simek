@@ -13,7 +13,7 @@ public class Query1_select_indexed implements Query {
         String hql =    "FROM Employees e " +
                         "WHERE e.employeeId = :id";
 
-        Employee e = session.createQuery(hql, Employee.class).setParameter("id", 5L).uniqueResult();
+        Employee e = session.createQuery(hql, Employee.class).setParameter("id", 526L).uniqueResult();
 
         System.out.println(e.getFirstName() + " - " + e.getLastName());
     }

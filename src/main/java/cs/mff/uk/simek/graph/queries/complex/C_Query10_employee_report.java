@@ -19,7 +19,7 @@ public class C_Query10_employee_report implements Query {
                     OPTIONAL MATCH (e)-[:IS_RESPONSIBLE_FOR]->(o:Order)
                     WITH e, COUNT(o) AS orderCount
                 
-                    OPTIONAL MATCH (p:Product)<-[:INCLUDES]-(e)-[:IS_RESPONSIBLE_FOR]->(o:Order)
+                    OPTIONAL MATCH (e)-[:IS_RESPONSIBLE_FOR]->(o:Order)-[:INCLUDES]->(p:Product)
                     WITH e, orderCount, SUM(p.unitPrice) AS totalPrice
                 
                     OPTIONAL MATCH (s:Employee)-[:REPORTS_TO]->(e)
@@ -47,7 +47,7 @@ public class C_Query10_employee_report implements Query {
             String firstName = (String) row.get("firstName");
             String lastName = (String) row.get("lastName");
             Long numberOfOrders = (Long) row.get("orderCount");
-            Long totalPrice = (Long) row.get("totalPrice");
+            Double totalPrice = (Double) row.get("totalPrice");
             Long numberOfSubordinates = (Long) row.get("subordinateCount");
             Long yearsSinceHire = (Long) row.get("yearsWorked");
             Long age = (Long) row.get("age");
