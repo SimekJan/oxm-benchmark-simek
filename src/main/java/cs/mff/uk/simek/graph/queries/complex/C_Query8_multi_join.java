@@ -17,10 +17,10 @@ public class C_Query8_multi_join implements Query {
                     MATCH (p)<-[:INCLUDES]-(o:Order)
                     MATCH (o)<-[:IS_RESPONSIBLE_FOR]-(e:Employee)
                     MATCH (o)-[:IS_CUSTOMERS_ORDER]->(c:Customer)
-                    WHERE s.companyName = 'Alpha'
-                        AND p.productName = 'Nut'
-                        AND e.firstName = 'Eva'
-                        AND c.companyName = 'E'
+                    WHERE s.companyName = 'BluePeak Industries'
+                        AND p.productName = 'Steel Plate'
+                        AND e.firstName = 'Jeffrey'
+                        AND c.companyName = 'StoneBridge'
                     RETURN
                         c.companyName AS customerName,
                         e.firstName AS employeeFirstName,

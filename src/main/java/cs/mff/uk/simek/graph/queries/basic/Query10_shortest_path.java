@@ -14,6 +14,8 @@ public class Query10_shortest_path implements Query {
     @Override
     public void perform(Session session) {
 
+        // TODO: COMPANY NAMES SHOULD BE UNIQUE FOR THIS !!!!!
+
         String query = """
                 MATCH (s1:Supplier {companyName: $from}),
                       (s2:Supplier {companyName: $to}),
@@ -21,7 +23,7 @@ public class Query10_shortest_path implements Query {
                 RETURN [n IN nodes(p) | n.companyName] AS pathNodes
             """;
 
-        Map<String,Object> params = Map.of("from","Alpha","to","Epsilon");
+        Map<String,Object> params = Map.of("from","Nordex Systems","to","Evercrest");
 
         Iterable<Map<String,Object>> results = session.query(query, params);
 

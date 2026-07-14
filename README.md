@@ -33,3 +33,7 @@
 - Added filtering so the join is not too large when using larger generated data
 
 - For chosen document embedded model this query is not possible to be optimized, so the query was deleted 
+
+## Generating Northwind data
+
+- 

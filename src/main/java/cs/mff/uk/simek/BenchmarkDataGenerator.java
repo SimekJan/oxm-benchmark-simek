@@ -54,7 +54,8 @@ public class BenchmarkDataGenerator {
     }
 
     public Float nextPrice() {
-        return random.nextFloat(5F, 500F);
+        // Try to round to two decimals (Does not work now due to Floats being store as they are !!!!)
+        return Math.round(random.nextFloat(5F, 500F) * 100F) / 100F;
     }
 
     public LocalDate nextHireDate() {
@@ -75,7 +76,7 @@ public class BenchmarkDataGenerator {
 
     public LocalDate nextBirthDate() {
 
-        int year = random.nextInt(1980, 2005);
+        int year = random.nextInt(1960, 2005);
         int day = random.nextInt(1, 365);
 
         return LocalDate.ofYearDay(year, day);

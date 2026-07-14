@@ -47,7 +47,8 @@ public class C_Query10_employee_report implements Query {
             String firstName = (String) row.get("firstName");
             String lastName = (String) row.get("lastName");
             Long numberOfOrders = (Long) row.get("orderCount");
-            Double totalPrice = (Double) row.get("totalPrice");
+            // Number needed because if whole number is returned then the value needs to be parsed into integer
+            Number totalPrice = (Number) row.get("totalPrice");
             Long numberOfSubordinates = (Long) row.get("subordinateCount");
             Long yearsSinceHire = (Long) row.get("yearsWorked");
             Long age = (Long) row.get("age");

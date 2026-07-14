@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Join suppliers which are from cities starting wit 'P' with their "cat2" products.
+ * Join suppliers which are from cities starting wit 'P' with their "Packaging Materials" products.
  */
 public class C_Query5_filter_join implements Query {
 
@@ -29,7 +29,7 @@ public class C_Query5_filter_join implements Query {
                 new Document("$unwind", "$products"),
 
                 new Document("$match",
-                        new Document("products.category", "cat2")
+                        new Document("products.category", "Packaging Materials")
                 ),
 
                 new Document("$project",

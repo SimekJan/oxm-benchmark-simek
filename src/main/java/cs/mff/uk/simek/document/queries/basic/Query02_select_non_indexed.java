@@ -15,7 +15,7 @@ public class Query02_select_non_indexed implements Query {
     public void runQuery(MongoDatabase db) {
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
 
-        Employee found = employees.find(eq("firstName", "Steve")).first();
+        Employee found = employees.find(eq("firstName", "Steven")).first();
         assert found != null;
 
         System.out.println(found.getFirstName() + " " + found.getLastName());

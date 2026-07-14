@@ -6,8 +6,8 @@ import org.neo4j.ogm.session.Session;
 import java.util.Map;
 
 /*
- * Select only employees with firstname starting with B, lastname starting with M,
- * city 'Praha' birthdate before 1991 and date of hire after 2018.
+ * Select only employees with firstname starting with R, lastname starting with M,
+ * city 'Reykjavik' birthdate before 2000 and date of hire after 2014.
  */
 public class C_Query7_multi_filter implements Query {
     @Override
@@ -15,10 +15,10 @@ public class C_Query7_multi_filter implements Query {
 
         String query = """
             MATCH (e:Employee)
-            WHERE e.firstName STARTS WITH 'B'
-                AND e.city = 'Prague'
-                AND e.birthDate < '1991-01-01'
-                AND e.hireDate > '2019-01-01'
+            WHERE e.firstName STARTS WITH 'R'
+                AND e.city = 'Reykjavik'
+                AND e.birthDate < '2000-01-01'
+                AND e.hireDate > '2014-01-01'
             RETURN e.firstName AS firstName, e.lastName AS lastName
         """;
 

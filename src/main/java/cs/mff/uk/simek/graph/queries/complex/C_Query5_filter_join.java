@@ -6,7 +6,7 @@ import org.neo4j.ogm.session.Session;
 import java.util.Map;
 
 /**
- * Join suppliers which are from cities starting wit 'P' with their "cat2" products.
+ * Join suppliers which are from cities starting wit 'P' with their "Packaging Materials" products.
  */
 public class C_Query5_filter_join implements Query {
 
@@ -15,7 +15,7 @@ public class C_Query5_filter_join implements Query {
 
         String query = """
             MATCH (p:Product)-[:IS_PRODUCED_BY]->(s:Supplier)
-            WHERE s.city STARTS WITH 'P' AND p.category = 'cat2'
+            WHERE s.city STARTS WITH 'P' AND p.category = 'Packaging Materials'
             RETURN p.productName AS product, s.companyName AS company
         """;
 

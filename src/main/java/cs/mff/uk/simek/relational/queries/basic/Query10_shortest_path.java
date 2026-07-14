@@ -43,8 +43,8 @@ public class Query10_shortest_path implements Query {
         """;
 
         List<?> results = session.createNativeQuery(sql)
-                .setParameter("from", "Alpha")
-                .setParameter("to", "Epsilon")
+                .setParameter("from", "Nordex Systems")
+                .setParameter("to", "Evercrest")
                 .getResultList();
 
         if (results.isEmpty()) {

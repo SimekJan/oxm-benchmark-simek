@@ -18,10 +18,10 @@ public class C_Query8_multi_join implements Query {
                             "JOIN p.orders o " +
                             "JOIN o.employee e " +
                             "JOIN o.customer c " +
-                        "WHERE s.companyName = 'Alpha' " +
-                            "AND p.productName = 'Nut' " +
-                            "AND e.firstName = 'Eva' " +
-                            "AND c.companyName = 'E' ";
+                        "WHERE s.companyName = 'BluePeak Industries' " +
+                            "AND p.productName = 'Steel Plate' " +
+                            "AND e.firstName = 'Jeffrey' " +
+                            "AND c.companyName = 'StoneBridge' ";
 
         List<Object[]> result = session.createQuery(hql, Object[].class).getResultList();
 

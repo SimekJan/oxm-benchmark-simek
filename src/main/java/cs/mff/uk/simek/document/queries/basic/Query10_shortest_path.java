@@ -23,7 +23,7 @@ public class Query10_shortest_path implements Query {
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
         List<Document> result = suppliers.aggregate(List.of(
-                match(eq("companyName", "Epsilon")),
+                match(eq("companyName", "Evercrest")),
                 new Document("$graphLookup",
                         new Document("from", "Suppliers")
                                 .append("startWith", "$suppliedBy")
@@ -34,7 +34,7 @@ public class Query10_shortest_path implements Query {
                                 .append("maxDepth", 10) // safety limit
                 ),
                 unwind("$reachable"),
-                match(eq("reachable.companyName", "Alpha")),
+                match(eq("reachable.companyName", "Nordex Systems")),
                 sort(Sorts.ascending("reachable.depth")),
                 limit(1),
                 project(fields(

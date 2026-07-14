@@ -15,10 +15,11 @@ public class Query2_select_non_indexed implements Query {
     @Override
     public void perform(Session session) {
 
-        Filter filter = new Filter("firstName", ComparisonOperator.EQUALS, "Steve");
+        Filter filter = new Filter("firstName", ComparisonOperator.EQUALS, "Steven");
 
         Collection<Employee> result = session.loadAll(Employee.class, filter);
 
-        System.out.println("Found " + result.toArray()[0] + " employee.");
+        System.out.println("First employee: " + result.toArray()[0]);
+        System.out.println("Found " + result.toArray().length + " employees.");
     }
 }

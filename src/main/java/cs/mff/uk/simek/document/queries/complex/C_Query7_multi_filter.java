@@ -24,14 +24,14 @@ public class C_Query7_multi_filter implements Query {
                 // order can be optimized internally by Mongo, so it does not matter much
                 new Document("$match",
                         new Document("firstName",
-                                new Document("$regex", "^B")
+                                new Document("$regex", "^R")
                         )
-                                .append("city", "Prague")
+                                .append("city", "Reykjavik")
                                 .append("birthDate",
-                                        new Document("$lt", LocalDate.of(1991, 1,1))
+                                        new Document("$lt", LocalDate.of(2000, 1,1))
                                 )
                                 .append("hireDate",
-                                        new Document("$gt", LocalDate.of(2019, 1, 1))
+                                        new Document("$gt", LocalDate.of(2014, 1, 1))
                                 )
                 ),
 

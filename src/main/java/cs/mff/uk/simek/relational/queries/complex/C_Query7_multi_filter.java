@@ -15,15 +15,14 @@ public class C_Query7_multi_filter implements Query {
     @Override
     public void perform(Session session) {
         String hql =    "FROM Employees e " +
-                        "WHERE e.firstName LIKE 'B%' " +
-                            "AND e.lastName LIKE 'M%' " +
-                            "AND e.city = 'Prague' " +
+                        "WHERE e.firstName LIKE 'R%' " +
+                            "AND e.city = 'Reykjavik' " +
                             "AND e.birthDate <= :birth_date " +
                             "AND e.hireDate >= :start_date ";
 
         List<Employee> result = session.createQuery(hql, Employee.class)
-                .setParameter("birth_date", LocalDate.of(1991,1,1))
-                .setParameter("start_date", LocalDate.of(2019,1,1))
+                .setParameter("birth_date", LocalDate.of(2000,1,1))
+                .setParameter("start_date", LocalDate.of(2014,1,1))
                 .getResultList();
 
         for (Employee e: result) {

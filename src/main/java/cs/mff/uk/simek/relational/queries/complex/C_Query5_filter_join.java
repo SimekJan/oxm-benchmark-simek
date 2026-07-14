@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 /**
- * Join suppliers which are from cities starting wit 'P' with their "cat2" products.
+ * Join suppliers which are from cities starting wit 'P' with their "Packaging Materials" products.
  */
 public class C_Query5_filter_join implements Query {
 
@@ -15,7 +15,7 @@ public class C_Query5_filter_join implements Query {
         String hql =    "SELECT s.companyName, p.productName " +
                         "FROM Suppliers s " +
                         "JOIN s.products p " +
-                        "WHERE s.city LIKE 'P%' AND p.category = 'cat2'";
+                        "WHERE s.city LIKE 'P%' AND p.category = 'Packaging Materials'";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 

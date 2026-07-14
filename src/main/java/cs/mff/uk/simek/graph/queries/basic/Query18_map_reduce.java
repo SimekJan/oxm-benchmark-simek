@@ -12,6 +12,8 @@ public class Query18_map_reduce implements Query {
     @Override
     public void perform(Session session) {
 
+        // TODO: does not work because supplier names are not unique as well
+
         String query = """
                     MATCH (s:Supplier)
                     OPTIONAL MATCH (p:Product)-[:IS_PRODUCED_BY]->(s)

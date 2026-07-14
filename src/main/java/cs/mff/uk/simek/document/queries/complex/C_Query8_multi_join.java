@@ -5,7 +5,6 @@ import com.mongodb.client.MongoDatabase;
 import cs.mff.uk.simek.document.queries.Query;
 import org.bson.Document;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class C_Query8_multi_join implements Query {
         List<Document> results = suppliers.aggregate(List.of(
 
                 new Document("$match",
-                        new Document("companyName", "Alpha")
+                        new Document("companyName", "BluePeak Industries")
                 ),
 
                 new Document("$lookup",
@@ -34,7 +33,7 @@ public class C_Query8_multi_join implements Query {
                 new Document("$unwind", "$product"),
 
                 new Document("$match",
-                        new Document("product.productName", "Nut")
+                        new Document("product.productName", "Steel Plate")
                 ),
 
                 new Document("$lookup",
@@ -56,7 +55,7 @@ public class C_Query8_multi_join implements Query {
                 new Document("$unwind", "$employee"),
 
                 new Document("$match",
-                        new Document("employee.firstName", "Eva")
+                        new Document("employee.firstName", "Jeffrey")
                 ),
 
                 new Document("$lookup",
@@ -68,7 +67,7 @@ public class C_Query8_multi_join implements Query {
                 new Document("$unwind", "$customer"),
 
                 new Document("$match",
-                        new Document("customer.companyName", "E")
+                        new Document("customer.companyName", "StoneBridge")
                 ),
 
                 new Document("$project",
