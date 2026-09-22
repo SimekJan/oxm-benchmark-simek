@@ -1,12 +1,13 @@
 services:
 
   generator:
-    image: oxm-benchmark
+    build: .
     command:
-      - java
-      - -cp
-      - /app/app.jar
       - cs.mff.uk.simek.generator.Generator
+    environment:
+      OUTPUT_DIR: /data
+    volumes:
+      - ./data:/data
 
   mongo:
     image: mongo:8
@@ -14,6 +15,20 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+
+  importer:
+    build: .
+    command:
+      - TBD
+    environment:
+      OUTPUT_DIR: /data
+    volumes:
+      - ./data:/data
+    depends_on:
+      generator:
+        condition: service_completed_successfully
+      mongo:
+        condition: service_started
 
 volumes:
   mongo-data:

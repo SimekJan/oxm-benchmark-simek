@@ -24,7 +24,9 @@ public class Generator {
     private static final int CUSTOMER_COUNT = 10_000;
     private static final int ORDER_COUNT = 20_000;
 
-    private static final Path OUTPUT_DIR = Path.of("generated");
+    private static final Path OUTPUT_DIR = Path.of(
+            System.getenv().getOrDefault("OUTPUT_DIR", "generated")
+    );
     private static final Path CSV_DIR = OUTPUT_DIR.resolve("csv");
     private static final Path JSON_DIR = OUTPUT_DIR.resolve("json");
 
