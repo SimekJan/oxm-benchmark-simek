@@ -38,7 +38,7 @@ public class GenerateData {
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
-        DataProvider gen = new DataProvider();
+        DataProvider gen = new DataProvider(1234567890L);
 
         Map<Long, Product> productMap = generateProducts(products, gen);
         Map<Long, Order> orderMap = generateOrders(orders, gen, productMap);

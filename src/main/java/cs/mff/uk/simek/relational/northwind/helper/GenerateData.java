@@ -21,7 +21,7 @@ public class GenerateData {
         Session session = HibernateSessionManager.getSession();
         Transaction tx = session.beginTransaction();
 
-        DataProvider gen = new DataProvider();
+        DataProvider gen = new DataProvider(1234567890L);
 
         List<Supplier> suppliers = generateSuppliers(gen);
         List<Product> products = generateProducts(gen, suppliers);

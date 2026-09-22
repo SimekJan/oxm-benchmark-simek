@@ -5,16 +5,10 @@ import java.util.SplittableRandom;
 
 public class DataProvider {
 
-    private static final long SEED = 12345L;
+    private final SplittableRandom random;
 
-    private SplittableRandom random;
-
-    public DataProvider() {
-        reset();
-    }
-
-    public void reset() {
-        random = new SplittableRandom(SEED);
+    public DataProvider(long seed) {
+        random = new SplittableRandom(seed);
     }
 
     public String nextFirstName() {

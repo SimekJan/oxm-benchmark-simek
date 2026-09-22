@@ -5,9 +5,10 @@ services:
     command:
       - cs.mff.uk.simek.generator.Generator
     environment:
-      OUTPUT_DIR: /data
+      CONFIG_FILE: /config/generator.yaml
     volumes:
       - ./data:/data
+      - ./config/generator.yaml:/config/generator.yaml:ro
 
   mongo:
     image: mongo:8

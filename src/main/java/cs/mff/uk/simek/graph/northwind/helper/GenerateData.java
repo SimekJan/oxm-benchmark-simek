@@ -20,7 +20,7 @@ public class GenerateData {
     public static void main(String[] args) {
 
         Session session = Neo4jSessionManager.getSession();
-        DataProvider gen = new DataProvider();
+        DataProvider gen = new DataProvider(1234567890L);
 
         List<Supplier> suppliers = generateSuppliers(gen);
         List<Product> products = generateProducts(gen, suppliers);

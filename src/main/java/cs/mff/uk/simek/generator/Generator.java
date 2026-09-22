@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -15,6 +16,8 @@ import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
+import java.io.InputStream;
+import java.util.Map;
 
 public class Generator {
 
@@ -24,17 +27,57 @@ public class Generator {
     private static final int CUSTOMER_COUNT = 10_000;
     private static final int ORDER_COUNT = 20_000;
 
-    private static final Path OUTPUT_DIR = Path.of(
-            System.getenv().getOrDefault("OUTPUT_DIR", "generated")
-    );
-    private static final Path CSV_DIR = OUTPUT_DIR.resolve("csv");
-    private static final Path JSON_DIR = OUTPUT_DIR.resolve("json");
+    private static final String OUTPUT_DIR = "data";
+    private static final String CSV_DIR = "csv";
+    private static final String JSON_DIR = "json";
+
+    private static final long DEFAULT_SEED = 1234567890L;
+
+    // TODO: use these
+    private static int supplierCount = SUPPLIER_COUNT;
+    private static int employeeCount = EMPLOYEE_COUNT;
+    private static int productCount = PRODUCT_COUNT;
+    private static int customerCount = CUSTOMER_COUNT;
+    private static int orderCount = ORDER_COUNT;
+
+    private static Path outputDir = Path.of(OUTPUT_DIR);
+    private static Path csvDir = outputDir.resolve(CSV_DIR);
+    private static Path jsonDir = outputDir.resolve(JSON_DIR);
 
     public static void main(String[] args) throws Exception {
 
+        String configFile = System.getenv().getOrDefault(
+            "CONFIG_FILE",
+            "config/generator.yaml"
+        );
+
+        Yaml yaml = new Yaml();
+
+        long dataSeed;
+        try (InputStream input = Files.newInputStream(Path.of(configFile))) {
+            Map<String, Object> config = yaml.load(input);
+
+            String configOutputDir = (String) config.get("outputDir");
+            if (configOutputDir != null) {
+                outputDir = Path.of(configOutputDir);
+                csvDir = outputDir.resolve(CSV_DIR);
+                jsonDir = outputDir.resolve(JSON_DIR);
+            }
+
+
+            dataSeed = ((Number) config.getOrDefault("dataSeed", DEFAULT_SEED)).longValue();
+
+            // TODO: use these, maybe should be Enum
+            String dataSize = (String) config.get("dataSize");
+            String dataCardinality = (String) config.get("dataCardinality");
+
+            // TODO: should be rather used during cleanup
+            boolean keepData = (Boolean) config.get("keepData");
+        }
+
         createDirectories();
 
-        DataProvider gen = new DataProvider();
+        DataProvider gen = new DataProvider(dataSeed);
 
         generateSuppliers(gen);
         generateProducts(gen);
@@ -46,7 +89,7 @@ public class Generator {
         generateOrderProducts(gen);
 
         System.out.println("Data generation finished.");
-        System.out.println("Output: " + OUTPUT_DIR.toAbsolutePath());
+        System.out.println("Output: " + outputDir.toAbsolutePath());
     }
 
     // -------------------------------------------------------------------------
@@ -54,8 +97,8 @@ public class Generator {
     // -------------------------------------------------------------------------
 
     private static void createDirectories() throws IOException {
-        Files.createDirectories(CSV_DIR);
-        Files.createDirectories(JSON_DIR);
+        Files.createDirectories(csvDir);
+        Files.createDirectories(jsonDir);
     }
 
     // -------------------------------------------------------------------------
@@ -64,8 +107,8 @@ public class Generator {
 
     private static void generateSuppliers(DataProvider gen) throws IOException {
 
-        Path csvPath = CSV_DIR.resolve("suppliers.csv");
-        Path jsonPath = JSON_DIR.resolve("suppliers.json");
+        Path csvPath = csvDir.resolve("suppliers.csv");
+        Path jsonPath = jsonDir.resolve("suppliers.json");
 
         try (
             BufferedWriter csvWriter = newWriter(csvPath);
@@ -79,7 +122,7 @@ public class Generator {
         ) {
             json.writeStartArray();
 
-            for (long supplierId = 1; supplierId <= SUPPLIER_COUNT; supplierId++) {
+            for (long supplierId = 1; supplierId <= supplierCount; supplierId++) {
 
                 String companyName = gen.nextCompanyName();
                 String city = gen.nextCity();
@@ -103,8 +146,8 @@ public class Generator {
 
     private static void generateProducts(DataProvider gen) throws IOException {
 
-        Path csvPath = CSV_DIR.resolve("products.csv");
-        Path jsonPath = JSON_DIR.resolve("products.json");
+        Path csvPath = csvDir.resolve("products.csv");
+        Path jsonPath = jsonDir.resolve("products.json");
 
         try (
             BufferedWriter csvWriter = newWriter(csvPath);
@@ -124,14 +167,14 @@ public class Generator {
         ) {
             json.writeStartArray();
 
-            for (long productId = 1; productId <= PRODUCT_COUNT; productId++) {
+            for (long productId = 1; productId <= productCount; productId++) {
 
                 String productName = gen.nextProductName();
                 double unitPrice = gen.nextPrice().doubleValue();
                 String category = gen.nextCategory();
 
                 // Pick an existing supplier ID directly.
-                long supplierId = randomId(gen, SUPPLIER_COUNT);
+                long supplierId = randomId(gen, supplierCount);
 
                 csv.printRecord(productId, productName, unitPrice, category, supplierId);
 
@@ -154,8 +197,8 @@ public class Generator {
 
     private static void generateEmployees(DataProvider gen) throws IOException {
 
-        Path csvPath = CSV_DIR.resolve("employees.csv");
-        Path jsonPath = JSON_DIR.resolve("employees.json");
+        Path csvPath = csvDir.resolve("employees.csv");
+        Path jsonPath = jsonDir.resolve("employees.json");
 
         try (
             BufferedWriter csvWriter = newWriter(csvPath);
@@ -187,12 +230,12 @@ public class Generator {
 
             long employeeId = 2;
 
-            while (employeeId <= EMPLOYEE_COUNT) {
+            while (employeeId <= employeeCount) {
 
                 long managerId = managers.remove();
                 int reports = gen.nextInt(2, 7);
 
-                for (int r = 0; r < reports && employeeId <= EMPLOYEE_COUNT; r++) {
+                for (int r = 0; r < reports && employeeId <= employeeCount; r++) {
 
                     long currentEmployeeId = employeeId++;
                     writeEmployee(currentEmployeeId, managerId, gen, csv, json);
@@ -241,8 +284,8 @@ public class Generator {
 
     private static void generateCustomers(DataProvider gen) throws IOException {
 
-        Path csvPath = CSV_DIR.resolve("customers.csv");
-        Path jsonPath = JSON_DIR.resolve("customers.json");
+        Path csvPath = csvDir.resolve("customers.csv");
+        Path jsonPath = jsonDir.resolve("customers.json");
 
         try (
             BufferedWriter csvWriter = newWriter(csvPath);
@@ -257,7 +300,7 @@ public class Generator {
             json.writeStartArray();
 
             for (long customerId = 1;
-                 customerId <= CUSTOMER_COUNT;
+                 customerId <= customerCount;
                  customerId++) {
 
                 String companyName = gen.nextCompanyName();
@@ -282,8 +325,8 @@ public class Generator {
 
     private static void generateOrders(DataProvider gen) throws IOException {
 
-        Path csvPath = CSV_DIR.resolve("orders.csv");
-        Path jsonPath = JSON_DIR.resolve("orders.json");
+        Path csvPath = csvDir.resolve("orders.csv");
+        Path jsonPath = jsonDir.resolve("orders.json");
 
         try (
             BufferedWriter csvWriter = newWriter(csvPath);
@@ -297,12 +340,12 @@ public class Generator {
         ) {
             json.writeStartArray();
 
-            for (long orderId = 1; orderId <= ORDER_COUNT; orderId++) {
+            for (long orderId = 1; orderId <= orderCount; orderId++) {
 
                 LocalDate orderDate = gen.nextOrderDate();
 
-                long customerId = randomId(gen, CUSTOMER_COUNT);
-                long employeeId = randomId(gen, EMPLOYEE_COUNT);
+                long customerId = randomId(gen, customerCount);
+                long employeeId = randomId(gen, employeeCount);
 
                 csv.printRecord(orderId, orderDate, customerId, employeeId);
 
@@ -324,8 +367,8 @@ public class Generator {
 
     private static void generateSupplierRelationships(DataProvider gen) throws IOException {
 
-        Path csvPath = CSV_DIR.resolve("supplier_relationships.csv");
-        Path jsonPath = JSON_DIR.resolve("supplier_relationships.json");
+        Path csvPath = csvDir.resolve("supplier_relationships.csv");
+        Path jsonPath = jsonDir.resolve("supplier_relationships.json");
 
         try (
             BufferedWriter csvWriter = newWriter(csvPath);
@@ -339,13 +382,14 @@ public class Generator {
         ) {
             json.writeStartArray();
 
-            for (long supplierId = 1; supplierId <= SUPPLIER_COUNT; supplierId++) {
+            for (long supplierId = 1; supplierId <= supplierCount; supplierId++) {
 
+                // TODO: extract these
                 int linkCount = gen.nextInt(1, 5);
                 Set<Long> targets = new HashSet<>();
 
                 while (targets.size() < linkCount) {
-                    long targetId = randomId(gen, SUPPLIER_COUNT);
+                    long targetId = randomId(gen, supplierCount);
                     if (targetId != supplierId) {
                         targets.add(targetId);
                     }
@@ -372,8 +416,8 @@ public class Generator {
 
     private static void generateOrderProducts(DataProvider gen) throws IOException {
 
-        Path csvPath = CSV_DIR.resolve("order_products.csv");
-        Path jsonPath = JSON_DIR.resolve("order_products.json");
+        Path csvPath = csvDir.resolve("order_products.csv");
+        Path jsonPath = jsonDir.resolve("order_products.json");
 
         try (
             BufferedWriter csvWriter = newWriter(csvPath);
@@ -387,13 +431,14 @@ public class Generator {
         ) {
             json.writeStartArray();
 
-            for (long orderId = 1; orderId <= ORDER_COUNT; orderId++) {
+            for (long orderId = 1; orderId <= orderCount; orderId++) {
 
+                // TODO: extract these
                 int productCount = gen.nextInt(1, 5);
                 Set<Long> products = new HashSet<>();
 
                 while (products.size() < productCount) {
-                    products.add(randomId(gen, PRODUCT_COUNT));
+                    products.add(randomId(gen, productCount));
                 }
 
                 for (long productId : products) {

@@ -40,13 +40,12 @@
 
 ## Dockerization
 ```bash
-# first run this to compile JAR file
+# first run this to compile JAR file, or after change in Java code
 mvn clean package
 
-# then run this to create a Docker image
-docker build -t oxm-benchmark .
+# this then runs the generator and saves generated data based on chosen config  
+docker compose run --rm generator
 
-# this should then run just the Generator main class
-docker run --rm oxm-benchmark cs.mff.uk.simek.generator.Generator
-# although this ends the container right when the data are generated
+# you might need to run this after rebuilding the package with Maven
+docker compose build --no-cache generator
 ```
