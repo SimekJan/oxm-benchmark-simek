@@ -1,6 +1,6 @@
 package cs.mff.uk.simek.graph.northwind.helper;
 
-import cs.mff.uk.simek.generator.BenchmarkDataGenerator;
+import cs.mff.uk.simek.generator.DataProvider;
 import cs.mff.uk.simek.graph.Neo4jSessionManager;
 import lombok.extern.slf4j.Slf4j;
 import org.neo4j.ogm.session.Session;
@@ -20,7 +20,7 @@ public class GenerateData {
     public static void main(String[] args) {
 
         Session session = Neo4jSessionManager.getSession();
-        BenchmarkDataGenerator gen = new BenchmarkDataGenerator();
+        DataProvider gen = new DataProvider();
 
         List<Supplier> suppliers = generateSuppliers(gen);
         List<Product> products = generateProducts(gen, suppliers);
@@ -68,7 +68,7 @@ public class GenerateData {
         log.info("Orders and products linked");
     }
 
-    private static List<Supplier> generateSuppliers(BenchmarkDataGenerator gen) {
+    private static List<Supplier> generateSuppliers(DataProvider gen) {
 
         List<Supplier> list = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class GenerateData {
     }
 
     private static void linkSuppliers(List<Supplier> suppliers,
-                                      BenchmarkDataGenerator gen) {
+                                      DataProvider gen) {
 
         for (Supplier s : suppliers) {
 
@@ -98,7 +98,7 @@ public class GenerateData {
     }
 
     private static List<Product> generateProducts(
-            BenchmarkDataGenerator gen,
+            DataProvider gen,
             List<Supplier> suppliers) {
 
         List<Product> products = new ArrayList<>();
@@ -121,7 +121,7 @@ public class GenerateData {
         return products;
     }
 
-    private static List<Employee> generateEmployees(BenchmarkDataGenerator gen) {
+    private static List<Employee> generateEmployees(DataProvider gen) {
 
         List<Employee> employees = new ArrayList<>();
 
@@ -136,7 +136,7 @@ public class GenerateData {
     }
 
     private static void generateEmployeeHierarchy(List<Employee> employees,
-                                                  BenchmarkDataGenerator gen) {
+                                                  DataProvider gen) {
 
         int maxReports = gen.nextInt(3, 8);
 
@@ -160,7 +160,7 @@ public class GenerateData {
         }
     }
 
-    private static List<Customer> generateCustomers(BenchmarkDataGenerator gen) {
+    private static List<Customer> generateCustomers(DataProvider gen) {
 
         List<Customer> customers = new ArrayList<>();
 
@@ -171,7 +171,7 @@ public class GenerateData {
         return customers;
     }
 
-    private static List<Order> generateOrders(BenchmarkDataGenerator gen) {
+    private static List<Order> generateOrders(DataProvider gen) {
 
         List<Order> orders = new ArrayList<>();
 
@@ -186,7 +186,7 @@ public class GenerateData {
     }
 
     private static void linkOrders(List<Order> orders, List<Customer> customers, List<Employee> employees,
-                                   List<Product> products, BenchmarkDataGenerator gen) {
+                                   List<Product> products, DataProvider gen) {
 
         for (Order o : orders) {
 

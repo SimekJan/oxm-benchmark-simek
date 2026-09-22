@@ -1,0 +1,19 @@
+services:
+
+  generator:
+    image: oxm-benchmark
+    command:
+      - java
+      - -cp
+      - /app/app.jar
+      - cs.mff.uk.simek.generator.Generator
+
+  mongo:
+    image: mongo:8
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

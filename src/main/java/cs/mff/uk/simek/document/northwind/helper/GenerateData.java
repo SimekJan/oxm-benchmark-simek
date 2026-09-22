@@ -6,7 +6,7 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.UpdateOneModel;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.model.WriteModel;
-import cs.mff.uk.simek.generator.BenchmarkDataGenerator;
+import cs.mff.uk.simek.generator.DataProvider;
 import cs.mff.uk.simek.document.MongoDbManger;
 import cs.mff.uk.simek.document.northwind.*;
 import org.bson.types.ObjectId;
@@ -36,7 +36,7 @@ public class GenerateData {
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
-        BenchmarkDataGenerator gen = new BenchmarkDataGenerator();
+        DataProvider gen = new DataProvider();
 
         Map<Long, ObjectId> supplierIds = generateSuppliers(suppliers, gen);
         generateSupplierRelations(suppliers, gen, supplierIds);
@@ -52,7 +52,7 @@ public class GenerateData {
         generateOrders(orders, gen, customerIds, employeeIds, productIds);
     }
 
-    private static Map<Long, ObjectId> generateSuppliers(MongoCollection<Supplier> suppliers, BenchmarkDataGenerator gen) {
+    private static Map<Long, ObjectId> generateSuppliers(MongoCollection<Supplier> suppliers, DataProvider gen) {
 
         Map<Long, ObjectId> supplierObjectIds = new HashMap<>();
         List<Supplier> batch = new ArrayList<>();
@@ -83,7 +83,7 @@ public class GenerateData {
         return supplierObjectIds;
     }
 
-    private static void generateSupplierRelations(MongoCollection<Supplier> suppliers, BenchmarkDataGenerator gen, Map<Long, ObjectId> supplierIds) {
+    private static void generateSupplierRelations(MongoCollection<Supplier> suppliers, DataProvider gen, Map<Long, ObjectId> supplierIds) {
 
         List<WriteModel<Supplier>> updates = new ArrayList<>();
 
@@ -119,7 +119,7 @@ public class GenerateData {
     }
 
     private static Map<Long, ObjectId> generateProducts(MongoCollection<Product> products,
-                                                        BenchmarkDataGenerator gen,
+                                                        DataProvider gen,
                                                         Map<Long, ObjectId> supplierIds) {
 
         Map<Long, ObjectId> productIds = new HashMap<>();
@@ -161,7 +161,7 @@ public class GenerateData {
     }
 
     private static Map<Long, ObjectId> generateEmployees(MongoCollection<Employee> employees,
-                                                         BenchmarkDataGenerator gen) {
+                                                         DataProvider gen) {
 
         Map<Long, ObjectId> employeeIds = new HashMap<>();
 
@@ -202,7 +202,7 @@ public class GenerateData {
     }
 
     private static void generateEmployeeHierarchy(
-            BenchmarkDataGenerator gen,
+            DataProvider gen,
             MongoCollection<Employee> employees,
             Map<Long, ObjectId> employeeIds) {
 
@@ -248,7 +248,7 @@ public class GenerateData {
     }
 
     private static Map<Long, ObjectId> generateCustomers(MongoCollection<Customer> customers,
-                                                         BenchmarkDataGenerator gen) {
+                                                         DataProvider gen) {
 
         Map<Long, ObjectId> customerIds = new HashMap<>();
 
@@ -287,7 +287,7 @@ public class GenerateData {
     }
 
     private static void generateOrders(MongoCollection<Order> orders,
-                                       BenchmarkDataGenerator gen,
+                                       DataProvider gen,
                                        Map<Long, ObjectId> customerIds,
                                        Map<Long, ObjectId> employeeIds,
                                        Map<Long, ObjectId> productIds) {

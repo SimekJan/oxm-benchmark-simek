@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
-public class GenerateFullData {
+public class Generator {
 
     private static final int SUPPLIER_COUNT = 1_000;
     private static final int EMPLOYEE_COUNT = 2_000;
@@ -32,7 +32,7 @@ public class GenerateFullData {
 
         createDirectories();
 
-        BenchmarkDataGenerator gen = new BenchmarkDataGenerator();
+        DataProvider gen = new DataProvider();
 
         generateSuppliers(gen);
         generateProducts(gen);
@@ -60,7 +60,7 @@ public class GenerateFullData {
     // Suppliers
     // -------------------------------------------------------------------------
 
-    private static void generateSuppliers(BenchmarkDataGenerator gen) throws IOException {
+    private static void generateSuppliers(DataProvider gen) throws IOException {
 
         Path csvPath = CSV_DIR.resolve("suppliers.csv");
         Path jsonPath = JSON_DIR.resolve("suppliers.json");
@@ -99,7 +99,7 @@ public class GenerateFullData {
     // Products
     // -------------------------------------------------------------------------
 
-    private static void generateProducts(BenchmarkDataGenerator gen) throws IOException {
+    private static void generateProducts(DataProvider gen) throws IOException {
 
         Path csvPath = CSV_DIR.resolve("products.csv");
         Path jsonPath = JSON_DIR.resolve("products.json");
@@ -150,7 +150,7 @@ public class GenerateFullData {
     // Employees
     // -------------------------------------------------------------------------
 
-    private static void generateEmployees(BenchmarkDataGenerator gen) throws IOException {
+    private static void generateEmployees(DataProvider gen) throws IOException {
 
         Path csvPath = CSV_DIR.resolve("employees.csv");
         Path jsonPath = JSON_DIR.resolve("employees.json");
@@ -204,7 +204,7 @@ public class GenerateFullData {
         }
     }
 
-    private static void writeEmployee(long employeeId, Long reportsTo, BenchmarkDataGenerator gen,
+    private static void writeEmployee(long employeeId, Long reportsTo, DataProvider gen,
                                       CSVPrinter csv, JsonGenerator json) throws IOException {
 
         String firstName = gen.nextFirstName();
@@ -237,7 +237,7 @@ public class GenerateFullData {
     // Customers
     // -------------------------------------------------------------------------
 
-    private static void generateCustomers(BenchmarkDataGenerator gen) throws IOException {
+    private static void generateCustomers(DataProvider gen) throws IOException {
 
         Path csvPath = CSV_DIR.resolve("customers.csv");
         Path jsonPath = JSON_DIR.resolve("customers.json");
@@ -278,7 +278,7 @@ public class GenerateFullData {
     // Orders
     // -------------------------------------------------------------------------
 
-    private static void generateOrders(BenchmarkDataGenerator gen) throws IOException {
+    private static void generateOrders(DataProvider gen) throws IOException {
 
         Path csvPath = CSV_DIR.resolve("orders.csv");
         Path jsonPath = JSON_DIR.resolve("orders.json");
@@ -320,7 +320,7 @@ public class GenerateFullData {
     // Supplier -> Supplier
     // -------------------------------------------------------------------------
 
-    private static void generateSupplierRelationships(BenchmarkDataGenerator gen) throws IOException {
+    private static void generateSupplierRelationships(DataProvider gen) throws IOException {
 
         Path csvPath = CSV_DIR.resolve("supplier_relationships.csv");
         Path jsonPath = JSON_DIR.resolve("supplier_relationships.json");
@@ -368,7 +368,7 @@ public class GenerateFullData {
     // Order -> Product
     // -------------------------------------------------------------------------
 
-    private static void generateOrderProducts(BenchmarkDataGenerator gen) throws IOException {
+    private static void generateOrderProducts(DataProvider gen) throws IOException {
 
         Path csvPath = CSV_DIR.resolve("order_products.csv");
         Path jsonPath = JSON_DIR.resolve("order_products.json");
@@ -413,7 +413,7 @@ public class GenerateFullData {
     // Helpers
     // -------------------------------------------------------------------------
 
-    private static long randomId(BenchmarkDataGenerator gen, long count) {
+    private static long randomId(DataProvider gen, long count) {
         return gen.nextInt(1, (int) count + 1);
     }
 

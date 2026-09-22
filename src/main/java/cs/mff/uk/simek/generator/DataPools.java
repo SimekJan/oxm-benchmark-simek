@@ -1,4 +1,4 @@
-package cs.mff.uk.simek;
+package cs.mff.uk.simek.generator;
 
 import java.util.List;
 

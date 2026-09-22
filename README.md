@@ -36,4 +36,17 @@
 
 ## Generating Northwind data
 
-- 
+- TBD
+
+## Dockerization
+```bash
+# first run this to compile JAR file
+mvn clean package
+
+# then run this to create a Docker image
+docker build -t oxm-benchmark .
+
+# this should then run just the Generator main class
+docker run --rm oxm-benchmark cs.mff.uk.simek.generator.Generator
+# although this ends the container right when the data are generated
+```

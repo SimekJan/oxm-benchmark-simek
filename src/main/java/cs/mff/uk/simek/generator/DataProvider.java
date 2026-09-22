@@ -1,17 +1,15 @@
 package cs.mff.uk.simek.generator;
 
-import cs.mff.uk.simek.DataPools;
-
 import java.time.LocalDate;
 import java.util.SplittableRandom;
 
-public class BenchmarkDataGenerator {
+public class DataProvider {
 
     private static final long SEED = 12345L;
 
     private SplittableRandom random;
 
-    public BenchmarkDataGenerator() {
+    public DataProvider() {
         reset();
     }
 
