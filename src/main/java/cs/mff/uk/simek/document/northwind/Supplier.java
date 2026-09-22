@@ -16,7 +16,7 @@ public class Supplier {
         this.id = new ObjectId();
         this.companyName = companyName;
         this.city = city;
-        suppliedBy = new ArrayList<>();
+        this.suppliedBy = new ArrayList<>();
     }
 
     private ObjectId id;

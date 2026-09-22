@@ -1,6 +1,6 @@
 package cs.mff.uk.simek.graph.northwind.helper;
 
-import cs.mff.uk.simek.BenchmarkDataGenerator;
+import cs.mff.uk.simek.generator.BenchmarkDataGenerator;
 import cs.mff.uk.simek.graph.Neo4jSessionManager;
 import lombok.extern.slf4j.Slf4j;
 import org.neo4j.ogm.session.Session;

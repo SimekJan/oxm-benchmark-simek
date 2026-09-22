@@ -5,19 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d9ed907-1c72-4f78-abdd-54d4ac452013" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/Supplier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/helper/DropDatabase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/helper/GenerateFullData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/helper/PopulateWithDummyData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/BenchmarkDataGenerator.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/GenerateData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/GenerateData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/northwind/helper/GenerateData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document_embedded/northwind/helper/GenerateData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/northwind/helper/GenerateData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/northwind/helper/GenerateData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/QueryExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/QueryExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/helper/GenerateData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/northwind/helper/GenerateData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/queries/basic_queries/Query6.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

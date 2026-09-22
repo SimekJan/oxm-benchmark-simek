@@ -6,7 +6,7 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.UpdateOneModel;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.model.WriteModel;
-import cs.mff.uk.simek.BenchmarkDataGenerator;
+import cs.mff.uk.simek.generator.BenchmarkDataGenerator;
 import cs.mff.uk.simek.document_embedded.MongoDbManger;
 import cs.mff.uk.simek.document_embedded.northwind.*;
 import org.bson.types.ObjectId;

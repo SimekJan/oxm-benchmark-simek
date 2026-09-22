@@ -1,6 +1,6 @@
 package cs.mff.uk.simek.relational.northwind.helper;
 
-import cs.mff.uk.simek.BenchmarkDataGenerator;
+import cs.mff.uk.simek.generator.BenchmarkDataGenerator;
 import cs.mff.uk.simek.relational.HibernateSessionManager;
 import cs.mff.uk.simek.relational.northwind.*;
 import org.hibernate.Session;
