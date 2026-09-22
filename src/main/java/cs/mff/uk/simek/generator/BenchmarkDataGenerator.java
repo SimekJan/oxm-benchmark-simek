@@ -1,4 +1,6 @@
-package cs.mff.uk.simek;
+package cs.mff.uk.simek.generator;
+
+import cs.mff.uk.simek.DataPools;
 
 import java.time.LocalDate;
 import java.util.SplittableRandom;
