@@ -5,6 +5,7 @@ import com.mongodb.client.MongoDatabase;
 import cs.mff.uk.simek.document.MongoDbManger;
 import cs.mff.uk.simek.document.northwind.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,7 @@ import static com.mongodb.client.model.Indexes.ascending;
 
 public class PopulateWithDummyData {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         MongoDatabase db = MongoDbManger.getDb();
 

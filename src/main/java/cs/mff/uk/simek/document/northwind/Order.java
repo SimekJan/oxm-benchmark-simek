@@ -3,6 +3,7 @@ package cs.mff.uk.simek.document.northwind;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
+import org.bson.codecs.pojo.annotations.BsonId;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Order {
         this.products = productIds;
     }
 
+    @BsonId
     private ObjectId id;
 
     private Long orderId;

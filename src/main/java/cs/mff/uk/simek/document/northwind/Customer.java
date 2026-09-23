@@ -3,6 +3,7 @@ package cs.mff.uk.simek.document.northwind;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
+import org.bson.codecs.pojo.annotations.BsonId;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +15,7 @@ public class Customer {
         this.city = city;
     }
 
+    @BsonId
     private ObjectId id;
 
     private Long customerId;

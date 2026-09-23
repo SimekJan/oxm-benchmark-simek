@@ -11,6 +11,7 @@ import cs.mff.uk.simek.document.MongoDbManger;
 import cs.mff.uk.simek.document.northwind.*;
 import org.bson.types.ObjectId;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ public class GenerateData {
 
     private static final int BATCH_SIZE = 2_000;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         MongoDatabase db = MongoDbManger.getDb();
 

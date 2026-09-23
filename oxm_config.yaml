@@ -12,7 +12,8 @@ generator:
 
 importer:
   mongo:
-    uri: mongodb://mongo:27017/oxm_benchmark
+    connection: mongodb://mongo:27017
+    db_name: oxm_benchmark
   neo4j:
     uri:
   postgre:

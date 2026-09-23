@@ -3,6 +3,7 @@ package cs.mff.uk.simek.document.northwind;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
+import org.bson.codecs.pojo.annotations.BsonId;
 
 import java.time.LocalDate;
 
@@ -19,6 +20,7 @@ public class Employee {
         this.city = city;
     }
 
+    @BsonId
     private ObjectId id;
 
     private Long employeeId;

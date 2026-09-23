@@ -46,3 +46,17 @@ mvn clean package
 # this then runs the generator and saves generated data based on chosen config  
 docker compose run --build --rm generator
 ```
+
+## Config options
+
+All config can be changed in `oxm_config.yaml` in root of the project.
+
+### Mongo
+
+To use local instance of MongoDB instead of container change: 
+
+```yaml
+importer:
+  mongo:
+    connection: mongodb://localhost:27017
+```

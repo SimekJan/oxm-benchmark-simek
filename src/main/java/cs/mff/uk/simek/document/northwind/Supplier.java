@@ -2,6 +2,7 @@ package cs.mff.uk.simek.document.northwind;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Supplier {
         this.suppliedBy = new ArrayList<>();
     }
 
+    @BsonId
     private ObjectId id;
 
     private Long supplierId;
