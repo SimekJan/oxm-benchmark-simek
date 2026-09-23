@@ -1,0 +1,177 @@
+package cs.mff.uk.simek.importer;
+
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import cs.mff.uk.simek.ConfigLoader;
+import cs.mff.uk.simek.document.MongoDbManger;
+import cs.mff.uk.simek.document.northwind.*;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.mongodb.client.model.Indexes.ascending;
+
+public class MongoImporter {
+
+    private static Path csvPath;
+
+    private static MongoDatabase db;
+
+    private static final int BATCH_SIZE = 2_000;
+
+    public static void run() throws IOException {
+
+        csvPath = ConfigLoader.getCsvDir();
+        db = MongoDbManger.getDb();
+
+        loadSuppliers();
+
+        /*
+        MongoCollection<Product> products = db.getCollection("Products", Product.class);
+        MongoCollection<Order> orders = db.getCollection("Orders", Order.class);
+        MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
+
+        // ---------- SUPPLIERS ----------
+        Supplier alpha = new Supplier(1L, "Alpha", "Prague");
+        Supplier beta = new Supplier(2L, "Beta", "Brno");
+        Supplier gamma = new Supplier(3L, "Gamma", "Ostrava");
+        Supplier delta = new Supplier(4L, "Delta", "Plzen");
+        Supplier epsilon = new Supplier(5L, "Epsilon", "Liberec");
+
+        alpha.setSuppliedBy(List.of());
+        beta.setSuppliedBy(List.of(alpha.getId()));
+        gamma.setSuppliedBy(List.of(alpha.getId(), beta.getId(), delta.getId()));
+        delta.setSuppliedBy(List.of(beta.getId(), gamma.getId()));
+        epsilon.setSuppliedBy(List.of(beta.getId(), gamma.getId()));
+
+        suppliers.insertMany(Arrays.asList(alpha, beta, gamma, delta, epsilon));
+        suppliers.createIndex(ascending("supplierId"));
+
+        // ---------- PRODUCTS ----------
+        Product p1 = new Product(1L, "S-Bolt", 10F, "cat1", alpha.getId());
+        Product p2 = new Product(2L, "Nut", 15F, "cat2", alpha.getId());
+        Product p3 = new Product(3L, "Screw", 9F, "cat1", beta.getId());
+        Product p4 = new Product(4L, "Steel Plate", 12F, "cat2", gamma.getId());
+        Product p5 = new Product(5L, "Gear", 12F, "cat2", delta.getId());
+        Product p6 = new Product(6L, "Valve", 16F, "cat3", epsilon.getId());
+
+        products.insertMany(Arrays.asList(p1, p2, p3, p4, p5, p6));
+        products.createIndex(ascending("productId"));
+
+        // ---------- EMPLOYEES ----------
+        Employee ceo = new Employee(1L, "Alice", "CEO", LocalDate.of(1985,1,1), LocalDate.of(2020,3,15), "Karlovy Vary");
+        employees.insertOne(ceo);
+
+        Employee manager1 = new Employee(2L, "Bob", "Manager", LocalDate.of(1990,1,1), LocalDate.of(2020,4,15), "Prague");
+        manager1.setReportsTo(ceo.getId());
+        Employee manager2 = new Employee(3L, "Carol", "Manager", LocalDate.of(1992,1,1), LocalDate.of(2018,3,4), "Brno");
+        manager2.setReportsTo(ceo.getId());
+        employees.insertMany(Arrays.asList(manager1, manager2));
+
+        Employee worker1 = new Employee(4L, "David", "Worker", LocalDate.of(1994,1,1), LocalDate.of(2005,7,28), "Liberec");
+        worker1.setReportsTo(manager1.getId());
+        Employee worker2 = new Employee(5L, "Eva", "Worker", LocalDate.of(1995,1,1), LocalDate.of(2008,4,26), "Ostrava");
+        worker2.setReportsTo(manager2.getId());
+        Employee worker3 = new Employee(6L, "Steve", "Worker", LocalDate.of(2001,1,1), LocalDate.of(2024,1,1), "Liberec");
+        worker3.setReportsTo(manager2.getId());
+        employees.insertMany(Arrays.asList(worker1, worker2, worker3));
+
+        employees.createIndex(ascending("employeeId"));
+
+        // ---------- CUSTOMERS ----------
+        Customer c1 = new Customer(1L, "A", "Karlovy Vary");
+        Customer c2 = new Customer(2L, "B", "Prague");
+        Customer c3 = new Customer(3L, "C", "Olomouc");
+        Customer c4 = new Customer(4L, "D", "Ostrava");
+        Customer c5 = new Customer(5L, "E", "Brno");
+        Customer c6 = new Customer(6L, "F", "Prague");
+
+        customers.insertMany(Arrays.asList(c1, c2, c3, c4, c5, c6));
+        customers.createIndex(ascending("customerId"));
+
+        // ---------- ORDERS ----------
+        Order o1 = new Order(1L, c1.getId(), manager1.getId(), LocalDate.of(2025,1,1), Arrays.asList(p1.getId(), p3.getId()));
+        Order o2 = new Order(2L, c2.getId(), manager1.getId(), LocalDate.of(2025,10,11),Arrays.asList(p2.getId(), p4.getId()));
+        Order o3 = new Order(3L, c3.getId(), manager2.getId(), LocalDate.of(2025,8,21),List.of(p5.getId()));
+        Order o4 = new Order(4L, c4.getId(), worker1.getId(), LocalDate.of(2025,9,15),Arrays.asList(p6.getId(), p1.getId()));
+        Order o5 = new Order(5L, c5.getId(), worker2.getId(), LocalDate.of(2025,7,4),Arrays.asList(p2.getId(), p3.getId()));
+        Order o6 = new Order(6L, c5.getId(), worker1.getId(), LocalDate.of(2025,12,9),List.of());
+
+        orders.insertMany(Arrays.asList(o1, o2, o3, o4, o5, o6));
+        orders.createIndex(ascending("orderId"));
+
+        */
+    }
+
+    private static void loadSuppliers() throws IOException {
+
+        MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
+        List<Supplier> batch = new ArrayList<>();
+
+        try (
+            Reader reader = Files.newBufferedReader(csvPath.resolve("suppliers.csv"));
+            CSVParser parser = CSVFormat.DEFAULT
+                    .builder()
+                    .setHeader()
+                    .setSkipHeaderRecord(true)
+                    .get()
+                    .parse(reader)
+        ) {
+            for (CSVRecord record : parser) {
+                Supplier supplier = new Supplier(
+                    Long.valueOf(record.get("supplier_id")),
+                    record.get("company_name"),
+                    record.get("city")
+                );
+
+                batch.add(supplier);
+
+                if (batch.size() >= BATCH_SIZE) {
+                    suppliers.insertMany(batch);
+                    batch.clear();
+                }
+            }
+
+            if(!batch.isEmpty()) {
+                suppliers.insertMany(batch);
+            }
+        }
+
+        // TODO: supplier relationships
+    }
+
+    private static void loadCustomers() throws IOException {
+
+        MongoCollection<Customer> customers = db.getCollection("Customers", Customer.class);
+
+        try (
+                Reader reader = Files.newBufferedReader(csvPath);
+                CSVParser parser = CSVFormat.DEFAULT
+                    .builder()
+                    .setHeader()
+                    .setSkipHeaderRecord(true)
+                    .get()
+                    .parse(reader)
+        ) {
+            for (CSVRecord record : parser) {
+                Customer customer = new Customer(
+                    Long.valueOf(record.get("customerId")),
+                    record.get("companyName"),
+                    record.get("city")
+                );
+
+                customers.insertOne(customer);
+            }
+        }
+    }
+
+}

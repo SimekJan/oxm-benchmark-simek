@@ -13,18 +13,19 @@ services:
   mongo:
     image: mongo:8
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - mongo-data:/data/db
 
   importer:
     build: .
     command:
-      - TBD
+      - cs.mff.uk.simek.importer.Importer
     environment:
-      OUTPUT_DIR: /data
+      CONFIG_FILE: /oxm_config.yaml
     volumes:
       - ./data:/data
+      - ./oxm_config.yaml:/oxm_config.yaml:ro
     depends_on:
       generator:
         condition: service_completed_successfully
