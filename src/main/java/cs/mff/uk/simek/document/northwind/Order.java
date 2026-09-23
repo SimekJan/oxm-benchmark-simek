@@ -6,26 +6,27 @@ import org.bson.types.ObjectId;
 import org.bson.codecs.pojo.annotations.BsonId;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class Order {
 
-    public Order(Long orderId, ObjectId customerId, ObjectId employeeId, LocalDate orderDate, List<ObjectId> productIds) {
+    public Order(Long orderId, Long customerId, Long employeeId, LocalDate orderDate) {
         this.orderId = orderId;
         this.employee = employeeId;
         this.customer = customerId;
         this.orderDate = orderDate;
-        this.products = productIds;
+        this.products = new ArrayList<>();
     }
 
     @BsonId
     private ObjectId id;
 
     private Long orderId;
-    private ObjectId employee;
-    private ObjectId customer;
+    private Long employee;
+    private Long customer;
     private LocalDate orderDate;
-    private List<ObjectId> products;
+    private List<Long> products;
 }

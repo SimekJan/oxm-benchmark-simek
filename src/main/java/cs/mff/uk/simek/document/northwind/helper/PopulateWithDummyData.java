@@ -13,7 +13,7 @@ import java.util.List;
 import static com.mongodb.client.model.Indexes.ascending;
 
 public class PopulateWithDummyData {
-
+/*
     public static void main(String[] args) throws IOException {
 
         MongoDatabase db = MongoDbManger.getDb();
@@ -32,10 +32,10 @@ public class PopulateWithDummyData {
         Supplier epsilon = new Supplier(5L, "Epsilon", "Liberec");
 
         alpha.setSuppliedBy(List.of());
-        beta.setSuppliedBy(List.of(alpha.getId()));
-        gamma.setSuppliedBy(List.of(alpha.getId(), beta.getId(), delta.getId()));
-        delta.setSuppliedBy(List.of(beta.getId(), gamma.getId()));
-        epsilon.setSuppliedBy(List.of(beta.getId(), gamma.getId()));
+        beta.setSuppliedBy(List.of(alpha.getSupplierId()));
+        gamma.setSuppliedBy(List.of(alpha.getSupplierId(), beta.getSupplierId(), delta.getSupplierId()));
+        delta.setSuppliedBy(List.of(beta.getSupplierId(), gamma.getSupplierId()));
+        epsilon.setSuppliedBy(List.of(beta.getSupplierId(), gamma.getSupplierId()));
 
         suppliers.insertMany(Arrays.asList(alpha, beta, gamma, delta, epsilon));
         suppliers.createIndex(ascending("supplierId"));
@@ -93,4 +93,5 @@ public class PopulateWithDummyData {
         orders.insertMany(Arrays.asList(o1, o2, o3, o4, o5, o6));
         orders.createIndex(ascending("orderId"));
     }
+ */
 }

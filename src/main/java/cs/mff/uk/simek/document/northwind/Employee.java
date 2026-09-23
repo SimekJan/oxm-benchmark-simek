@@ -29,5 +29,5 @@ public class Employee {
     private LocalDate birthDate;
     private LocalDate hireDate;
     private String city;
-    private ObjectId reportsTo;
+    private Long reportsTo;
 }

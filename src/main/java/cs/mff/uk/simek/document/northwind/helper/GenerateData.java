@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GenerateData {
-
+/*
     private static final int SUPPLIER_COUNT = 1_000;
     private static final int EMPLOYEE_COUNT = 2_000;
     private static final int PRODUCT_COUNT = 5_000;
@@ -335,4 +335,6 @@ public class GenerateData {
         if (!batch.isEmpty())
             orders.insertMany(batch);
     }
+
+    */
 }
