@@ -1,0 +1,19 @@
+databaseToUse:
+  - MongoDB
+  - Neo4j
+  - PostgreSQL
+
+generator:
+  outputDir: /data
+  keepData: true
+  dataSeed: 1234567890
+  dataSize: small
+  dataCardinality: light
+
+importer:
+  mongo:
+    uri: mongodb://mongo:27017/oxm_benchmark
+  neo4j:
+    uri:
+  postgre:
+    uri:

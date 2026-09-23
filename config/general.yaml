@@ -1,4 +1,0 @@
-databaseToUser:
-  - MongoDB
-  - Neo4j
-  - PostgreSQL

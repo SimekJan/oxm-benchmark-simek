@@ -44,8 +44,5 @@
 mvn clean package
 
 # this then runs the generator and saves generated data based on chosen config  
-docker compose run --rm generator
-
-# you might need to run this after rebuilding the package with Maven
-docker compose build --no-cache generator
+docker compose run --build --rm generator
 ```

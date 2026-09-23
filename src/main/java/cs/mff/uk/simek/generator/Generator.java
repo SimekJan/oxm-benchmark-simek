@@ -2,6 +2,7 @@ package cs.mff.uk.simek.generator;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cs.mff.uk.simek.ConfigLoader;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.yaml.snakeyaml.Yaml;
@@ -16,7 +17,6 @@ import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
-import java.io.InputStream;
 import java.util.Map;
 
 public class Generator {
@@ -46,34 +46,23 @@ public class Generator {
 
     public static void main(String[] args) throws Exception {
 
-        String configFile = System.getenv().getOrDefault(
-            "CONFIG_FILE",
-            "config/generator.yaml"
-        );
+        Map<String, Object> config = ConfigLoader.getSection(ConfigLoader.GENERATOR_SECTION);
 
-        Yaml yaml = new Yaml();
-
-        long dataSeed;
-        try (InputStream input = Files.newInputStream(Path.of(configFile))) {
-            Map<String, Object> config = yaml.load(input);
-
-            String configOutputDir = (String) config.get("outputDir");
-            if (configOutputDir != null) {
-                outputDir = Path.of(configOutputDir);
-                csvDir = outputDir.resolve(CSV_DIR);
-                jsonDir = outputDir.resolve(JSON_DIR);
-            }
-
-
-            dataSeed = ((Number) config.getOrDefault("dataSeed", DEFAULT_SEED)).longValue();
-
-            // TODO: use these, maybe should be Enum
-            String dataSize = (String) config.get("dataSize");
-            String dataCardinality = (String) config.get("dataCardinality");
-
-            // TODO: should be rather used during cleanup
-            boolean keepData = (Boolean) config.get("keepData");
+        String configOutputDir = (String) config.get("outputDir");
+        if (configOutputDir != null) {
+            outputDir = Path.of(configOutputDir);
+            csvDir = outputDir.resolve(CSV_DIR);
+            jsonDir = outputDir.resolve(JSON_DIR);
         }
+
+        long dataSeed = ((Number) config.getOrDefault("dataSeed", DEFAULT_SEED)).longValue();
+
+        // TODO: use these, maybe should be Enum
+        String dataSize = (String) config.get("dataSize");
+        String dataCardinality = (String) config.get("dataCardinality");
+
+        // TODO: should be rather used during cleanup
+        boolean keepData = (Boolean) config.get("keepData");
 
         createDirectories();
 

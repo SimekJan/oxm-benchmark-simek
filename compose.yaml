@@ -5,10 +5,10 @@ services:
     command:
       - cs.mff.uk.simek.generator.Generator
     environment:
-      CONFIG_FILE: /config/generator.yaml
+      CONFIG_FILE: /oxm_config.yaml
     volumes:
       - ./data:/data
-      - ./config/generator.yaml:/config/generator.yaml:ro
+      - ./oxm_config.yaml:/oxm_config.yaml:ro
 
   mongo:
     image: mongo:8
