@@ -202,8 +202,6 @@ public class Generator {
 
             // Employee 1 is the CEO.
             managers.add(1L);
-
-            // Generate CEO.
             writeEmployee(1L, null, gen, csv, json);
 
             long employeeId = 2;
@@ -412,10 +410,10 @@ public class Generator {
             for (long orderId = 1; orderId <= orderCount; orderId++) {
 
                 // TODO: extract these
-                int productCount = gen.nextInt(1, 5);
+                int productInOrder = gen.nextInt(1, 5);
                 Set<Long> products = new HashSet<>();
 
-                while (products.size() < productCount) {
+                while (products.size() < productInOrder) {
                     products.add(randomId(gen, productCount));
                 }
 
