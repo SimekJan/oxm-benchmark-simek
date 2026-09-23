@@ -59,4 +59,46 @@ public class ConfigLoader {
 
         return current;
     }
+
+    private static final String OUTPUT_DIR = "data";
+    private static final String CSV_DIR = "csv";
+    private static final String JSON_DIR = "json";
+
+    private static final Path defaultOutputDir = Path.of(OUTPUT_DIR);
+
+    /**
+     * Returns chosen path for saved CSV data according to config.
+     * @return CSV data Path.
+     */
+    public static Path getCsvDir() throws IOException {
+        Path csvDir = defaultOutputDir.resolve(CSV_DIR);
+
+        Map<String, Object> config = ConfigLoader.getSection(ConfigLoader.GENERATOR_SECTION);
+
+        String configOutputDir = (String) config.get("outputDir");
+        if (configOutputDir != null) {
+            Path outputDir = Path.of(configOutputDir);
+            csvDir = outputDir.resolve(CSV_DIR);
+        }
+
+        return csvDir;
+    }
+
+    /**
+     * Returns chosen path for saved JSON data according to config.
+     * @return JSON data Path.
+     */
+    public static Path getJsonDir() throws IOException {
+        Path jsonDir = defaultOutputDir.resolve(JSON_DIR);
+
+        Map<String, Object> config = ConfigLoader.getSection(ConfigLoader.GENERATOR_SECTION);
+
+        String configOutputDir = (String) config.get("outputDir");
+        if (configOutputDir != null) {
+            Path outputDir = Path.of(configOutputDir);
+            jsonDir = outputDir.resolve(JSON_DIR);
+        }
+
+        return jsonDir;
+    }
 }

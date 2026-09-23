@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cs.mff.uk.simek.ConfigLoader;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -27,10 +26,6 @@ public class Generator {
     private static final int CUSTOMER_COUNT = 10_000;
     private static final int ORDER_COUNT = 20_000;
 
-    private static final String OUTPUT_DIR = "data";
-    private static final String CSV_DIR = "csv";
-    private static final String JSON_DIR = "json";
-
     private static final long DEFAULT_SEED = 1234567890L;
 
     // TODO: use these
@@ -40,20 +35,14 @@ public class Generator {
     private static int customerCount = CUSTOMER_COUNT;
     private static int orderCount = ORDER_COUNT;
 
-    private static Path outputDir = Path.of(OUTPUT_DIR);
-    private static Path csvDir = outputDir.resolve(CSV_DIR);
-    private static Path jsonDir = outputDir.resolve(JSON_DIR);
+    private static Path csvDir;
+    private static Path jsonDir;
 
     public static void main(String[] args) throws Exception {
 
+        csvDir = ConfigLoader.getCsvDir();
+        jsonDir = ConfigLoader.getJsonDir();
         Map<String, Object> config = ConfigLoader.getSection(ConfigLoader.GENERATOR_SECTION);
-
-        String configOutputDir = (String) config.get("outputDir");
-        if (configOutputDir != null) {
-            outputDir = Path.of(configOutputDir);
-            csvDir = outputDir.resolve(CSV_DIR);
-            jsonDir = outputDir.resolve(JSON_DIR);
-        }
 
         long dataSeed = ((Number) config.getOrDefault("dataSeed", DEFAULT_SEED)).longValue();
 
@@ -78,7 +67,7 @@ public class Generator {
         generateOrderProducts(gen);
 
         System.out.println("Data generation finished.");
-        System.out.println("Output: " + outputDir.toAbsolutePath());
+        System.out.println("Output: " + csvDir.toAbsolutePath() + " and " + jsonDir.toAbsolutePath());
     }
 
     // -------------------------------------------------------------------------
