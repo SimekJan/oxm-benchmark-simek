@@ -1,15 +1,5 @@
 package cs.mff.uk.simek.document.northwind.helper;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import cs.mff.uk.simek.document.MongoDbManger;
-import cs.mff.uk.simek.document.northwind.*;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-
 import static com.mongodb.client.model.Indexes.ascending;
 
 public class PopulateWithDummyData {

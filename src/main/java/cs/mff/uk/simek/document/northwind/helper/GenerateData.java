@@ -1,22 +1,5 @@
 package cs.mff.uk.simek.document.northwind.helper;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.UpdateOneModel;
-import com.mongodb.client.model.Updates;
-import com.mongodb.client.model.WriteModel;
-import cs.mff.uk.simek.generator.DataProvider;
-import cs.mff.uk.simek.document.MongoDbManger;
-import cs.mff.uk.simek.document.northwind.*;
-import org.bson.types.ObjectId;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class GenerateData {
 /*
     private static final int SUPPLIER_COUNT = 1_000;

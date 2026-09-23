@@ -2,7 +2,7 @@ package cs.mff.uk.simek.importer;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import cs.mff.uk.simek.document.MongoDbManger;
+import cs.mff.uk.simek.document.MongoDbManager;
 import cs.mff.uk.simek.document.northwind.*;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -26,7 +26,7 @@ public class MongoImporter {
      */
     public static void run() throws IOException {
 
-        db = MongoDbManger.getDb();
+        db = MongoDbManager.getDb();
 
         loadSuppliers();
         loadCustomers();

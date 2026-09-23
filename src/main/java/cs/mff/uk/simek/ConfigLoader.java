@@ -66,6 +66,14 @@ public class ConfigLoader {
 
     private static final Path defaultOutputDir = Path.of(OUTPUT_DIR);
 
+    public static Path getDataDir() throws IOException {
+        Map<String, Object> config = ConfigLoader.getSection(ConfigLoader.GENERATOR_SECTION);
+
+        String configOutputDir = (String) config.get("outputDir");
+        return (configOutputDir != null) ?
+            Path.of(configOutputDir) : defaultOutputDir;
+    }
+    
     /**
      * Returns chosen path for saved CSV data according to config.
      * @return CSV data Path.

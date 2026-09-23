@@ -15,8 +15,11 @@ import java.util.Map;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class MongoDbManger {
-
+/**
+ * Provides connection to chosen Mongo instance from config
+ * to all parts of program
+ */
+public class MongoDbManager {
 
     public static MongoDatabase getDb() throws IOException {
 

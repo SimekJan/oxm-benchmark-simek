@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d9ed907-1c72-4f78-abdd-54d4ac452013" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/Runner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/query_params/QueryParams.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/ConfigLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/ConfigLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/MongoDbManger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/MongoDbManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/QueryExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/QueryExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/DropMongoDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/DropMongoDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/GenerateData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/GenerateData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/PopulateWithDummyData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/northwind/helper/PopulateWithDummyData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query01_select_indexed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/document/queries/basic/Query01_select_indexed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/importer/MongoImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/importer/MongoImporter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +121,7 @@
       <module name="oxm-benchmark-simek" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cs.mff.uk.simek.generator.*" />
+          <option name="PATTERN" value="cs.mff.uk.simek.query_params.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>

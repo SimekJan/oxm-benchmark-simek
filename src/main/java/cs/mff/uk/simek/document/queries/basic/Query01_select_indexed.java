@@ -7,8 +7,8 @@ import cs.mff.uk.simek.document.northwind.Employee;
 
 import static com.mongodb.client.model.Filters.eq;
 
-/*
-    Get employee with specific id. That is filter by indexed column.
+/**
+ * Get employee with specific id. That is filter by indexed column.
  */
 public class Query01_select_indexed implements Query {
     @Override
