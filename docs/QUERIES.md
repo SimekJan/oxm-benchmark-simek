@@ -53,7 +53,7 @@
     - (**String**)
     - Pottentially starting letter param for (Suppliers) city
 - CQ6: UnitPrice 2x
-    - (**Integer**, **Integer**)
+    - (**Float**, **Float**)
 - CQ7: Starting letter 2x, City, Date 2x
     - (**String**, **LocalDate**, **LocalDate**)
     - Pottentially starting letter param
