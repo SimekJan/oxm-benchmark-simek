@@ -22,7 +22,7 @@
     - ()
 - Q10: SupplierId 2x (**TODO: change the query from company name!!!**)
     - (**Long**, **Long**)
-    - These suppliers **need to have a connection** (testing shotes path)
+    - These suppliers **need to have a connection** (testing the shortest path)
 - Q11: Nothing
     - ()
 - Q12: Nothing
