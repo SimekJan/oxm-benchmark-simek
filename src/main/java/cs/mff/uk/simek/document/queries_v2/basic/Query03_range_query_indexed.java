@@ -17,7 +17,7 @@ import static com.mongodb.client.model.Filters.*;
 public class Query03_range_query_indexed implements DocumentQuery<Q3_Params> {
 
     @Override
-    public void run(Q3_Params params, MongoDatabase db) {
+    public void run(Q3_Params params) {
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
 
         List<Employee> res = employees.find(and(

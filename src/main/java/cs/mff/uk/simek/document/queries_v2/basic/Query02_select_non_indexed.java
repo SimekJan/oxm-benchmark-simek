@@ -14,7 +14,7 @@ import static com.mongodb.client.model.Filters.eq;
 public class Query02_select_non_indexed implements DocumentQuery<Q2_Params> {
 
     @Override
-    public void run(Q2_Params params, MongoDatabase db) {
+    public void run(Q2_Params params) {
 
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
 

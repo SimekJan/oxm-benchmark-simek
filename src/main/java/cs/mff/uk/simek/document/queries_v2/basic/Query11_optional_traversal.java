@@ -16,7 +16,7 @@ import java.util.List;
 public class Query11_optional_traversal implements DocumentQuery<QX_No_Params> {
 
     @Override
-    public void run(QX_No_Params params, MongoDatabase db) {
+    public void run(QX_No_Params params) {
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
         List<Document> result = suppliers.aggregate(List.of(

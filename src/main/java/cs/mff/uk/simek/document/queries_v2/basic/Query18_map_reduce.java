@@ -15,7 +15,7 @@ import org.bson.Document;
 public class Query18_map_reduce implements DocumentQuery<QX_No_Params> {
 
     @Override
-    public void run(QX_No_Params params, MongoDatabase db) {
+    public void run(QX_No_Params params) {
 
         MongoCollection<Product> products = db.getCollection("Products", Product.class);
 

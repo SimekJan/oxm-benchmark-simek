@@ -21,7 +21,7 @@ import static com.mongodb.client.model.Projections.*;
 public class Query10_shortest_path implements DocumentQuery<Q10_Params> {
 
     @Override
-    public void run(Q10_Params params, MongoDatabase db) {
+    public void run(Q10_Params params) {
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
         List<Document> result = suppliers.aggregate(List.of(

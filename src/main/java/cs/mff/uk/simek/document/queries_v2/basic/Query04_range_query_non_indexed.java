@@ -18,7 +18,7 @@ import static com.mongodb.client.model.Filters.*;
 public class Query04_range_query_non_indexed implements DocumentQuery<Q4_Params> {
 
     @Override
-    public void run(Q4_Params params, MongoDatabase db) {
+    public void run(Q4_Params params) {
         MongoCollection<Product> products = db.getCollection("Products", Product.class);
 
         List<Product> res = products.find(and(

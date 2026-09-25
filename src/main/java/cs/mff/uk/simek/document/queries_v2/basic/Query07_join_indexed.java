@@ -18,7 +18,7 @@ import static com.mongodb.client.model.Aggregates.lookup;
 public class Query07_join_indexed implements DocumentQuery<QX_No_Params> {
 
     @Override
-    public void run(QX_No_Params params, MongoDatabase db) {
+    public void run(QX_No_Params params) {
         MongoCollection<Order> orders = db.getCollection("Orders", Order.class);
 
         List<Document> result = orders.aggregate(List.of(

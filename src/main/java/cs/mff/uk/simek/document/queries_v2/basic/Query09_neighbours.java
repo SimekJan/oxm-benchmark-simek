@@ -16,7 +16,7 @@ import java.util.List;
 public class Query09_neighbours implements DocumentQuery<QX_No_Params> {
 
     @Override
-    public void run(QX_No_Params params, MongoDatabase db) {
+    public void run(QX_No_Params params) {
 
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 

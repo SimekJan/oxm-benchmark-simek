@@ -20,7 +20,7 @@ import static com.mongodb.client.model.Projections.include;
 public class Query13_intersect implements DocumentQuery<QX_No_Params> {
 
     @Override
-    public void run(QX_No_Params params, MongoDatabase db) {
+    public void run(QX_No_Params params) {
         MongoCollection<Customer> customers = db.getCollection("Customers", Customer.class);
 
         List<Document> result = customers.aggregate(List.of(

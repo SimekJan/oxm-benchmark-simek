@@ -19,7 +19,7 @@ import static com.mongodb.client.model.Aggregates.group;
 public class Query06_max implements DocumentQuery<QX_No_Params> {
 
     @Override
-    public void run(QX_No_Params params, MongoDatabase db) {
+    public void run(QX_No_Params params) {
 
         MongoCollection<Product> products = db.getCollection("Products", Product.class);
 

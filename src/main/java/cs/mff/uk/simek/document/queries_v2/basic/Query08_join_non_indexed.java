@@ -19,7 +19,7 @@ import static com.mongodb.client.model.Projections.*;
 public class Query08_join_non_indexed implements DocumentQuery<QX_No_Params> {
 
     @Override
-    public void run(QX_No_Params params, MongoDatabase db) {
+    public void run(QX_No_Params params) {
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
 
         List<Document> result = employees.aggregate(List.of(
