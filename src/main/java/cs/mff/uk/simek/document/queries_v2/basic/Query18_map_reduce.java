@@ -23,9 +23,10 @@ public class Query18_map_reduce implements DocumentQuery<QX_No_Params> {
         @Deprecated
         MapReduceIterable<Document> result = products.mapReduce(mapFunction, reduceFunction, Document.class);
 
-        result.forEach( doc ->
-            System.out.println(doc.get("_id") + " -> " + doc.getDouble("value"))
-        );
+        System.out.println("MapReduce: " + result);
+        // result.forEach( doc ->
+        //    System.out.println(doc.get("_id") + " -> " + doc.getDouble("value"))
+        // );
     }
 }
 

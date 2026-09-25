@@ -26,8 +26,8 @@ public class Query04_range_query_non_indexed implements DocumentQuery<Q4_Params>
         )).into(new ArrayList<>());
 
         System.out.println("Number of products found: " + res.size());
-        for (Product p: res) {
-            System.out.println(p.getProductName() + ": " + p.getUnitPrice());
-        }
+        // for (Product p: res) {
+        //    System.out.println(p.getProductName() + ": " + p.getUnitPrice());
+        // }
     }
 }

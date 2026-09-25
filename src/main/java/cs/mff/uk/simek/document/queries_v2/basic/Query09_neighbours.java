@@ -37,8 +37,9 @@ public class Query09_neighbours implements DocumentQuery<QX_No_Params> {
                 )
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc: result) {
-            System.out.println(doc.get("fromSupplier") + "\t to \t" + doc.get("toSupplier") + "\t with depth: " + doc.get("depth"));
-        }
+        System.out.println("Connections of depth max 2: " + result.size());
+        // for (Document doc: result) {
+        //    System.out.println(doc.get("fromSupplier") + "\t to \t" + doc.get("toSupplier") + "\t with depth: " + doc.get("depth"));
+        // }
     }
 }

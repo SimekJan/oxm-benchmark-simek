@@ -33,8 +33,9 @@ public class Query12_union implements DocumentQuery<QX_No_Params> {
                 group("$city")
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc: result) {
-            System.out.println(doc.get("_id"));
-        }
+        System.out.println("Cities in either: " + result.size());
+        // for (Document doc: result) {
+        //    System.out.println(doc.get("_id"));
+        // }
     }
 }

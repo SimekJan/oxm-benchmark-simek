@@ -26,8 +26,9 @@ public class Query05_count implements DocumentQuery<QX_No_Params> {
                 group("$city", sum("count", 1))
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc : result) {
-            System.out.println(doc.get("_id") + ": " + doc.getInteger("count"));
-        }
+        System.out.println("Number of cities: " + result.size());
+        // for (Document doc : result) {
+        //    System.out.println(doc.get("_id") + ": " + doc.getInteger("count"));
+        // }
     }
 }

@@ -25,8 +25,9 @@ public class Query17_distinct implements DocumentQuery<QX_No_Params> {
                 group("$city")
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc : result) {
-            System.out.println(doc.getString("_id"));
-        }
+        System.out.println("Distinct cities: " + result.size());
+        // for (Document doc : result) {
+        //    System.out.println(doc.getString("_id"));
+        // }
     }
 }

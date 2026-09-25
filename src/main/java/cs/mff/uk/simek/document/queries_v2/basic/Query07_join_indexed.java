@@ -27,9 +27,10 @@ public class Query07_join_indexed implements DocumentQuery<QX_No_Params> {
                         "employee")             // output array field
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc : result) {
-            List<Document> emp = (List<Document>) doc.get("employee");
-            System.out.println("Order " + doc.getLong("orderId") + " -> " + emp.getFirst().get("firstName") + " " + emp.getFirst().get("lastName"));
-        }
+        System.out.println("Orders - Employee join results: " + result.size());
+        // for (Document doc : result) {
+        //    List<Document> emp = (List<Document>) doc.get("employee");
+        //    System.out.println("Order " + doc.getLong("orderId") + " -> " + emp.getFirst().get("firstName") + " " + emp.getFirst().get("lastName"));
+        // }
     }
 }

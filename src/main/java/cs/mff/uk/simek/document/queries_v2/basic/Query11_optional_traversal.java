@@ -38,8 +38,9 @@ public class Query11_optional_traversal implements DocumentQuery<QX_No_Params> {
                 )
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc: result) {
-            System.out.println(doc.toJson());
-        }
+        System.out.println("Supplier counts: " + result.size());
+        // for (Document doc: result) {
+        //    System.out.println(doc.toJson());
+        // }
     }
 }

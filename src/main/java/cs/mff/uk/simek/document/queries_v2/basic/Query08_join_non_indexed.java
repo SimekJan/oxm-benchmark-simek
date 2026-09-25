@@ -33,9 +33,10 @@ public class Query08_join_non_indexed implements DocumentQuery<QX_No_Params> {
                 ))
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc : result) {
-            System.out.println(doc.get("firstName") + " " + doc.get("lastName") + ": " +
-                    doc.get("companyName") + " in " + doc.get("city"));
-        }
+        System.out.println("Employee - Customer join results: " + result.size());
+        // for (Document doc : result) {
+        //    System.out.println(doc.get("firstName") + " " + doc.get("lastName") + ": " +
+        //            doc.get("companyName") + " in " + doc.get("city"));
+        // }
     }
 }

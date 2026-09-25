@@ -29,8 +29,9 @@ public class Query14_diff implements DocumentQuery<QX_No_Params> {
                 project(fields(include("companyName")))
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc: result) {
-            System.out.println(doc.get("companyName"));
-        }
+        System.out.println("Customers without order: " + result.size());
+        // for (Document doc: result) {
+        //    System.out.println(doc.get("companyName"));
+        // }
     }
 }
