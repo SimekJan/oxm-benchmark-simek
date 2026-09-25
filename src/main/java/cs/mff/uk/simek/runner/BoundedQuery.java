@@ -1,5 +1,6 @@
 package cs.mff.uk.simek.runner;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -10,9 +11,11 @@ import java.util.function.Function;
 public class BoundedQuery<P> implements RunnableQuery {
 
     private final P params;
-    private final Function<P, Void> operation;
 
-    public BoundedQuery(P params, Function<P, Void> operation) {
+    // TODO: change to include return type like "Results"
+    private final Consumer<P> operation;
+
+    public BoundedQuery(P params, Consumer<P> operation) {
         this.params = params;
         this.operation = operation;
     }
@@ -22,6 +25,6 @@ public class BoundedQuery<P> implements RunnableQuery {
      */
     @Override
     public void run() {
-        operation.apply(params);
+        operation.accept(params);
     }
 }
