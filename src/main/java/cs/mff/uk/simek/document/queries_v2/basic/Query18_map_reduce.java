@@ -2,9 +2,7 @@ package cs.mff.uk.simek.document.queries_v2.basic;
 
 import com.mongodb.client.MapReduceIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import cs.mff.uk.simek.document.northwind.Product;
-import cs.mff.uk.simek.document.queries.Query;
 import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;

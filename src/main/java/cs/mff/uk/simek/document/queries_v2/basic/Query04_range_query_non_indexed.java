@@ -1,7 +1,6 @@
 package cs.mff.uk.simek.document.queries_v2.basic;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import cs.mff.uk.simek.document.northwind.Product;
 import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.Q4_Params;
@@ -13,7 +12,7 @@ import java.util.List;
 import static com.mongodb.client.model.Filters.*;
 
 /**
- * Get all products in price range 9.5 - 12.5 (Range query).
+ * Get all products in price range (Range query).
  */
 public class Query04_range_query_non_indexed implements DocumentQuery<Q4_Params> {
 

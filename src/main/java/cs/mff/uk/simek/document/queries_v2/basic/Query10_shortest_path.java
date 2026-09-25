@@ -1,7 +1,6 @@
 package cs.mff.uk.simek.document.queries_v2.basic;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
 import cs.mff.uk.simek.document.northwind.Supplier;
 import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
