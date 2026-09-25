@@ -46,10 +46,37 @@ mvn clean package
 # this then runs the generator and saves generated data based on chosen config  
 docker compose run --build --rm generator
 
+# Run to build the whole benchmark
+# the --no-cache option ensures the images are rebuild even after local changes
 docker compose build --no-cache
 
+# Run to start the benchmark
 docker compose up
+
+# Run to end the benchmark, stop the databases if in Docker mode
+# and remove the generated data from the dbs images
+docker compose down -v
 ```
+
+## Connecting to the DBs
+
+- All ports for the databases are moved from the standard ports to avoid clash 
+  with local instances during development and benchmark usage. 
+
+### MongoDB
+
+- From (e.g. Mongo Compass) connect to `mongodb://localhost:27018/`.
+- Authentication **TBD**, there is none right now
+
+### Neo4j
+
+- From (e.g. Neo4j Desktop) connect to `bolt://localhost:7688`.
+- Use username `neo4j` and password `oxm_password`.
+
+### PostgreSQL
+
+- From (e.g. DBeaver) connect to `jdbc:postgresql://localhost:5433/oxm_benchmark`.
+- Use username `postgre` and password `oxm_password`.
 
 ## Config options
 

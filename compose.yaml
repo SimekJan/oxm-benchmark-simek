@@ -24,7 +24,7 @@ services:
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_USER: oxm_postgres
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: oxm_password
       POSTGRES_DB: oxm_benchmark
     volumes:
