@@ -23,13 +23,13 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 @Slf4j
 public class MongoDbManager {
 
-    private static String DEFAULT_MONGO_CONNECTION = "mongodb://mongo:27017";
-    private static String DEFAULT_MONGO_DATABASE_NAME = "oxm_benchmark";
+    private static final String DEFAULT_MONGO_CONNECTION = "mongodb://mongo:27017";
+    private static final String DEFAULT_MONGO_DATABASE_NAME = "oxm_benchmark";
 
+    private static MongoClient client;
     private static MongoDatabase instance;
 
-    public static MongoDatabase getDb() {
-
+    public static synchronized MongoDatabase getDb() {
         if (instance != null) {
             return instance;
         }
@@ -39,7 +39,8 @@ public class MongoDbManager {
 
         try {
             Map<String, Object> config = ConfigLoader.getSection(
-                    ConfigLoader.IMPORTER_SECTION, ConfigLoader.MONGO_IMPORTER_SECTION);
+                    ConfigLoader.IMPORTER_SECTION,
+                    ConfigLoader.MONGO_IMPORTER_SECTION);
 
             connection = (String) config.get("connection");
             dbName = (String) config.get("db_name");
@@ -48,18 +49,31 @@ public class MongoDbManager {
         }
 
         CodecRegistry pojoCodecRegistry = fromRegistries(
-            MongoClientSettings.getDefaultCodecRegistry(),
-            fromProviders(PojoCodecProvider.builder().automatic(true).build())
+                MongoClientSettings.getDefaultCodecRegistry(),
+                fromProviders(
+                        PojoCodecProvider.builder()
+                                .automatic(true)
+                                .build()
+                )
         );
 
-        try (MongoClient client = MongoClients.create(
+        client = MongoClients.create(
                 MongoClientSettings.builder()
                         .applyConnectionString(new ConnectionString(connection))
                         .codecRegistry(pojoCodecRegistry)
                         .build()
-        )) {
-            instance = client.getDatabase(dbName);
-        }
+        );
+
+        instance = client.getDatabase(dbName);
+
         return instance;
+    }
+
+    public static synchronized void close() {
+        if (client != null) {
+            client.close();
+            client = null;
+            instance = null;
+        }
     }
 }
