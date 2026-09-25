@@ -1,7 +1,6 @@
 package cs.mff.uk.simek.runner;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * Implementation of common class for all Queries
@@ -12,7 +11,6 @@ public class BoundedQuery<P> implements RunnableQuery {
 
     private final P params;
 
-    // TODO: change to include return type like "Results"
     private final Consumer<P> operation;
 
     public BoundedQuery(P params, Consumer<P> operation) {
@@ -24,7 +22,11 @@ public class BoundedQuery<P> implements RunnableQuery {
      * Run the described query
      */
     @Override
-    public void run() {
+    public QueryResult run() {
+        long start = System.nanoTime();
         operation.accept(params);
+        long end = System.nanoTime();
+
+        return new QueryResult(end - start);
     }
 }

@@ -8,5 +8,5 @@ public interface RunnableQuery {
     /**
      * Run the described query
      */
-    void run();
+    QueryResult run();
 }

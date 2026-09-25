@@ -2,6 +2,7 @@ package cs.mff.uk.simek.runner;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,17 +19,24 @@ public class Runner {
         log.info("Runner started.");
 
         List<QueriesRun> runs = List.of(new DocumentQueriesRun());
+        List<List<QueryResult>> results = new ArrayList<>();
 
         for(QueriesRun run : runs) {
-            runAll(run.getQueries());
+            results.add(runAll(run.getQueries()));
         }
+
+        System.out.println(results);
 
         System.out.println("Runner executed.");
     }
 
-    private static void runAll(List<RunnableQuery> queries) {
+    private static List<QueryResult> runAll(List<RunnableQuery> queries) {
+        List<QueryResult> results = new ArrayList<>();
+
         for (RunnableQuery query : queries) {
-            query.run();
+            results.add(query.run());
         }
+
+        return results;
     }
 }

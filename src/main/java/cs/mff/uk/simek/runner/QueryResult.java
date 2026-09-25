@@ -1,4 +1,8 @@
 package cs.mff.uk.simek.runner;
 
-public record QueryResult() {
-}
+/**
+ * Helper storage for measurement results.
+ */
+public record QueryResult(
+        long totalNs
+) {}
