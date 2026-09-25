@@ -1,0 +1,12 @@
+package cs.mff.uk.simek.runner;
+
+/**
+ * Common interface for exposing run method for all Queries
+ */
+public interface RunnableQuery {
+
+    /**
+     * Run the described query
+     */
+    void run();
+}
