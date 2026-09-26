@@ -37,11 +37,6 @@ public class Supplier {
     @Relationship(type = "SUPPLIES_TO")
     private Set<Supplier> suppliesTo = new HashSet<>();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @Relationship(type = "SUPPLIES_TO", direction = Relationship.Direction.INCOMING)
-    private Set<Supplier> suppliedBy = new HashSet<>();
-
     public void addProduct(Product p) {
         if (products.add(p)) {
             p.setSupplier(this);
@@ -49,12 +44,6 @@ public class Supplier {
     }
 
     public void addSuppliesTo(Supplier s) {
-        if (suppliesTo.add(s)) {
-            s.addSuppliedBy(this);
-        }
-    }
-
-    public void addSuppliedBy(Supplier s) {
-        suppliedBy.add(s);
+        suppliesTo.add(s);
     }
 }

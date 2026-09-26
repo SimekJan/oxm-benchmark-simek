@@ -64,12 +64,12 @@ public class PopulateWithDummyData {
         Employee worker3 = new Employee(6L, "Steve", "Worker", LocalDate.of(2001,1,1), LocalDate.of(2024,1,1), "Liberec");
 
 // hierarchy (both sides)
-        ceo.addSubordinate(manager1);
-        ceo.addSubordinate(manager2);
+        manager1.setReportsTo(ceo);
+        manager2.setReportsTo(ceo);
 
-        manager1.addSubordinate(worker1);
-        manager2.addSubordinate(worker2);
-        manager2.addSubordinate(worker3);
+        worker1.setReportsTo(manager1);
+        worker2.setReportsTo(manager2);
+        worker3.setReportsTo(manager2);
 
 
 // ---------- CUSTOMERS ----------

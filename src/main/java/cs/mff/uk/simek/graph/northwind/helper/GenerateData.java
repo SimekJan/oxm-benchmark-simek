@@ -153,7 +153,7 @@ public class GenerateData {
             for (int i = 0; i < reports && index < employees.size(); i++) {
 
                 Employee e = employees.get(index++);
-                manager.addSubordinate(e);
+                e.setReportsTo(manager);
 
                 managers.add(e); // becomes potential manager
             }

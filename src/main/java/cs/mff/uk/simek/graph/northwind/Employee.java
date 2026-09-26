@@ -9,8 +9,6 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotation.Index;
-import org.neo4j.ogm.annotation.typeconversion.Convert;
-import org.neo4j.ogm.typeconversion.LocalDateStringConverter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -55,22 +53,11 @@ public class Employee {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Relationship(type = "REPORTS_TO", direction = Relationship.Direction.INCOMING)
-    private Set<Employee> subordinates = new HashSet<>();
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @Relationship(type = "IS_RESPONSIBLE_FOR")
     private List<Order> orders = new ArrayList<>();
 
     public void addOrder(Order o) {
         orders.add(o);
         o.setEmployee(this);
-    }
-
-    public void addSubordinate(Employee e) {
-        if (subordinates.add(e)) {
-            e.setReportsTo(this);
-        }
     }
 }
