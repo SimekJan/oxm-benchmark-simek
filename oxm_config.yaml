@@ -15,6 +15,8 @@ importer:
     connection: mongodb://mongo:27017
     db_name: oxm_benchmark
   neo4j:
-    uri:
+    connection: bolt://localhost:7687
+    username: neo4j
+    password: oxm_password
   postgre:
     uri:
