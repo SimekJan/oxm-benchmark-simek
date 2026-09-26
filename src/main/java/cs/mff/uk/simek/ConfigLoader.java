@@ -14,7 +14,7 @@ public class ConfigLoader {
     public static final String IMPORTER_SECTION = "importer";
     public static final String MONGO_IMPORTER_SECTION = "mongo";
     public static final String NEO4J_IMPORTER_SECTION = "neo4j";
-    public static final String POSTGRE_IMPORTER_SECTION = "postgre";
+    public static final String POSTGRE_IMPORTER_SECTION = "postgres";
 
     /**
      * Load whole app config.

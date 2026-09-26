@@ -17,7 +17,6 @@ public class HibernateSessionManager {
             "jdbc:postgresql://postgres:5432/oxm_benchmark";
     private static final String DEFAULT_POSTGRES_USERNAME = "postgres";
     private static final String DEFAULT_POSTGRES_PASSWORD = "oxm_password";
-    private static final String DEFAULT_POSTGRES_DATABASE = "oxm_benchmark";
 
     private static Session session;
 
@@ -44,19 +43,20 @@ public class HibernateSessionManager {
         }
 
         SessionFactory sessionFactory = new Configuration()
-                .setProperty("hibernate.connection.url", connection)
-                .setProperty("hibernate.connection.username", username)
-                .setProperty("hibernate.connection.password", password)
-                .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
-                .setProperty("hibernate.hbm2ddl.auto", "update")
-                .addAnnotatedClass(Customer.class)
-                .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(Order.class)
-                .addAnnotatedClass(Product.class)
-                .addAnnotatedClass(Supplier.class)
-                .buildSessionFactory();
+            .setProperty("hibernate.connection.url", connection)
+            .setProperty("hibernate.connection.username", username)
+            .setProperty("hibernate.connection.password", password)
+            .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
+            .setProperty("hibernate.hbm2ddl.auto", "update")
+            .addAnnotatedClass(Customer.class)
+            .addAnnotatedClass(Employee.class)
+            .addAnnotatedClass(Order.class)
+            .addAnnotatedClass(Product.class)
+            .addAnnotatedClass(Supplier.class)
+            .buildSessionFactory();
 
         session = sessionFactory.openSession();
+
         return session;
     }
 }

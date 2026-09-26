@@ -37,5 +37,10 @@ public class Importer {
             Neo4jImporter.run();
             System.out.println("Data imported to Neo4j.");
         }
+
+        if (dbsUsed.contains("postgres")) {
+            PostgresImporter.run();
+            System.out.println("Data imported to PostgreSQL.");
+        }
     }
 }
