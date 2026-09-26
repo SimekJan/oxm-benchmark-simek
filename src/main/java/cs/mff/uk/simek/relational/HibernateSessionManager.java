@@ -1,22 +1,54 @@
 package cs.mff.uk.simek.relational;
 
+import cs.mff.uk.simek.ConfigLoader;
 import cs.mff.uk.simek.relational.northwind.*;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.io.File;
-import java.util.List;
+import java.io.IOException;
+import java.util.Map;
 
+@Slf4j
 public class HibernateSessionManager {
 
+    private static final String DEFAULT_POSTGRES_CONNECTION =
+            "jdbc:postgresql://postgres:5432/oxm_benchmark";
+    private static final String DEFAULT_POSTGRES_USERNAME = "postgres";
+    private static final String DEFAULT_POSTGRES_PASSWORD = "oxm_password";
+    private static final String DEFAULT_POSTGRES_DATABASE = "oxm_benchmark";
+
+    private static Session session;
+
     public static Session getSession() {
+
+        if (session != null) {
+            return session;
+        }
+
+        String connection = DEFAULT_POSTGRES_CONNECTION;
+        String username = DEFAULT_POSTGRES_USERNAME;
+        String password = DEFAULT_POSTGRES_PASSWORD;
+
+        try {
+            Map<String, Object> config = ConfigLoader.getSection(
+                ConfigLoader.IMPORTER_SECTION,
+                ConfigLoader.POSTGRE_IMPORTER_SECTION);
+
+            connection = (String) config.get("connection");
+            username = (String) config.get("username");
+            password = (String) config.get("password");
+        } catch (IOException e) {
+            log.info("Cannot load Neo4j config, using default connection and authentication.");
+        }
+
         SessionFactory sessionFactory = new Configuration()
-                // Workaround needed, IntelliJ did not copy the config file to target/ or out/
-                // .configure("hibernate.cfg.xml.xml")
-                .configure(
-                        new File("src/main/resources/hibernate.cfg.xml")
-                )
+                .setProperty("hibernate.connection.url", connection)
+                .setProperty("hibernate.connection.username", username)
+                .setProperty("hibernate.connection.password", password)
+                .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
+                .setProperty("hibernate.hbm2ddl.auto", "update")
                 .addAnnotatedClass(Customer.class)
                 .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Order.class)
@@ -24,44 +56,7 @@ public class HibernateSessionManager {
                 .addAnnotatedClass(Supplier.class)
                 .buildSessionFactory();
 
-        return sessionFactory.openSession();
-    }
-
-    public static void main(String[] args) {
-
-        Session session = getSession();
-
-        try {
-            session.beginTransaction();
-
-            List<Customer> customers = session.createQuery("from Customers", Customer.class).getResultList();
-            List<Employee> employees = session.createQuery("from Employees", Employee.class).getResultList();
-            List<Product> products = session.createQuery("from Products", Product.class).getResultList();
-            List<Order> orders = session.createQuery("from Orders", Order.class).getResultList();
-
-            System.out.println("-------------------------------------------------------------------------");
-            for (Customer c : customers) {
-                System.out.println(c.getCustomerId() + " - " + c.getCompanyName());
-            }
-            System.out.println("-------------------------------------------------------------------------");
-            System.out.println("-------------------------------------------------------------------------");
-            for (Employee e : employees) {
-                String managerName = (e.getReportsTo() != null) ? e.getReportsTo().getLastName() : "-";
-                System.out.println(e.getLastName() + " - " + e.getFirstName() + " - " + e.getCity()
-                        + " - " + e.getBirthDate() + " - " + managerName + " - " + e.getEmployeeId());
-            }
-       /*     System.out.println("-------------------------------------------------------------------------");
-            for (Product p : products) {
-                System.out.println(p.getProductName() + " - " + p.getUnitPrice() + " - " + p.getUnitsInStock());
-            }
-            System.out.println("-------------------------------------------------------------------------");
-            for (Order o : orders) {
-                System.out.println(o.getShipName() + " - " + o.getShipRegion());
-            }*/
-
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        session = sessionFactory.openSession();
+        return session;
     }
 }

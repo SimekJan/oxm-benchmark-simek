@@ -1,5 +1,5 @@
 databaseToUse:
-  - mongo
+  - postgres
 
 generator:
   outputDir: /data
@@ -17,4 +17,6 @@ importer:
     username: neo4j
     password: oxm_password
   postgres:
-    uri:
+    connection: jdbc:postgresql://postgres:5432/oxm_benchmark
+    username: postgres
+    password: oxm_password
