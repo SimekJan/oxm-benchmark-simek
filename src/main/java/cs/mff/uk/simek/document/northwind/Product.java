@@ -9,12 +9,11 @@ import org.bson.codecs.pojo.annotations.BsonId;
 @NoArgsConstructor
 public class Product {
 
-    public Product(Long productId, String productName, Float unitPrice, String category, Long supplierId) {
+    public Product(Long productId, String productName, Float unitPrice, String category) {
         this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;
         this.category = category;
-        this.supplier = supplierId;
     }
 
     @BsonId
@@ -24,5 +23,5 @@ public class Product {
     private String productName;
     private Float unitPrice;
     private String category;
-    private Long supplier;
+    private ObjectId supplier;
 }

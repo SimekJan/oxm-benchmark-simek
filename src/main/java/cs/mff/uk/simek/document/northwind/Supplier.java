@@ -26,5 +26,5 @@ public class Supplier {
     private Long supplierId;
     private String companyName;
     private String city;
-    private List<Long> suppliedBy;
+    private List<ObjectId> suppliedBy;
 }

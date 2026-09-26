@@ -13,10 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Order {
 
-    public Order(Long orderId, Long customerId, Long employeeId, LocalDate orderDate) {
+    public Order(Long orderId, LocalDate orderDate) {
         this.orderId = orderId;
-        this.employee = employeeId;
-        this.customer = customerId;
         this.orderDate = orderDate;
         this.products = new ArrayList<>();
     }
@@ -25,8 +23,8 @@ public class Order {
     private ObjectId id;
 
     private Long orderId;
-    private Long employee;
-    private Long customer;
+    private ObjectId employee;
+    private ObjectId customer;
     private LocalDate orderDate;
-    private List<Long> products;
+    private List<ObjectId> products;
 }
