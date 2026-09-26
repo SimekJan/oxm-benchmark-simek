@@ -28,12 +28,12 @@ public class Importer {
         System.out.println("Importing to:");
         System.out.println(dbsUsed);
 
-        if (dbsUsed.contains("MongoDB")) {
+        if (dbsUsed.contains("mongo")) {
             MongoImporter.run();
             System.out.println("Data imported to MongoDB.");
         }
 
-        if (dbsUsed.contains("Neo4j")) {
+        if (dbsUsed.contains("neo4j")) {
             Neo4jImporter.run();
             System.out.println("Data imported to Neo4j.");
         }

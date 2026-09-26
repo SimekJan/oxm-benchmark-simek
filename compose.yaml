@@ -7,6 +7,12 @@ services:
     volumes:
       - mongo-data:/data/db
     command: mongod --quiet --logpath /dev/null
+    healthcheck:
+      test: [ "CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ ping: 1 })'" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
 
   neo4j:
     image: neo4j:2026.09.0
@@ -39,6 +45,12 @@ services:
       POSTGRES_DB: oxm_benchmark
     volumes:
       - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d oxm_benchmark" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
 
   generator:
     build: .
@@ -63,12 +75,6 @@ services:
     depends_on:
       generator:
         condition: service_completed_successfully
-      # mongo:
-        # condition: service_started
-      neo4j:
-        condition: service_healthy
-      # postgres:
-        # condition: service_started
 
   runner:
     build: .
