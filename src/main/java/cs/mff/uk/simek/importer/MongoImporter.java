@@ -15,6 +15,9 @@ import java.util.Iterator;
 
 import static com.mongodb.client.model.Indexes.ascending;
 
+/**
+ * Adds all records stored in generated CSV files to configured Mongo instance
+ */
 public class MongoImporter {
 
     private static MongoDatabase db;

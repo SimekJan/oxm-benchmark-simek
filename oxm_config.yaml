@@ -1,5 +1,4 @@
 databaseToUse:
-  - MongoDB
   - Neo4j
   - PostgreSQL
 
@@ -15,7 +14,7 @@ importer:
     connection: mongodb://mongo:27017
     db_name: oxm_benchmark
   neo4j:
-    connection: bolt://localhost:7687
+    connection: bolt://neo4j:7687
     username: neo4j
     password: oxm_password
   postgre:

@@ -18,6 +18,16 @@ services:
     volumes:
       - neo4j_data:/data
       - neo4j_logs:/logs
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "cypher-shell -u neo4j -p oxm_password 'RETURN 1' || exit 1"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
 
   postgres:
     image: postgres:18.6
@@ -53,8 +63,12 @@ services:
     depends_on:
       generator:
         condition: service_completed_successfully
-      mongo:
-        condition: service_started
+      # mongo:
+        # condition: service_started
+      neo4j:
+        condition: service_healthy
+      # postgres:
+        # condition: service_started
 
   runner:
     build: .

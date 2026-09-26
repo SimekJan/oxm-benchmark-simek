@@ -29,6 +29,10 @@ public class MongoDbManager {
     private static MongoClient client;
     private static MongoDatabase instance;
 
+    /**
+     * Provides connection to Mongo Database
+     * @return Instance of MongoDB connection
+     */
     public static synchronized MongoDatabase getDb() {
         if (instance != null) {
             return instance;
