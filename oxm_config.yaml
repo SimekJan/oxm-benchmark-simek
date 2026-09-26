@@ -1,5 +1,5 @@
 databaseToUse:
-  - neo4j
+  - mongo
 
 generator:
   outputDir: /data
@@ -16,5 +16,5 @@ importer:
     connection: bolt://neo4j:7687
     username: neo4j
     password: oxm_password
-  postgre:
+  postgres:
     uri:

@@ -65,7 +65,7 @@ public class MongoImporter {
                     break;
                 }
 
-                supplier.getSuppliedBy().add(secondId);
+                // supplier.getSuppliedBy().add(secondId);
 
                 relationship = relationships.hasNext() ?
                         relationships.next() : null;
@@ -132,8 +132,8 @@ public class MongoImporter {
 
             String reportsTo = record.get("reports_to");
 
-            employee.setReportsTo(reportsTo == null || reportsTo.isBlank() ?
-                            null : Long.valueOf(reportsTo));
+            // employee.setReportsTo(reportsTo == null || reportsTo.isBlank() ?
+            //                null : Long.valueOf(reportsTo));
 
             batch.add(employee);
 
@@ -161,8 +161,7 @@ public class MongoImporter {
                     Long.valueOf(record.get("product_id")),
                     record.get("product_name"),
                     Float.valueOf(record.get("unit_price")),
-                    record.get("category"),
-                    Long.valueOf(record.get("supplier_id"))
+                    record.get("category")
             );
 
             batch.add(product);
@@ -194,8 +193,6 @@ public class MongoImporter {
 
             Order order = new Order(
                     orderId,
-                    Long.parseLong(record.get("customer_id")),
-                    Long.parseLong(record.get("employee_id")),
                     LocalDate.parse(record.get("order_date"))
                 );
 
@@ -208,7 +205,7 @@ public class MongoImporter {
                     break;
                 }
 
-                order.getProducts().add(productId);
+                // order.getProducts().add(productId);
 
                 relationship = relationships.hasNext() ?
                         relationships.next() : null;
