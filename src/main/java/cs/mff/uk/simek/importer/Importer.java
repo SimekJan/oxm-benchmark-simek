@@ -29,7 +29,7 @@ public class Importer {
         System.out.println(dbsUsed);
 
         if (dbsUsed.contains("mongo")) {
-            MongoImporter_v2.run();
+            MongoImporter.run();
             System.out.println("Data imported to MongoDB.");
         }
 

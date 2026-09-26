@@ -1,7 +1,9 @@
 package cs.mff.uk.simek.importer;
 
+import com.mongodb.bulk.BulkWriteResult;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.*;
 import cs.mff.uk.simek.document.MongoDbManager;
 import cs.mff.uk.simek.document.northwind.*;
 import org.apache.commons.csv.CSVParser;
@@ -11,65 +13,48 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
+import java.util.Map;
 
-import static com.mongodb.client.model.Indexes.ascending;
-
-/**
- * Adds all records stored in generated CSV files to configured Mongo instance
- */
 public class MongoImporter {
-
-    private static MongoDatabase db;
 
     private static final int BATCH_SIZE = 2_000;
 
-    /**
-     * Loads all data from specified CSV path in config to chosen MongoDB instance.
-     */
+    private static MongoDatabase db;
+
     public static void run() throws IOException {
 
         db = MongoDbManager.getDb();
 
         loadSuppliers();
+        linkSuppliers();
+
         loadCustomers();
+
         loadEmployees();
+        linkEmployees();
+
         loadProducts();
+        linkProductsWithSuppliers();
+
         loadOrders();
+        linkOrdersWithCustomers();
+        linkOrdersWithEmployees();
+        linkOrdersWithProducts();
     }
 
     private static void loadSuppliers() throws IOException {
 
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
         CSVParser parser = CsvParser.getParser("suppliers.csv");
-        CSVParser relationshipsParser = CsvParser.getParser("supplier_relationships.csv");
-        Iterator<CSVRecord> relationships = relationshipsParser.iterator();
-        CSVRecord relationship = relationships.hasNext() ? relationships.next() : null;
         List<Supplier> batch = new ArrayList<>();
 
         for (CSVRecord record : parser) {
-            long supplierId = Long.parseLong(record.get("supplier_id"));
 
             Supplier supplier = new Supplier(
-                supplierId,
-                record.get("company_name"),
-                record.get("city")
+                    Long.parseLong(record.get("supplier_id")),
+                    record.get("company_name"),
+                    record.get("city")
             );
-
-            // Consume all relationships belonging to this supplier
-            while (relationship != null) {
-                long firstId = Long.parseLong(relationship.get("supplier_id"));
-                long secondId = Long.parseLong(relationship.get("supplied_to_id"));
-
-                if (firstId > supplierId) {
-                    break;
-                }
-
-                // supplier.getSuppliedBy().add(secondId);
-
-                relationship = relationships.hasNext() ?
-                        relationships.next() : null;
-            }
 
             batch.add(supplier);
 
@@ -82,8 +67,65 @@ public class MongoImporter {
         if(!batch.isEmpty()) {
             suppliers.insertMany(batch);
         }
+    }
 
-        suppliers.createIndex(ascending("supplierId"));
+    private static void linkSuppliers() throws IOException {
+
+        CSVParser parser = CsvParser.getParser("supplier_relationships.csv");
+        List<Map<String, Long>> batch = new ArrayList<>(BATCH_SIZE);
+
+        for (CSVRecord record : parser) {
+
+            batch.add(
+                Map.of(
+                    "supplierId", Long.parseLong(record.get("supplier_id")),
+                    "suppliedToId", Long.parseLong(record.get("supplied_to_id"))
+                )
+            );
+
+            if (batch.size() == BATCH_SIZE) {
+                saveSupplierRelationships(batch);
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+            saveSupplierRelationships(batch);
+        }
+    }
+
+    private static void saveSupplierRelationships(
+            List<Map<String, Long>> relationships) {
+
+        MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
+        List<WriteModel<Supplier>> operations = new ArrayList<>();
+
+        for (Map<String, Long> relationship : relationships) {
+
+            Supplier suppliedTo = suppliers.find(
+                Filters.eq("supplierId", relationship.get("suppliedToId"))
+            ).first();
+
+            if (suppliedTo == null) {
+                throw new IllegalStateException(
+                    "Supplier not found: " + relationship.get("suppliedToId")
+                );
+            }
+
+            operations.add(
+                new UpdateOneModel<>(
+                    Filters.eq("supplierId", relationship.get("supplierId")),
+                    Updates.addToSet("suppliedBy", suppliedTo.getId())
+                )
+            );
+        }
+
+        if (!operations.isEmpty()) {
+            suppliers.bulkWrite(
+                operations,
+                new BulkWriteOptions().ordered(false)
+            );
+        }
     }
 
     private static void loadCustomers() throws IOException {
@@ -94,9 +136,9 @@ public class MongoImporter {
 
         for (CSVRecord record : parser) {
             Customer customer = new Customer(
-                Long.valueOf(record.get("customer_id")),
-                record.get("company_name"),
-                record.get("city")
+                    Long.valueOf(record.get("customer_id")),
+                    record.get("company_name"),
+                    record.get("city")
             );
 
             batch.add(customer);
@@ -110,8 +152,6 @@ public class MongoImporter {
         if(!batch.isEmpty()) {
             customers.insertMany(batch);
         }
-
-        customers.createIndex(ascending("customerId"));
     }
 
     private static void loadEmployees() throws IOException {
@@ -130,11 +170,6 @@ public class MongoImporter {
                     record.get("city")
             );
 
-            String reportsTo = record.get("reports_to");
-
-            // employee.setReportsTo(reportsTo == null || reportsTo.isBlank() ?
-            //                null : Long.valueOf(reportsTo));
-
             batch.add(employee);
 
             if (batch.size() >= BATCH_SIZE) {
@@ -146,13 +181,75 @@ public class MongoImporter {
         if(!batch.isEmpty()) {
             employees.insertMany(batch);
         }
+    }
 
-        employees.createIndex(ascending("employeeId"));
+    private static void linkEmployees() throws IOException {
+
+        CSVParser parser = CsvParser.getParser("employees.csv");
+        List<Map<String, Long>> batch = new ArrayList<>(BATCH_SIZE);
+
+        for (CSVRecord record : parser) {
+
+            String reportsTo = record.get("reports_to");
+
+            // CEO / top-level employee
+            if (reportsTo == null || reportsTo.isBlank()) {
+                continue;
+            }
+
+            batch.add(Map.of(
+                "employeeId", Long.parseLong(record.get("employee_id")),
+                "reportsTo", Long.parseLong(reportsTo)
+            ));
+
+            if (batch.size() == BATCH_SIZE) {
+                saveEmployeeRelationships(batch);
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+            saveEmployeeRelationships(batch);
+        }
+    }
+
+    private static void saveEmployeeRelationships(
+            List<Map<String, Long>> relationships) {
+
+        MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
+        List<WriteModel<Employee>> operations = new ArrayList<>();
+
+        for (Map<String, Long> relationship : relationships) {
+
+            Employee reportsTo = employees.find(
+                Filters.eq("employeeId", relationship.get("reportsTo"))
+            ).first();
+
+            if (reportsTo == null) {
+                throw new IllegalStateException(
+                    "Employee not found: " + relationship.get("reportsTo")
+                );
+            }
+
+            operations.add(
+                new UpdateOneModel<>(
+                    Filters.eq("employeeId", relationship.get("employeeId")),
+                    Updates.set("reportsTo", reportsTo.getId())
+                )
+            );
+        }
+
+        if (!operations.isEmpty()) {
+            employees.bulkWrite(
+                operations,
+                new BulkWriteOptions().ordered(false)
+            );
+        }
     }
 
     private static void loadProducts() throws IOException {
 
-        MongoCollection<Product> products = db.getCollection("Product", Product.class);
+        MongoCollection<Product> products = db.getCollection("Products", Product.class);
         CSVParser parser = CsvParser.getParser("products.csv");
         List<Product> batch = new ArrayList<>();
 
@@ -172,44 +269,82 @@ public class MongoImporter {
             }
         }
 
-        if(!batch.isEmpty()) {
+        if (!batch.isEmpty()) {
             products.insertMany(batch);
         }
+    }
 
-        products.createIndex(ascending("productId"));
+    private static void linkProductsWithSuppliers() throws IOException {
+
+        CSVParser parser = CsvParser.getParser("products.csv");
+
+        List<Map<String, Long>> batch = new ArrayList<>(BATCH_SIZE);
+
+        for (CSVRecord record : parser) {
+
+            batch.add(Map.of(
+                "productId", Long.parseLong(record.get("product_id")),
+                "supplierId", Long.parseLong(record.get("supplier_id"))
+            ));
+
+            if (batch.size() == BATCH_SIZE) {
+                saveProductSupplierRelationships(batch);
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+            saveProductSupplierRelationships(batch);
+        }
+    }
+
+    private static void saveProductSupplierRelationships(
+            List<Map<String, Long>> relationships) {
+
+        MongoCollection<Product> products = db.getCollection("Products", Product.class);
+        MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
+        List<WriteModel<Product>> operations = new ArrayList<>();
+
+        for (Map<String, Long> relationship : relationships) {
+
+            Supplier supplier = suppliers.find(
+                Filters.eq("supplierId", relationship.get("supplierId"))
+            ).first();
+
+            if (supplier == null) {
+                throw new IllegalStateException(
+                    "Supplier not found: " + relationship.get("supplierId")
+                );
+            }
+
+            operations.add(
+                new UpdateOneModel<>(
+                    Filters.eq("productId", relationship.get("productId")),
+                    Updates.set("supplier", supplier.getId())
+                )
+            );
+        }
+
+        if (!operations.isEmpty()) {
+            products.bulkWrite(
+                operations,
+                new BulkWriteOptions().ordered(false)
+            );
+        }
     }
 
     private static void loadOrders() throws IOException {
 
         MongoCollection<Order> orders = db.getCollection("Orders", Order.class);
         CSVParser parser = CsvParser.getParser("orders.csv");
-        CSVParser order_products = CsvParser.getParser("order_products.csv");
-        Iterator<CSVRecord> relationships = order_products.iterator();
-        CSVRecord relationship = relationships.hasNext() ? relationships.next() : null;
         List<Order> batch = new ArrayList<>();
 
         for (CSVRecord record : parser) {
-            long orderId = Long.parseLong(record.get("order_id"));
 
             Order order = new Order(
-                    orderId,
+                    Long.parseLong(record.get("order_id")),
                     LocalDate.parse(record.get("order_date"))
-                );
-
-            // Consume all relationships belonging to this supplier
-            while (relationship != null) {
-                long relationshipOrderId = Long.parseLong(relationship.get("order_id"));
-                long productId = Long.parseLong(relationship.get("product_id"));
-
-                if (relationshipOrderId > orderId) {
-                    break;
-                }
-
-                // order.getProducts().add(productId);
-
-                relationship = relationships.hasNext() ?
-                        relationships.next() : null;
-            }
+            );
 
             batch.add(order);
 
@@ -222,7 +357,183 @@ public class MongoImporter {
         if(!batch.isEmpty()) {
             orders.insertMany(batch);
         }
+    }
 
-        orders.createIndex(ascending("orderId"));
+    private static void linkOrdersWithCustomers() throws IOException {
+
+        CSVParser parser = CsvParser.getParser("orders.csv");
+        List<Map<String, Long>> batch = new ArrayList<>(BATCH_SIZE);
+
+        for (CSVRecord record : parser) {
+
+            batch.add(Map.of(
+                "orderId", Long.parseLong(record.get("order_id")),
+                "customerId", Long.parseLong(record.get("customer_id"))
+            ));
+
+            if (batch.size() == BATCH_SIZE) {
+                saveOrderCustomerRelationship(batch);
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+            saveOrderCustomerRelationship(batch);
+        }
+    }
+
+    private static void saveOrderCustomerRelationship(
+            List<Map<String, Long>> relationships) {
+
+        MongoCollection<Order> orders = db.getCollection("Orders", Order.class);
+        MongoCollection<Customer> customers = db.getCollection("Customers", Customer.class);
+        List<WriteModel<Order>> operations = new ArrayList<>();
+
+        for (Map<String, Long> relationship : relationships) {
+
+            Customer customer = customers.find(
+                Filters.eq("customerId", relationship.get("customerId"))
+            ).first();
+
+            if (customer == null) {
+                throw new IllegalStateException(
+                    "Customer not found: " + relationship.get("customerId")
+                );
+            }
+
+            operations.add(
+                new UpdateOneModel<>(
+                    Filters.eq("orderId", relationship.get("orderId")),
+                    Updates.set("customer", customer.getId())
+                )
+            );
+        }
+
+        if (!operations.isEmpty()) {
+            orders.bulkWrite(
+                operations,
+                new BulkWriteOptions().ordered(false)
+            );
+        }
+    }
+
+    private static void linkOrdersWithEmployees() throws IOException {
+
+        CSVParser parser = CsvParser.getParser("orders.csv");
+
+        List<Map<String, Long>> batch = new ArrayList<>(BATCH_SIZE);
+
+        for (CSVRecord record : parser) {
+
+            batch.add(Map.of(
+                    "orderId", Long.parseLong(record.get("order_id")),
+                    "employeeId", Long.parseLong(record.get("employee_id"))
+            ));
+
+            if (batch.size() == BATCH_SIZE) {
+                saveOrderEmployeeRelationship(batch);
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+            saveOrderEmployeeRelationship(batch);
+        }
+    }
+
+    private static void saveOrderEmployeeRelationship(
+            List<Map<String, Long>> relationships) {
+
+        MongoCollection<Order> orders = db.getCollection("Orders", Order.class);
+        MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
+        List<WriteModel<Order>> operations = new ArrayList<>();
+
+        for (Map<String, Long> relationship : relationships) {
+
+            Employee employee = employees.find(
+                    Filters.eq("employeeId", relationship.get("employeeId"))
+            ).first();
+
+            if (employee == null) {
+                throw new IllegalStateException(
+                    "Employee not found: " + relationship.get("employeeId")
+                );
+            }
+
+            operations.add(
+                new UpdateOneModel<>(
+                    Filters.eq("orderId", relationship.get("orderId")),
+                    Updates.set("employee", employee.getId())
+                )
+            );
+        }
+
+        if (!operations.isEmpty()) {
+            orders.bulkWrite(
+                operations,
+                new BulkWriteOptions().ordered(false)
+            );
+        }
+    }
+
+    private static void linkOrdersWithProducts() throws IOException {
+
+        CSVParser parser = CsvParser.getParser("order_products.csv");
+        List<Map<String, Long>> batch = new ArrayList<>(BATCH_SIZE);
+
+        for (CSVRecord record : parser) {
+
+            batch.add(Map.of(
+                "orderId", Long.parseLong(record.get("order_id")),
+                "productId", Long.parseLong(record.get("product_id"))
+            ));
+
+            if (batch.size() == BATCH_SIZE) {
+                saveOrderProductRelationships(batch);
+                batch.clear();
+            }
+        }
+
+        if (!batch.isEmpty()) {
+            saveOrderProductRelationships(batch);
+        }
+    }
+
+    private static void saveOrderProductRelationships(
+            List<Map<String, Long>> relationships) {
+
+        MongoCollection<Order> orders = db.getCollection("Orders", Order.class);
+        MongoCollection<Product> products = db.getCollection("Products", Product.class);
+        List<WriteModel<Order>> operations = new ArrayList<>();
+
+        for (Map<String, Long> relationship : relationships) {
+
+            Product product = products.find(
+                Filters.eq("productId", relationship.get("productId"))
+            ).first();
+
+            if (product == null) {
+                throw new IllegalStateException(
+                    "Product not found: " + relationship.get("productId")
+                );
+            }
+
+            operations.add(
+                new UpdateOneModel<>(
+                    Filters.eq("orderId", relationship.get("orderId")),
+                    Updates.addToSet("products", product.getId())
+                )
+            );
+        }
+
+        if (!operations.isEmpty()) {
+            BulkWriteResult result = orders.bulkWrite(
+                operations,
+                new BulkWriteOptions().ordered(false)
+            );
+
+            System.out.println("Matched: " + result.getMatchedCount());
+            System.out.println("Modified: " + result.getModifiedCount());
+        }
     }
 }
