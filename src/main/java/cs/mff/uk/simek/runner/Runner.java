@@ -30,8 +30,9 @@ public class Runner {
         List<List<QueryResult>> results = new ArrayList<>();
 
         if (dbsUsed.contains("mongo")) {
-            System.out.println("----------------------------------");
+            System.out.println("---------------------------------");
             System.out.println("Starting MongoDB queries");
+            System.out.println("---------------------------------");
 
             List<QueriesRun> runs = List.of(new DocumentQueriesRun());
             for (QueriesRun run : runs) {
@@ -42,8 +43,9 @@ public class Runner {
         }
 
         if (dbsUsed.contains("neo4j")) {
-            System.out.println("----------------------------------");
+            System.out.println("---------------------------------");
             System.out.println("Starting Neo4j queries");
+            System.out.println("---------------------------------");
 
             List<QueriesRun> runs = List.of(new GraphQueriesRun());
             for (QueriesRun run : runs) {
@@ -54,8 +56,9 @@ public class Runner {
         }
 
         if (dbsUsed.contains("postgres")) {
-            System.out.println("----------------------------------");
+            System.out.println("---------------------------------");
             System.out.println("Starting PostgreSQL queries");
+            System.out.println("---------------------------------");
 
             // List<QueriesRun> runs = List.of(new RelationalQueriesRun());
             // for (QueriesRun run : runs) {

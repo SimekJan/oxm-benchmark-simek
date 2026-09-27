@@ -19,8 +19,9 @@ public class Query01_select_indexed implements GraphQuery<Q1_Params> {
         Filter filter = new Filter("employeeId", ComparisonOperator.EQUALS, params.employeeId());
 
         Collection<Employee> result = session.loadAll(Employee.class, filter);
+        Employee employee = result.stream().toList().getFirst();
 
         System.out.println("------------Neo4j-Q1-------------");
-        System.out.println("Found " + result.toArray()[0] + " employee.");
+        System.out.println("Found employee: " + employee.getFirstName() + " " + employee.getLastName());
     }
 }
