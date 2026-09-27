@@ -1,11 +1,18 @@
 package cs.mff.uk.simek.runner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import cs.mff.uk.simek.ConfigLoader;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import cs.mff.uk.simek.generator.Generator;
+import cs.mff.uk.simek.graph.Neo4jSessionManager;
+import cs.mff.uk.simek.relational.HibernateSessionManager;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +69,9 @@ public class Runner {
 
             // Measurement
             for (int i = 0; i < 20; i++) {
+                // For emptying caches
+                Neo4jSessionManager.getSession().clear();
+
                 results.add(runAll(run.getQueries()));
             }
 
@@ -81,6 +91,9 @@ public class Runner {
 
             // Measurement
             for (int i = 0; i < 20; i++) {
+                // For emptying caches
+                HibernateSessionManager.getSession().clear();
+
                 results.add(runAll(run.getQueries()));
             }
 
@@ -89,9 +102,11 @@ public class Runner {
         }
 
         // Save results
-        System.out.println("Saving results...");
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new File("results.json"), results);
+        Path dataDir = ConfigLoader.getDataDir();
+        Path dataPath = dataDir.resolve("results.json");
+        try (JsonGenerator json = Generator.jsonGenerator(dataPath)) {
+            json.writeObject(results);
+        }
 
         System.out.println("Runner executed.");
     }

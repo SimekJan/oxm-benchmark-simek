@@ -83,6 +83,7 @@ services:
     environment:
       CONFIG_FILE: /oxm_config.yaml
     volumes:
+      - ./data:/data
       - ./oxm_config.yaml:/oxm_config.yaml:ro
     depends_on:
       importer:

@@ -20,11 +20,11 @@ import java.util.Map;
 
 public class Generator {
 
-    private static final int SUPPLIER_COUNT = 150;
-    private static final int EMPLOYEE_COUNT = 100;
-    private static final int PRODUCT_COUNT = 200;
-    private static final int CUSTOMER_COUNT = 300;
-    private static final int ORDER_COUNT = 400;
+    private static final int SUPPLIER_COUNT = 1_000;
+    private static final int EMPLOYEE_COUNT = 5_000;
+    private static final int PRODUCT_COUNT = 5_000;
+    private static final int CUSTOMER_COUNT = 2_000;
+    private static final int ORDER_COUNT = 2_000;
 
     private static final long DEFAULT_SEED = 1234567890L;
 
@@ -449,7 +449,7 @@ public class Generator {
         );
     }
 
-    private static JsonGenerator jsonGenerator(Path path) throws IOException {
+    public static JsonGenerator jsonGenerator(Path path) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
         return mapper.getFactory().createGenerator(

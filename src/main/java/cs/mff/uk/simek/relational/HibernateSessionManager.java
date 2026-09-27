@@ -5,6 +5,7 @@ import cs.mff.uk.simek.relational.northwind.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
@@ -48,6 +49,10 @@ public class HibernateSessionManager {
             .setProperty("hibernate.connection.password", password)
             .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
             .setProperty("hibernate.hbm2ddl.auto", "update")
+                // To avoid caching
+            .setProperty(AvailableSettings.USE_SECOND_LEVEL_CACHE, "false")
+            .setProperty(AvailableSettings.USE_QUERY_CACHE, "false")
+                //
             .addAnnotatedClass(Customer.class)
             .addAnnotatedClass(Employee.class)
             .addAnnotatedClass(Order.class)
