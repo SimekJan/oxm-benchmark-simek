@@ -7,7 +7,9 @@
     <list default="true" id="1d9ed907-1c72-4f78-abdd-54d4ac452013" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/oxm_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/oxm_config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/queries_v2/basic/Query01_select_indexed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/relational/queries_v2/basic/Query01_select_indexed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/GraphQueriesRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/GraphQueriesRun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/RelationalQueriesRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/RelationalQueriesRun.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +79,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/drtic/Desktop/diplomka/oxm-benchmark-simek/src/main/java/cs/mff/uk/simek/graph/queries_v2/basic",
+    "last_opened_file_path": "C:/Users/drtic/Desktop/diplomka/oxm-benchmark-simek/src/main/java/cs/mff/uk/simek/relational/queries_v2/basic",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -86,11 +88,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\drtic\Desktop\diplomka\oxm-benchmark-simek\src\main\java\cs\mff\uk\simek\relational\queries_v2\basic" />
       <recent name="C:\Users\drtic\Desktop\diplomka\oxm-benchmark-simek\src\main\java\cs\mff\uk\simek\graph\queries_v2\basic" />
       <recent name="C:\Users\drtic\Desktop\diplomka\oxm-benchmark-simek\src\main\java\cs\mff\uk\simek\document\queries_v2" />
       <recent name="C:\Users\drtic\Desktop\diplomka\oxm-benchmark-simek\src\main\java\cs\mff\uk\simek" />
       <recent name="C:\Users\drtic\Desktop\diplomka\oxm-benchmark-simek\src\main\java\cs\mff\uk\simek\document_embedded\northwind" />
-      <recent name="C:\Users\drtic\Desktop\diplomka\oxm-benchmark-simek\src\main\java\cs\mff\uk\simek\document\queries\complex" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\drtic\Desktop\diplomka\oxm-benchmark-simek\src\main\java\cs\mff\uk\simek\importer" />
