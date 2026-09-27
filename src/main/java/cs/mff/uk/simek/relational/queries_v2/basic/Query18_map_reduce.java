@@ -14,17 +14,17 @@ public class Query18_map_reduce implements RelationalQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
         System.out.println("----------PostgreSQL-Q18---------");
 
-        String hql = "SELECT s.companyName, COUNT(*) " +
+        String hql = "SELECT s.supplierId, s.companyName, COUNT(*) " +
                      "FROM Suppliers s " +
                      "       JOIN Products p ON s.supplierId = p.supplier " +
-                     "GROUP BY s.companyName";
+                     "GROUP BY s.supplierId, s.companyName";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 
         System.out.println("Counted products for " + results.size() + " suppliers.");
-        // for (Object[] line: results) {
-        //    System.out.println(line[0] + ": " + line[1]);
-        // }
+        /*for (Object[] line: results) {
+            System.out.println(line[0] + ": " + line[1]);
+        }*/
     }
 }
 

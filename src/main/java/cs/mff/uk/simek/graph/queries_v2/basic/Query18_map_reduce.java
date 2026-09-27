@@ -16,9 +16,8 @@ public class Query18_map_reduce implements GraphQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
 
         String query = """
-            MATCH (s:Supplier)
-            OPTIONAL MATCH (p:Product)-[:IS_PRODUCED_BY]->(s)
-            RETURN s.companyName AS supplier, count(p) AS productCount
+            MATCH (s:Supplier)<-[:IS_PRODUCED_BY]-(p:Product)
+            RETURN s, s.companyName AS supplier, count(p) AS productCount
         """;
 
         Iterable<Map<String,Object>> results = session.query(query, Map.of());
@@ -28,11 +27,11 @@ public class Query18_map_reduce implements GraphQuery<QX_No_Params> {
 
         System.out.println("------------Neo4j-Q18------------");
         System.out.println("Found " + resultList.size() + " suppliers");
-        // for (Map<String,Object> row : results) {
-        //    String supplier = (String) row.get("supplier");
-        //    Long count = (Long) row.get("productCount");
-        //    System.out.println(supplier + ": " + count);
-        // }
+        /*for (Map<String,Object> row : results) {
+            String supplier = (String) row.get("supplier");
+            Long count = (Long) row.get("productCount");
+            System.out.println(supplier + ": " + count);
+        }*/
     }
 }
 

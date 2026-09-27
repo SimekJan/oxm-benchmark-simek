@@ -18,7 +18,7 @@ public class Query11_optional_traversal implements GraphQuery<QX_No_Params> {
         String query = """
             MATCH (s:Supplier)
             OPTIONAL MATCH (s)-[:SUPPLIES_TO]->(sub:Supplier)
-            RETURN s.companyName AS supplier, count(sub) AS suppliedCount
+            RETURN s, s.companyName AS supplier, count(sub) AS suppliedCount
         """;
 
         Iterable<Map<String,Object>> results = session.query(query, Map.of());

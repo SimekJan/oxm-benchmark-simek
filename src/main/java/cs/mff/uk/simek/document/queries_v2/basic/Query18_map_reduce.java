@@ -29,9 +29,9 @@ public class Query18_map_reduce implements DocumentQuery<QX_No_Params> {
         System.out.println("------------Mongo-Q18------------");
         List<Document> resultList = result.into(new ArrayList<>());
         System.out.println("Map-reduce number of rows: " + resultList.size());
-        // for (Document d: resultList) {
-        //    System.out.println(d.toJson());
-        // }
+        /*for (Document d: resultList) {
+            System.out.println(d.toJson());
+        }*/
     }
 }
 
