@@ -24,12 +24,13 @@ public class Query09_neighbors implements RelationalQuery<QX_No_Params> {
 
         List<Object[]> results1 = session.createQuery(hql1).getResultList();
 
-        for (Object[] row : results1) {
-            Supplier from = (Supplier) row[0];
-            Supplier to = (Supplier) row[1];
+        System.out.println("Found " + results1.size() + " connections with depth 1.");
+        // for (Object[] row : results1) {
+        //    Supplier from = (Supplier) row[0];
+        //    Supplier to = (Supplier) row[1];
 
-            System.out.println(from.getCompanyName() + " -> " + to.getCompanyName() + " with depth 1");
-        }
+        //    System.out.println(from.getCompanyName() + " -> " + to.getCompanyName() + " with depth 1");
+        // }
 
         String hql2 = """
             SELECT DISTINCT s, o2
@@ -41,7 +42,7 @@ public class Query09_neighbors implements RelationalQuery<QX_No_Params> {
 
         List<Object[]> results2 = session.createQuery(hql2).getResultList();
 
-        System.out.println("Found " + results2.size() + " connections.");
+        System.out.println("Found " + results2.size() + " connections with depth 2.");
         // for (Object[] row : results2) {
         //    Supplier from = (Supplier) row[0];
         //    Supplier to = (Supplier) row[1];

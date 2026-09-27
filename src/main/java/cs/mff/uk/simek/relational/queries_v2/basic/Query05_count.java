@@ -20,7 +20,7 @@ public class Query05_count implements RelationalQuery<QX_No_Params> {
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 
-        System.out.println("Found " + results + " employees.");
+        System.out.println("Found " + results.size() + " employees.");
         // for (Object[] line: results) {
         //    System.out.println(line[0] + ": " + line[1]);
         // }

@@ -21,8 +21,8 @@ public class Query02_select_non_indexed implements RelationalQuery<Q2_Params> {
         List<Employee> employees = session.createQuery(hql, Employee.class).setParameter("first_name", params.firstName()).getResultList();
 
         System.out.println("Found " + employees.size() + " employees with given name.");
-        for (Employee e: employees) {
-            System.out.println("Found employee: " + e.getFirstName() + " " + e.getLastName());
-        }
+        // for (Employee e: employees) {
+        //    System.out.println("Found employee: " + e.getFirstName() + " " + e.getLastName());
+        // }
     }
 }

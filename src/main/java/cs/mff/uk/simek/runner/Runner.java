@@ -37,6 +37,7 @@ public class Runner {
             QueriesRun run = new DocumentQueriesRun();
             results.add(runAll(run.getQueries()));
 
+            System.out.println("---------------------------------");
             System.out.println("Results after MongoDB queries: " + (long) results.size());
         }
 
@@ -48,6 +49,7 @@ public class Runner {
             QueriesRun run = new GraphQueriesRun();
             results.add(runAll(run.getQueries()));
 
+            System.out.println("---------------------------------");
             System.out.println("Results after Neo4j queries: " + (long) results.size());
         }
 
@@ -59,6 +61,7 @@ public class Runner {
             QueriesRun run = new RelationalQueriesRun();
             results.add(runAll(run.getQueries()));
 
+            System.out.println("---------------------------------");
             System.out.println("Results after PostgreSQL queries: " + (long) results.size());
         }
 
