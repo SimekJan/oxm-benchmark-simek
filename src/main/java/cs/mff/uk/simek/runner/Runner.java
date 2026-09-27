@@ -1,9 +1,12 @@
 package cs.mff.uk.simek.runner;
 
+import cs.mff.uk.simek.ConfigLoader;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Main entrypoint for the query execution
@@ -15,17 +18,43 @@ public class Runner {
      * Starts the benchmark with provided parameters from config
      * @param args Command line arguments (not used)
      */
-    public static void main(String[] args) {
-        log.info("Runner started.");
+    public static void main(String[] args) throws IOException {
 
-        List<QueriesRun> runs = List.of(new DocumentQueriesRun());
+        Map<String, Object> config = ConfigLoader.getConfig();
+
+        List<String> dbsUsed = ((List<?>) config.get("databaseToUse"))
+                .stream()
+                .map(String.class::cast)
+                .toList();
+
         List<List<QueryResult>> results = new ArrayList<>();
 
-        for(QueriesRun run : runs) {
-            results.add(runAll(run.getQueries()));
+        if (dbsUsed.contains("mongo")) {
+            List<QueriesRun> runs = List.of(new DocumentQueriesRun());
+            for (QueriesRun run : runs) {
+                results.add(runAll(run.getQueries()));
+            }
+
+            System.out.println("Results after MongoDB queries: " + (long) results.size());
         }
 
-        System.out.println(results);
+        if (dbsUsed.contains("neo4j")) {
+            // List<QueriesRun> runs = List.of(new GraphQueriesRun());
+            // for (QueriesRun run : runs) {
+            //    results.add(runAll(run.getQueries()));
+            //}
+
+            // System.out.println("Results after Neo4j queries: " + (long) results.size());
+        }
+
+        if (dbsUsed.contains("postgres")) {
+            // List<QueriesRun> runs = List.of(new RelationalQueriesRun());
+            // for (QueriesRun run : runs) {
+            //    results.add(runAll(run.getQueries()));
+            // }
+
+            // System.out.println("Results after PostgreSQL queries: " + (long) results.size());
+        }
 
         System.out.println("Runner executed.");
     }
