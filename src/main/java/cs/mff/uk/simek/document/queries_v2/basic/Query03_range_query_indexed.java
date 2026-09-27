@@ -11,7 +11,7 @@ import java.util.List;
 import static com.mongodb.client.model.Filters.*;
 
 /**
- * Get all users with employeeId (Range query).
+ * Get all employees with employeeId (Range query).
  */
 public class Query03_range_query_indexed implements DocumentQuery<Q3_Params> {
 
@@ -24,9 +24,7 @@ public class Query03_range_query_indexed implements DocumentQuery<Q3_Params> {
                 lte("employeeId", params.employeeIdTo())
         )).into(new ArrayList<>());
 
-        System.out.println("Number of employees found: " + res.size());
-        // for (Employee e: res) {
-        //     System.out.println("- " + e.getFirstName() + " " + e.getLastName());
-        // }
+        System.out.println("------------Mongo-Q3-------------");
+        System.out.println("Number of employees found (ranged, indexed): " + res.size());
     }
 }

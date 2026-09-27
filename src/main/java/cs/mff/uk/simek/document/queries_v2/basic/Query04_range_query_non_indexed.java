@@ -25,7 +25,8 @@ public class Query04_range_query_non_indexed implements DocumentQuery<Q4_Params>
                 lte("unitPrice", BigDecimal.valueOf(params.unitPriceTo()))
         )).into(new ArrayList<>());
 
-        System.out.println("Number of products found: " + res.size());
+        System.out.println("------------Mongo-Q4-------------");
+        System.out.println("Number of products found (ranged): " + res.size());
         // for (Product p: res) {
         //    System.out.println(p.getProductName() + ": " + p.getUnitPrice());
         // }

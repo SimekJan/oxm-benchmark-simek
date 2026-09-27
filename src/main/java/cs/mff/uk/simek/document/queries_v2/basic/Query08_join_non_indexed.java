@@ -33,6 +33,7 @@ public class Query08_join_non_indexed implements DocumentQuery<QX_No_Params> {
                 ))
         ), Document.class).into(new ArrayList<>());
 
+        System.out.println("------------Mongo-Q8-------------");
         System.out.println("Employee - Customer join results: " + result.size());
         // for (Document doc : result) {
         //    System.out.println(doc.get("firstName") + " " + doc.get("lastName") + ": " +

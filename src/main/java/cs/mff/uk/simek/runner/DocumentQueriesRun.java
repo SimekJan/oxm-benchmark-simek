@@ -15,13 +15,13 @@ public class DocumentQueriesRun implements QueriesRun {
     private static final Q1_Params q1_params = new Q1_Params(1L);
     private static final Query01_select_indexed q1 = new Query01_select_indexed();
 
-    private static final Q2_Params q2_params = new Q2_Params("Steven");
+    private static final Q2_Params q2_params = new Q2_Params("Jerry");
     private static final Query02_select_non_indexed q2 = new Query02_select_non_indexed();
 
     private static final Q3_Params q3_params = new Q3_Params(1L, 5L);
     private static final Query03_range_query_indexed q3 = new Query03_range_query_indexed();
 
-    private static final Q4_Params q4_params = new Q4_Params(10.0F, 15.0F);
+    private static final Q4_Params q4_params = new Q4_Params(200.0F, 300.0F);
     private static final Query04_range_query_non_indexed q4 = new Query04_range_query_non_indexed();
 
     private static final Query05_count q5 = new Query05_count();

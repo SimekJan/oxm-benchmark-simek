@@ -24,11 +24,12 @@ public class Query14_diff implements DocumentQuery<QX_No_Params> {
         MongoCollection<Customer> customers = db.getCollection("Customers", Customer.class);
 
         List<Document> result = customers.aggregate(List.of(
-                lookup("Orders", "customerId", "customer", "orders"),
+                lookup("Orders", "_id", "customer", "orders"),
                 match(new Document("orders.0", new Document("$exists", false))),
                 project(fields(include("companyName")))
         ), Document.class).into(new ArrayList<>());
 
+        System.out.println("------------Mongo-Q14------------");
         System.out.println("Customers without order: " + result.size());
         // for (Document doc: result) {
         //    System.out.println(doc.get("companyName"));

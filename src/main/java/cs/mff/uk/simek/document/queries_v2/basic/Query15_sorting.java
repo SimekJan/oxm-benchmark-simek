@@ -25,6 +25,7 @@ public class Query15_sorting implements DocumentQuery<QX_No_Params> {
                 sort(Sorts.ascending("unitPrice"))
         ), Product.class).into(new ArrayList<>());
 
+        System.out.println("------------Mongo-Q15------------");
         System.out.println("Sorted products: " + results.size());
         // for (Product p: results) {
         //    System.out.println(p.getProductName() + " " + p.getUnitPrice());

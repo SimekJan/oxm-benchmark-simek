@@ -26,6 +26,7 @@ public class Query06_max implements DocumentQuery<QX_No_Params> {
                 group("$category", max("maxPrice", "$unitPrice" ))
         ), Document.class).into(new ArrayList<>());
 
+        System.out.println("------------Mongo-Q6-------------");
         System.out.println("Product categories: " + result.size());
         // for (Document doc : result) {
         //    System.out.println(doc.getString("_id") + ": " + doc.getDouble("maxPrice"));

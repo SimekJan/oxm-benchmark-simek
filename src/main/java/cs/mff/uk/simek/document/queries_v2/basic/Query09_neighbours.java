@@ -22,8 +22,8 @@ public class Query09_neighbours implements DocumentQuery<QX_No_Params> {
         List<Document> result = suppliers.aggregate(List.of(
                 new Document("$graphLookup",
                         new Document("from", "Suppliers")
-                                .append("startWith", "$supplierId")
-                                .append("connectFromField", "supplierId")
+                                .append("startWith", "$_id")
+                                .append("connectFromField", "_id")
                                 .append("connectToField", "suppliedBy")
                                 .append("as", "path")
                                 .append("maxDepth", 2)
@@ -37,9 +37,10 @@ public class Query09_neighbours implements DocumentQuery<QX_No_Params> {
                 )
         ), Document.class).into(new ArrayList<>());
 
+        System.out.println("------------Mongo-Q9-------------");
         System.out.println("Connections of depth max 2: " + result.size());
-        // for (Document doc: result) {
-        //    System.out.println(doc.get("fromSupplier") + "\t to \t" + doc.get("toSupplier") + "\t with depth: " + doc.get("depth"));
+        // for (Document d: result) {
+        //    System.out.println(d.get("fromSupplier") + " to " + d.get("toSupplier") + " with depth: " + d.get("depth"));
         // }
     }
 }

@@ -7,6 +7,9 @@ import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Number of products by supplier (one order or more)
  */
@@ -23,10 +26,12 @@ public class Query18_map_reduce implements DocumentQuery<QX_No_Params> {
         @Deprecated
         MapReduceIterable<Document> result = products.mapReduce(mapFunction, reduceFunction, Document.class);
 
-        System.out.println("MapReduce: " + result);
-        // result.forEach( doc ->
-        //    System.out.println(doc.get("_id") + " -> " + doc.getDouble("value"))
-        // );
+        System.out.println("------------Mongo-Q18------------");
+        List<Document> resultList = result.into(new ArrayList<>());
+        System.out.println("Map-reduce number of rows: " + resultList.size());
+        // for (Document d: resultList) {
+        //    System.out.println(d.toJson());
+        // }
     }
 }
 

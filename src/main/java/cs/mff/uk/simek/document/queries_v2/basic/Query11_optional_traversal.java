@@ -22,7 +22,7 @@ public class Query11_optional_traversal implements DocumentQuery<QX_No_Params> {
                 new Document("$lookup",
                         new Document("from", "Suppliers")
                                 .append("localField", "suppliedBy")
-                                .append("foreignField", "supplierId")
+                                .append("foreignField", "_id")
                                 .append("as", "suppliers")
                 ),
 
@@ -38,9 +38,10 @@ public class Query11_optional_traversal implements DocumentQuery<QX_No_Params> {
                 )
         ), Document.class).into(new ArrayList<>());
 
+        System.out.println("------------Mongo-Q11------------");
         System.out.println("Supplier counts: " + result.size());
-        // for (Document doc: result) {
-        //    System.out.println(doc.toJson());
+        // for (Document r : result) {
+        //    System.out.println( r.get("companyName") + ": " + r.get("supplierCount"));
         // }
     }
 }

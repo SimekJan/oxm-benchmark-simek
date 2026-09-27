@@ -25,6 +25,7 @@ public class Query16_sorting_indexed implements DocumentQuery<QX_No_Params> {
                 sort(Sorts.ascending("productId"))
         ), Product.class).into(new ArrayList<>());
 
+        System.out.println("------------Mongo-Q16------------");
         System.out.println("Sorted products (indexed): " + results.size());
         // for (Product p: results) {
         //    System.out.println(p.getProductId() + ": " + p.getProductName());

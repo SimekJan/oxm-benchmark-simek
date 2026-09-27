@@ -20,6 +20,7 @@ public class Query01_select_indexed implements DocumentQuery<Q1_Params> {
         Employee found = employees.find(eq("employeeId", params.employeeId())).first();
         assert found != null;
 
+        System.out.println("------------Mongo-Q1-------------");
         System.out.println(found.getFirstName() + " " + found.getLastName());
     }
 }

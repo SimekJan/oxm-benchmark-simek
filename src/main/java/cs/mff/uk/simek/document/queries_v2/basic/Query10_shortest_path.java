@@ -29,7 +29,7 @@ public class Query10_shortest_path implements DocumentQuery<Q10_Params> {
                         new Document("from", "Suppliers")
                                 .append("startWith", "$suppliedBy")
                                 .append("connectFromField", "suppliedBy")
-                                .append("connectToField", "supplierId")
+                                .append("connectToField", "_id")
                                 .append("as", "reachable")
                                 .append("depthField", "depth")
                                 .append("maxDepth", 10) // safety limit
@@ -45,11 +45,10 @@ public class Query10_shortest_path implements DocumentQuery<Q10_Params> {
                 ))
         ), Document.class).into(new ArrayList<>());
 
+        System.out.println("------------Mongo-Q10------------");
         for (Document doc: result) {
-            System.out.println(doc.toJson());
+            System.out.println("Shortest path: " + doc.toJson() + " -- Depth starts from 0.");
         }
-
-        System.out.println("Note that depth starts as 0 for the first neighbour.");
     }
 }
 

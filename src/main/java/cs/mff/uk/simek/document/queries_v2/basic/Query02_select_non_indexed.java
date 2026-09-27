@@ -20,6 +20,7 @@ public class Query02_select_non_indexed implements DocumentQuery<Q2_Params> {
         Employee found = employees.find(eq("firstName", params.firstName())).first();
         assert found != null;
 
+        System.out.println("------------Mongo-Q2-------------");
         System.out.println(found.getFirstName() + " " + found.getLastName());
     }
 }

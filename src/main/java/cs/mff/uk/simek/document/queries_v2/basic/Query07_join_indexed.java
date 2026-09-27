@@ -23,14 +23,11 @@ public class Query07_join_indexed implements DocumentQuery<QX_No_Params> {
         List<Document> result = orders.aggregate(List.of(
                 lookup("Employees",       // from collection
                         "employee",             // local field
-                        "employeeId",           // foreign field
+                        "_id",                  // foreign field
                         "employee")             // output array field
         ), Document.class).into(new ArrayList<>());
 
-        System.out.println("Orders - Employee join results: " + result.size());
-        // for (Document doc : result) {
-        //    List<Document> emp = (List<Document>) doc.get("employee");
-        //    System.out.println("Order " + doc.getLong("orderId") + " -> " + emp.getFirst().get("firstName") + " " + emp.getFirst().get("lastName"));
-        // }
+        System.out.println("------------Mongo-Q7-------------");
+        System.out.println("Orders - Employee join results (indexed): " + result.size());
     }
 }
