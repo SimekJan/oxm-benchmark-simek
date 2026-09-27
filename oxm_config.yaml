@@ -1,5 +1,5 @@
 databaseToUse:
-  - neo4j
+  - postgres
 
 generator:
   outputDir: /data

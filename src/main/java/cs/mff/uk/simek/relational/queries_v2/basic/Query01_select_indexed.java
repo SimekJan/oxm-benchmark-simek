@@ -1,0 +1,22 @@
+package cs.mff.uk.simek.relational.queries_v2.basic;
+
+import cs.mff.uk.simek.query_params.params.Q1_Params;
+import cs.mff.uk.simek.relational.northwind.Employee;
+import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+
+/**
+ * Get employee with specific id. That is filter by indexed column.
+ */
+public class Query01_select_indexed implements RelationalQuery<Q1_Params> {
+
+    @Override
+    public void run(Q1_Params params) {
+        String hql = "FROM Employees e " +
+                     "WHERE e.employeeId = :id";
+
+        Employee e = session.createQuery(hql, Employee.class).setParameter("id", params.employeeId()).uniqueResult();
+
+        System.out.println("----------PostgreSQL-Q1----------");
+        System.out.println(e.getFirstName() + " - " + e.getLastName());
+    }
+}

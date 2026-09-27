@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d9ed907-1c72-4f78-abdd-54d4ac452013" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/generator/Generator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries_v2/basic/Query01_select_indexed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/graph/queries_v2/basic/Query01_select_indexed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/GraphQueriesRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/GraphQueriesRun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/QueriesRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/QueriesRun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oxm_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/oxm_config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cs/mff/uk/simek/runner/Runner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +18,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Record" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -107,11 +104,11 @@
       <recent name="cs.mff.uk.simek.document.northwind" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cs.mff.uk.simek.relational.queries_v2.basic" />
       <recent name="cs.mff.uk.simek.document.northwind.helper" />
       <recent name="cs.mff.uk.simek.document_embedded.queries.complex" />
       <recent name="cs.mff.uk.simek.document_embedded.queries.basic" />
       <recent name="cs.mff.uk.simek.document_embedded.northwind" />
-      <recent name="cs.mff.uk.simek.document_embedded.northwind.helper" />
     </key>
   </component>
   <component name="RunManager" selected="Application.cs.mff.uk.simek.document_embedded.QueryExample">

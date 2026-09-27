@@ -34,10 +34,8 @@ public class Runner {
             System.out.println("Starting MongoDB queries");
             System.out.println("---------------------------------");
 
-            List<QueriesRun> runs = List.of(new DocumentQueriesRun());
-            for (QueriesRun run : runs) {
-                results.add(runAll(run.getQueries()));
-            }
+            QueriesRun run = new DocumentQueriesRun();
+            results.add(runAll(run.getQueries()));
 
             System.out.println("Results after MongoDB queries: " + (long) results.size());
         }
@@ -47,10 +45,8 @@ public class Runner {
             System.out.println("Starting Neo4j queries");
             System.out.println("---------------------------------");
 
-            List<QueriesRun> runs = List.of(new GraphQueriesRun());
-            for (QueriesRun run : runs) {
-                results.add(runAll(run.getQueries()));
-            }
+            QueriesRun run = new GraphQueriesRun();
+            results.add(runAll(run.getQueries()));
 
             System.out.println("Results after Neo4j queries: " + (long) results.size());
         }
@@ -60,12 +56,10 @@ public class Runner {
             System.out.println("Starting PostgreSQL queries");
             System.out.println("---------------------------------");
 
-            // List<QueriesRun> runs = List.of(new RelationalQueriesRun());
-            // for (QueriesRun run : runs) {
-            //    results.add(runAll(run.getQueries()));
-            // }
+            QueriesRun run = new RelationalQueriesRun();
+            results.add(runAll(run.getQueries()));
 
-            // System.out.println("Results after PostgreSQL queries: " + (long) results.size());
+            System.out.println("Results after PostgreSQL queries: " + (long) results.size());
         }
 
         System.out.println("Runner executed.");
