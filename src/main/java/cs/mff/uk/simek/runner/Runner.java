@@ -1,8 +1,10 @@
 package cs.mff.uk.simek.runner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cs.mff.uk.simek.ConfigLoader;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,14 @@ public class Runner {
             System.out.println("---------------------------------");
 
             QueriesRun run = new DocumentQueriesRun();
-            results.add(runAll(run.getQueries()));
+
+            // Warm-up
+            runAll(run.getQueries());
+
+            // Measurement
+            for (int i = 0; i < 20; i++) {
+                results.add(runAll(run.getQueries()));
+            }
 
             System.out.println("---------------------------------");
             System.out.println("Results after MongoDB queries: " + (long) results.size());
@@ -47,7 +56,14 @@ public class Runner {
             System.out.println("---------------------------------");
 
             QueriesRun run = new GraphQueriesRun();
-            results.add(runAll(run.getQueries()));
+
+            // Warm-up
+            runAll(run.getQueries());
+
+            // Measurement
+            for (int i = 0; i < 20; i++) {
+                results.add(runAll(run.getQueries()));
+            }
 
             System.out.println("---------------------------------");
             System.out.println("Results after Neo4j queries: " + (long) results.size());
@@ -59,11 +75,23 @@ public class Runner {
             System.out.println("---------------------------------");
 
             QueriesRun run = new RelationalQueriesRun();
-            results.add(runAll(run.getQueries()));
+
+            // Warm-up
+            runAll(run.getQueries());
+
+            // Measurement
+            for (int i = 0; i < 20; i++) {
+                results.add(runAll(run.getQueries()));
+            }
 
             System.out.println("---------------------------------");
             System.out.println("Results after PostgreSQL queries: " + (long) results.size());
         }
+
+        // Save results
+        System.out.println("Saving results...");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(new File("results.json"), results);
 
         System.out.println("Runner executed.");
     }
