@@ -1,5 +1,5 @@
 databaseToUse:
-  - mongo
+  - neo4j
 
 generator:
   outputDir: /data

@@ -10,29 +10,16 @@ import java.util.List;
  */
 public class DocumentQueriesRun implements QueriesRun {
 
-    private static final QX_No_Params qx_no_params = new QX_No_Params();
-
-    private static final Q1_Params q1_params = new Q1_Params(1L);
     private static final Query01_select_indexed q1 = new Query01_select_indexed();
-
-    private static final Q2_Params q2_params = new Q2_Params("Jerry");
     private static final Query02_select_non_indexed q2 = new Query02_select_non_indexed();
-
-    private static final Q3_Params q3_params = new Q3_Params(1L, 5L);
     private static final Query03_range_query_indexed q3 = new Query03_range_query_indexed();
-
-    private static final Q4_Params q4_params = new Q4_Params(200.0F, 300.0F);
     private static final Query04_range_query_non_indexed q4 = new Query04_range_query_non_indexed();
-
     private static final Query05_count q5 = new Query05_count();
     private static final Query06_max q6 = new Query06_max();
     private static final Query07_join_indexed q7 = new Query07_join_indexed();
     private static final Query08_join_non_indexed q8 = new Query08_join_non_indexed();
     private static final Query09_neighbours q9 = new Query09_neighbours();
-
-    private static final Q10_Params q10_params = new Q10_Params(1L, 5L);
     private static final Query10_shortest_path q10 = new Query10_shortest_path();
-
     private static final Query11_optional_traversal q11 = new Query11_optional_traversal();
     private static final Query12_union q12 = new Query12_union();
     private static final Query13_intersect q13 = new Query13_intersect();
