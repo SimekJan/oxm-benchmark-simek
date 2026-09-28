@@ -1,62 +1,27 @@
 # OXM-benchmark 
 
-```
- ~ 7/2026
-```
-
-## Filtering by Regex
-
-- **PostgreSQL**: LIKE, SIMILAR TO, POSIX Regular Expressions
-
-- **MongoDB**: $regex operator, Regex expression object directly in query
-
-- **Neo4j**: STARTS WITH, Regex (=~)
-
-### Differences
-
-- Non-indexed columns -> Sequential (probably not interesting)
-
-- Indexed -> differs (**Starts with** vs. **General regex**)
-
-- **Starts with** -> possibly better optimization with MongoDB
-
-- **General Regex** -> all full scan, PostgreSQL improvement using *pg_trgm* (filters results before regex is applied using 3-character chunks)
-
-## Northwind generated sources sizes
-
-- Suppliers < Employees < Products < Customers < Orders
-
-## Multi-join query
-
-- Optimized so smaller collections are joined first (to avoid pottential issues with inner oprimization differences)
-
-- Added filtering so the join is not too large when using larger generated data
-
-- For chosen document embedded model this query is not possible to be optimized, so the query was deleted 
-
-## Generating Northwind data
-
-- TBD
-
-## Dockerization
+## Running the experiment
 ```bash
-# first run this to compile JAR file, or after change in Java code
+# first run this to compile JAR file, or after changing Java code
 mvn clean package
 
-# this then runs the generator and saves generated data based on chosen config  
-docker compose run --build --rm generator
-
-# Run to build the whole benchmark
-# the --no-cache option ensures the images are rebuild even after local changes
-docker compose build --no-cache
-
-# Run to start the benchmark
-docker compose up
+# Build and run the whole benchmark
+# Prepares specified dbs (all by default) and runs the program
+# DBs keeps running after the experiment ends
+./run.sh
 
 # Run to end the benchmark, stop the databases if in Docker mode
 # and remove the generated data from the dbs images
 docker compose down -v
 ```
+
+After the `generator` runs, you can find the generated data in `/data` folder.
+
+After the `importer` runs, you can find the data imported to the running instances of databases.
+
+After the `runner` runs, you can find the results in `/data/results.json`.
+
+Generated files in `/data` are not automatically deleted ofter Docker ends runing.
 
 ## Connecting to the DBs
 
@@ -86,10 +51,10 @@ All config can be changed in `oxm_config.yaml` in root of the project.
 
 To use local instance of MongoDB instead of container change: 
 
-// TODO: add authentication
-
 ```yaml
 importer:
   mongo:
     connection: mongodb://host.docker.internal:27017
 ```
+
+Similarly for the rest of the DBs.
