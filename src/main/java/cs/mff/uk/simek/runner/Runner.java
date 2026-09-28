@@ -3,7 +3,6 @@ package cs.mff.uk.simek.runner;
 import cs.mff.uk.simek.ConfigLoader;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import cs.mff.uk.simek.generator.Generator;
 import cs.mff.uk.simek.graph.Neo4jSessionManager;
 import cs.mff.uk.simek.relational.HibernateSessionManager;
@@ -11,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.nio.file.Path;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

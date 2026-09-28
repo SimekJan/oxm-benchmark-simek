@@ -20,11 +20,11 @@ import java.util.Map;
 
 public class Generator {
 
-    private static final int SUPPLIER_COUNT = 1_000;
+    private static final int SUPPLIER_COUNT = 3_000;
     private static final int EMPLOYEE_COUNT = 5_000;
     private static final int PRODUCT_COUNT = 5_000;
-    private static final int CUSTOMER_COUNT = 2_000;
-    private static final int ORDER_COUNT = 2_000;
+    private static final int CUSTOMER_COUNT = 5_000;
+    private static final int ORDER_COUNT = 5_000;
 
     private static final long DEFAULT_SEED = 1234567890L;
 
