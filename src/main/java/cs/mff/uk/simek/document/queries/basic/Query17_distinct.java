@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import cs.mff.uk.simek.document.northwind.Customer;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;
 
@@ -22,7 +22,7 @@ public class Query17_distinct implements DocumentQuery<QX_No_Params> {
         MongoCollection<Customer> customers = db.getCollection("Customers", Customer.class);
 
         List<Document> result = customers.aggregate(List.of(
-                group("$city")
+            group("$city")
         ), Document.class).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q17------------");

@@ -1,8 +1,7 @@
 package cs.mff.uk.simek.runner;
 
-import cs.mff.uk.simek.document.queries_v2.complex.*;
-import cs.mff.uk.simek.document.queries_v2.basic.*;
-import cs.mff.uk.simek.query_params.params.*;
+import cs.mff.uk.simek.document.queries.complex.*;
+import cs.mff.uk.simek.document.queries.basic.*;
 
 import java.util.List;
 

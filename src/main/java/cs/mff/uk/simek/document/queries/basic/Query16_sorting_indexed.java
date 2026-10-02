@@ -1,9 +1,9 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Sorts;
 import cs.mff.uk.simek.document.northwind.Product;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Query16_sorting_indexed implements DocumentQuery<QX_No_Params> {
         MongoCollection<Product> products = db.getCollection("Products", Product.class);
 
         List<Product> results = products.aggregate(List.of(
-                sort(Sorts.ascending("productId"))
+            sort(Sorts.ascending("productId"))
         ), Product.class).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q16------------");

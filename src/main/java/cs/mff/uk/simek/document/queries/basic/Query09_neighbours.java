@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import cs.mff.uk.simek.document.northwind.Supplier;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;
 
@@ -20,21 +20,21 @@ public class Query09_neighbours implements DocumentQuery<QX_No_Params> {
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
         List<Document> result = suppliers.aggregate(List.of(
-                new Document("$graphLookup",
-                        new Document("from", "Suppliers")
-                                .append("startWith", "$_id")
-                                .append("connectFromField", "_id")
-                                .append("connectToField", "suppliedBy")
-                                .append("as", "path")
-                                .append("maxDepth", 2)
-                                .append("depthField", "depth")
-                ),
-                new Document("$unwind", "$path"),
-                new Document("$project",
-                        new Document("fromSupplier", "$companyName")
-                                .append("toSupplier", "$path.companyName")
-                                .append("depth", "$path.depth")
-                )
+            new Document("$graphLookup",
+                new Document("from", "Suppliers")
+                    .append("startWith", "$_id")
+                    .append("connectFromField", "_id")
+                    .append("connectToField", "suppliedBy")
+                    .append("as", "path")
+                    .append("maxDepth", 2)
+                    .append("depthField", "depth")
+            ),
+            new Document("$unwind", "$path"),
+            new Document("$project",
+                new Document("fromSupplier", "$companyName")
+                    .append("toSupplier", "$path.companyName")
+                    .append("depth", "$path.depth")
+            )
         ), Document.class).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q9-------------");

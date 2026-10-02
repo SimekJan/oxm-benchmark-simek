@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import cs.mff.uk.simek.document.northwind.Order;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;
 
@@ -21,10 +21,10 @@ public class Query07_join_indexed implements DocumentQuery<QX_No_Params> {
         MongoCollection<Order> orders = db.getCollection("Orders", Order.class);
 
         List<Document> result = orders.aggregate(List.of(
-                lookup("Employees",       // from collection
-                        "employee",             // local field
-                        "_id",                  // foreign field
-                        "employee")             // output array field
+            lookup("Employees",       // from collection
+                "employee",             // local field
+                "_id",                  // foreign field
+                "employee")             // output array field
         ), Document.class).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q7-------------");

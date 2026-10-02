@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import cs.mff.uk.simek.document.northwind.Supplier;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;
 
@@ -19,23 +19,23 @@ public class Query11_optional_traversal implements DocumentQuery<QX_No_Params> {
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
         List<Document> result = suppliers.aggregate(List.of(
-                new Document("$lookup",
-                        new Document("from", "Suppliers")
-                                .append("localField", "suppliedBy")
-                                .append("foreignField", "_id")
-                                .append("as", "suppliers")
-                ),
+            new Document("$lookup",
+                new Document("from", "Suppliers")
+                    .append("localField", "suppliedBy")
+                    .append("foreignField", "_id")
+                    .append("as", "suppliers")
+            ),
 
-                new Document("$addFields",
-                        new Document("supplierCount",
-                                new Document("$size", "$suppliers")
-                        )
-                ),
-
-                new Document("$project",
-                        new Document("companyName", 1)
-                                .append("supplierCount", 1)
+            new Document("$addFields",
+                new Document("supplierCount",
+                    new Document("$size", "$suppliers")
                 )
+            ),
+
+            new Document("$project",
+                new Document("companyName", 1)
+                    .append("supplierCount", 1)
+            )
         ), Document.class).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q11------------");

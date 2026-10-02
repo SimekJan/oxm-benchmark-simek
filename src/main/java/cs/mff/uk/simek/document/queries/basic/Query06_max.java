@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import cs.mff.uk.simek.document.northwind.Product;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;
 
@@ -23,7 +23,7 @@ public class Query06_max implements DocumentQuery<QX_No_Params> {
         MongoCollection<Product> products = db.getCollection("Products", Product.class);
 
         List<Document> result = products.aggregate(List.of(
-                group("$category", max("maxPrice", "$unitPrice" ))
+            group("$category", max("maxPrice", "$unitPrice"))
         ), Document.class).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q6-------------");

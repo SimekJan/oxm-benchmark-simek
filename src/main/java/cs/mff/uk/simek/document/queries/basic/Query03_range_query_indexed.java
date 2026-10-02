@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import cs.mff.uk.simek.document.northwind.Employee;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.Q3_Params;
 
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ public class Query03_range_query_indexed implements DocumentQuery<Q3_Params> {
         MongoCollection<Employee> employees = db.getCollection("Employees", Employee.class);
 
         List<Employee> res = employees.find(and(
-                gte("employeeId", params.employeeIdFrom()),
-                lte("employeeId", params.employeeIdTo())
+            gte("employeeId", params.employeeIdFrom()),
+            lte("employeeId", params.employeeIdTo())
         )).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q3-------------");

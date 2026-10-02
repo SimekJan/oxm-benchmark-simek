@@ -1,9 +1,9 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Sorts;
 import cs.mff.uk.simek.document.northwind.Supplier;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.Q10_Params;
 import org.bson.Document;
 
@@ -24,29 +24,29 @@ public class Query10_shortest_path implements DocumentQuery<Q10_Params> {
         MongoCollection<Supplier> suppliers = db.getCollection("Suppliers", Supplier.class);
 
         List<Document> result = suppliers.aggregate(List.of(
-                match(eq("supplierId", params.supplierIdFrom())),
-                new Document("$graphLookup",
-                        new Document("from", "Suppliers")
-                                .append("startWith", "$suppliedBy")
-                                .append("connectFromField", "suppliedBy")
-                                .append("connectToField", "_id")
-                                .append("as", "reachable")
-                                .append("depthField", "depth")
-                                .append("maxDepth", 10) // safety limit
-                ),
-                unwind("$reachable"),
-                match(eq("reachable.supplierId", params.supplierIdTo())),
-                sort(Sorts.ascending("reachable.depth")),
-                limit(1),
-                project(fields(
-                        include("companyName"),
-                        computed("target", "$reachable.companyName"),
-                        computed("depth", "$reachable.depth")
-                ))
+            match(eq("supplierId", params.supplierIdFrom())),
+            new Document("$graphLookup",
+                new Document("from", "Suppliers")
+                    .append("startWith", "$suppliedBy")
+                    .append("connectFromField", "suppliedBy")
+                    .append("connectToField", "_id")
+                    .append("as", "reachable")
+                    .append("depthField", "depth")
+                    .append("maxDepth", 10) // safety limit
+            ),
+            unwind("$reachable"),
+            match(eq("reachable.supplierId", params.supplierIdTo())),
+            sort(Sorts.ascending("reachable.depth")),
+            limit(1),
+            project(fields(
+                include("companyName"),
+                computed("target", "$reachable.companyName"),
+                computed("depth", "$reachable.depth")
+            ))
         ), Document.class).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q10------------");
-        for (Document doc: result) {
+        for (Document doc : result) {
             System.out.println("Shortest path: " + doc.toJson() + " -- Depth starts from 0.");
         }
     }

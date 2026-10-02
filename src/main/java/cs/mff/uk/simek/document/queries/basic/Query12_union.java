@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import cs.mff.uk.simek.document.northwind.Customer;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;
 
@@ -24,13 +24,13 @@ public class Query12_union implements DocumentQuery<QX_No_Params> {
         MongoCollection<Customer> customers = db.getCollection("Customers", Customer.class);
 
         List<Document> result = customers.aggregate(List.of(
-                new Document("$unionWith",
-                        new Document("coll", "Suppliers")
-                ),
-                project(fields(include("city"))),
+            new Document("$unionWith",
+                new Document("coll", "Suppliers")
+            ),
+            project(fields(include("city"))),
 
-                // remove duplicates
-                group("$city")
+            // remove duplicates
+            group("$city")
         ), Document.class).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q12------------");

@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.document.queries_v2.basic;
+package cs.mff.uk.simek.document.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import cs.mff.uk.simek.document.northwind.Product;
-import cs.mff.uk.simek.document.queries_v2.DocumentQuery;
+import cs.mff.uk.simek.document.queries.DocumentQuery;
 import cs.mff.uk.simek.query_params.params.Q4_Params;
 
 import java.math.BigDecimal;
@@ -21,8 +21,8 @@ public class Query04_range_query_non_indexed implements DocumentQuery<Q4_Params>
         MongoCollection<Product> products = db.getCollection("Products", Product.class);
 
         List<Product> res = products.find(and(
-                gte("unitPrice", BigDecimal.valueOf(params.unitPriceFrom())),
-                lte("unitPrice", BigDecimal.valueOf(params.unitPriceTo()))
+            gte("unitPrice", BigDecimal.valueOf(params.unitPriceFrom())),
+            lte("unitPrice", BigDecimal.valueOf(params.unitPriceTo()))
         )).into(new ArrayList<>());
 
         System.out.println("------------Mongo-Q4-------------");
