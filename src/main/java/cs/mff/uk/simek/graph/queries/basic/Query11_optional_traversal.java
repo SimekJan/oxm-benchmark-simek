@@ -1,6 +1,6 @@
-package cs.mff.uk.simek.graph.queries_v2.basic;
+package cs.mff.uk.simek.graph.queries.basic;
 
-import cs.mff.uk.simek.graph.queries_v2.GraphQuery;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.Map;
@@ -16,12 +16,12 @@ public class Query11_optional_traversal implements GraphQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
 
         String query = """
-            MATCH (s:Supplier)
-            OPTIONAL MATCH (s)-[:SUPPLIES_TO]->(sub:Supplier)
-            RETURN s, s.companyName AS supplier, count(sub) AS suppliedCount
-        """;
+                MATCH (s:Supplier)
+                OPTIONAL MATCH (s)-[:SUPPLIES_TO]->(sub:Supplier)
+                RETURN s, s.companyName AS supplier, count(sub) AS suppliedCount
+            """;
 
-        Iterable<Map<String,Object>> results = session.query(query, Map.of());
+        Iterable<Map<String, Object>> results = session.query(query, Map.of());
 
         List<Map<String, Object>> resultList = new ArrayList<>();
         results.forEach(resultList::add);

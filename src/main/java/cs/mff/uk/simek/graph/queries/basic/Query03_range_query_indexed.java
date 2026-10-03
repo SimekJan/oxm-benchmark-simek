@@ -1,8 +1,7 @@
-package cs.mff.uk.simek.graph.queries_v2.basic;
+package cs.mff.uk.simek.graph.queries.basic;
 
 import cs.mff.uk.simek.graph.northwind.Employee;
-import cs.mff.uk.simek.graph.northwind.Product;
-import cs.mff.uk.simek.graph.queries_v2.GraphQuery;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
 import cs.mff.uk.simek.query_params.params.Q3_Params;
 import org.neo4j.ogm.cypher.BooleanOperator;
 import org.neo4j.ogm.cypher.ComparisonOperator;

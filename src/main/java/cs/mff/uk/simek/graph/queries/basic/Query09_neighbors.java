@@ -1,6 +1,6 @@
-package cs.mff.uk.simek.graph.queries_v2.basic;
+package cs.mff.uk.simek.graph.queries.basic;
 
-import cs.mff.uk.simek.graph.queries_v2.GraphQuery;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.List;
@@ -16,10 +16,10 @@ public class Query09_neighbors implements GraphQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
 
         String query = """
-            MATCH (s:Supplier)-[:SUPPLIES_TO*1..2]->(other:Supplier)
-            WHERE s <> other
-            RETURN s.companyName AS fromSupplier, other.companyName AS toSupplier
-        """;
+                MATCH (s:Supplier)-[:SUPPLIES_TO*1..2]->(other:Supplier)
+                WHERE s <> other
+                RETURN s.companyName AS fromSupplier, other.companyName AS toSupplier
+            """;
 
         Iterable<Map<String, Object>> results = session.query(query, Map.of());
 

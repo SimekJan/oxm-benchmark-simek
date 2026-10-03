@@ -1,6 +1,6 @@
-package cs.mff.uk.simek.graph.queries_v2.basic;
+package cs.mff.uk.simek.graph.queries.basic;
 
-import cs.mff.uk.simek.graph.queries_v2.GraphQuery;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.ArrayList;
@@ -17,12 +17,12 @@ public class Query15_sorting implements GraphQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
 
         String query = """
-            MATCH (p:Product)
-            RETURN p.productName AS product, p.unitPrice AS price
-            ORDER BY price
-        """;
+                MATCH (p:Product)
+                RETURN p.productName AS product, p.unitPrice AS price
+                ORDER BY price
+            """;
 
-        Iterable<Map<String,Object>> results = session.query(query, Map.of());
+        Iterable<Map<String, Object>> results = session.query(query, Map.of());
 
         List<Map<String, Object>> resultList = new ArrayList<>();
         results.forEach(resultList::add);

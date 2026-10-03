@@ -1,24 +1,26 @@
 package cs.mff.uk.simek.graph.queries.complex;
 
-import cs.mff.uk.simek.graph.queries.Query;
-import org.neo4j.ogm.session.Session;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
+import cs.mff.uk.simek.query_params.params.CQ1_Params;
 
 import java.util.Map;
 
 /**
- * Max price of products with name starting with "S" per category.
+ * Max price of products with name starting with given letter per category.
  */
-public class C_Query1_filter_max implements Query {
+public class C_Query1_filter_max implements GraphQuery<CQ1_Params> {
 
     @Override
-    public void perform(Session session) {
+    public void run(CQ1_Params params) {
         String query = """
-            MATCH (p:Product)
-            WHERE p.productName STARTS WITH 'S'
-            RETURN p.category AS category, max(p.unitPrice) AS maxUnitPrice
-        """;
+                MATCH (p:Product)
+                WHERE p.productName STARTS WITH $startingLetter
+                RETURN p.category AS category, max(p.unitPrice) AS maxUnitPrice
+            """;
 
-        Iterable<Map<String, Object>> results = session.query(query, Map.of());
+        Iterable<Map<String, Object>> results = session.query(query, Map.of(
+            "$startingLetter", params.productNameStartingLetter()
+        ));
 
         for (Map<String, Object> row : results) {
             String category = (String) row.get("category");

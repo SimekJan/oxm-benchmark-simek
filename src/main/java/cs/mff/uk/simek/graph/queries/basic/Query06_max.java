@@ -1,6 +1,6 @@
-package cs.mff.uk.simek.graph.queries_v2.basic;
+package cs.mff.uk.simek.graph.queries.basic;
 
-import cs.mff.uk.simek.graph.queries_v2.GraphQuery;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ public class Query06_max implements GraphQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
 
         String query = """
-            MATCH (p:Product)
-            RETURN p.category AS category, max(p.unitPrice) AS maxUnitPrice
-        """;
+                MATCH (p:Product)
+                RETURN p.category AS category, max(p.unitPrice) AS maxUnitPrice
+            """;
 
         Iterable<Map<String, Object>> results = session.query(query, Map.of());
 

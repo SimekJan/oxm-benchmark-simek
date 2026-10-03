@@ -1,6 +1,6 @@
-package cs.mff.uk.simek.graph.queries_v2.basic;
+package cs.mff.uk.simek.graph.queries.basic;
 
-import cs.mff.uk.simek.graph.queries_v2.GraphQuery;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.ArrayList;
@@ -16,13 +16,13 @@ public class Query08_join_non_indexed implements GraphQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
 
         String query = """
-            MATCH (c:Customer)
-            MATCH (e:Employee)
-            WHERE c.city = e.city
-            RETURN c.companyName AS customer,
-                   e.firstName AS name,
-                   c.city AS city
-        """;
+                MATCH (c:Customer)
+                MATCH (e:Employee)
+                WHERE c.city = e.city
+                RETURN c.companyName AS customer,
+                       e.firstName AS name,
+                       c.city AS city
+            """;
 
         Iterable<Map<String, Object>> results = session.query(query, Map.of());
 

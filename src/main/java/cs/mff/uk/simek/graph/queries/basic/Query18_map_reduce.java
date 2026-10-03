@@ -1,6 +1,6 @@
-package cs.mff.uk.simek.graph.queries_v2.basic;
+package cs.mff.uk.simek.graph.queries.basic;
 
-import cs.mff.uk.simek.graph.queries_v2.GraphQuery;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ public class Query18_map_reduce implements GraphQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
 
         String query = """
-            MATCH (s:Supplier)<-[:IS_PRODUCED_BY]-(p:Product)
-            RETURN s, s.companyName AS supplier, count(p) AS productCount
-        """;
+                MATCH (s:Supplier)<-[:IS_PRODUCED_BY]-(p:Product)
+                RETURN s, s.companyName AS supplier, count(p) AS productCount
+            """;
 
-        Iterable<Map<String,Object>> results = session.query(query, Map.of());
+        Iterable<Map<String, Object>> results = session.query(query, Map.of());
 
         List<Map<String, Object>> resultList = new ArrayList<>();
         results.forEach(resultList::add);

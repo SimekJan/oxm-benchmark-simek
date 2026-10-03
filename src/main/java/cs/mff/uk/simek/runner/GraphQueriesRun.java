@@ -1,7 +1,7 @@
 package cs.mff.uk.simek.runner;
 
-import cs.mff.uk.simek.graph.queries_v2.complex.*;
-import cs.mff.uk.simek.graph.queries_v2.basic.*;
+import cs.mff.uk.simek.graph.queries.complex.*;
+import cs.mff.uk.simek.graph.queries.basic.*;
 
 import java.util.List;
 

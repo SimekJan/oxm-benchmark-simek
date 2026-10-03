@@ -1,6 +1,6 @@
-package cs.mff.uk.simek.graph.queries_v2.basic;
+package cs.mff.uk.simek.graph.queries.basic;
 
-import cs.mff.uk.simek.graph.queries_v2.GraphQuery;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ public class Query12_union implements GraphQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
 
         String query = """
-            MATCH (c:Customer)
-            RETURN c.city AS city
-            UNION
-            MATCH (s:Supplier)
-            RETURN s.city AS city
-        """;
+                MATCH (c:Customer)
+                RETURN c.city AS city
+                UNION
+                MATCH (s:Supplier)
+                RETURN s.city AS city
+            """;
 
-        Iterable<Map<String,Object>> results = session.query(query, Map.of());
+        Iterable<Map<String, Object>> results = session.query(query, Map.of());
 
         List<Map<String, Object>> resultList = new ArrayList<>();
         results.forEach(resultList::add);

@@ -1,27 +1,29 @@
 package cs.mff.uk.simek.graph.queries.complex;
 
-import cs.mff.uk.simek.graph.queries.Query;
-import org.neo4j.ogm.session.Session;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
+import cs.mff.uk.simek.query_params.params.QX_No_Params;
 
 import java.util.Map;
 
 /**
  * Select products with bellow average price.
  */
-public class C_Query9_subquery implements Query {
+public class C_Query9_subquery implements GraphQuery<QX_No_Params> {
+
     @Override
-    public void perform(Session session) {
+    public void run(QX_No_Params params) {
 
         String query = """
-                    MATCH (p:Product)
-                    WITH AVG(p.unitPrice) AS avgPrice
-                    MATCH (p:Product)
-                    WHERE p.unitPrice <= avgPrice
-                    RETURN p.productName
-                """;
+                MATCH (p:Product)
+                WITH AVG(p.unitPrice) AS avgPrice
+                MATCH (p:Product)
+                WHERE p.unitPrice <= avgPrice
+                RETURN p.productName
+            """;
 
         Iterable<Map<String, Object>> results = session.query(query, Map.of());
 
+        System.out.println("------------Neo4j-CQ9------------");
         for (Map<String, Object> row : results) {
             String customerName = (String) row.get("p.productName");
             System.out.println(customerName);

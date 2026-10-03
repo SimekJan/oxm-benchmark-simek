@@ -1,47 +1,50 @@
 package cs.mff.uk.simek.graph.queries.complex;
 
-import cs.mff.uk.simek.graph.queries.Query;
-import org.neo4j.ogm.session.Session;
+import cs.mff.uk.simek.graph.queries.GraphQuery;
+import cs.mff.uk.simek.query_params.params.CQ10_Params;
 
 import java.util.Map;
 
 /**
- *  Create a complex real-world-like report including employee info
+ * Create a complex real-world-like report including employee info
  */
-public class C_Query10_employee_report implements Query {
+public class C_Query10_employee_report implements GraphQuery<CQ10_Params> {
+
     @Override
-    public void perform(Session session) {
+    public void run(CQ10_Params params) {
 
         String query = """
-                    MATCH (e:Employee)
-                    WITH e
-                
-                    OPTIONAL MATCH (e)-[:IS_RESPONSIBLE_FOR]->(o:Order)
-                    WITH e, COUNT(o) AS orderCount
-                
-                    OPTIONAL MATCH (e)-[:IS_RESPONSIBLE_FOR]->(o:Order)-[:INCLUDES]->(p:Product)
-                    WITH e, orderCount, SUM(p.unitPrice) AS totalPrice
-                
-                    OPTIONAL MATCH (s:Employee)-[:REPORTS_TO]->(e)
-                    WITH e, orderCount, totalPrice, COUNT(s) AS subordinateCount
-                
-                    WITH e, orderCount, totalPrice, subordinateCount,
-                         duration.between(date(e.hireDate), date()).years AS yearsWorked,
-                         duration.between(date(e.birthDate), date()).years AS age
-                
-                    RETURN
-                        e.employeeId AS employeeId,
-                        e.firstName AS firstName,
-                        e.lastName AS lastName,
-                        orderCount,
-                        totalPrice,
-                        subordinateCount,
-                        yearsWorked,
-                        age
-                """;
+            MATCH (e:Employee)
+            WITH e
+            
+            OPTIONAL MATCH (e)-[:IS_RESPONSIBLE_FOR]->(o:Order)
+            WITH e, COUNT(o) AS orderCount
+            
+            OPTIONAL MATCH (e)-[:IS_RESPONSIBLE_FOR]->(o:Order)-[:INCLUDES]->(p:Product)
+            WITH e, orderCount, SUM(p.unitPrice) AS totalPrice
+            
+            OPTIONAL MATCH (s:Employee)-[:REPORTS_TO]->(e)
+            WITH e, orderCount, totalPrice, COUNT(s) AS subordinateCount
+            
+            WITH e, orderCount, totalPrice, subordinateCount,
+                 duration.between(date(e.hireDate), date($currentDate)).years AS yearsWorked,
+                 duration.between(date(e.birthDate), date($currentDate)).years AS age
+            
+            RETURN
+                e.employeeId AS employeeId,
+                e.firstName AS firstName,
+                e.lastName AS lastName,
+                orderCount,
+                totalPrice,
+                subordinateCount,
+                yearsWorked,
+                age
+            """;
 
-        Iterable<Map<String, Object>> results = session.query(query, Map.of());
+        Iterable<Map<String, Object>> results =
+            session.query(query, Map.of("currentDate", params.today().toString()));
 
+        System.out.println("------------Neo4j-CQ10-----------");
         for (Map<String, Object> row : results) {
             Long employeeId = (Long) row.get("employeeId");
             String firstName = (String) row.get("firstName");
