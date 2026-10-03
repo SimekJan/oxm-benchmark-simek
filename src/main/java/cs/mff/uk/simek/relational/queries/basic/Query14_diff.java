@@ -1,7 +1,7 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ public class Query14_diff implements RelationalQuery<QX_No_Params> {
         System.out.println("----------PostgreSQL-Q14---------");
 
         String hql = """
-            SELECT c.companyName
-            FROM Customers c
-            WHERE NOT EXISTS (
-                SELECT 1
-                FROM Orders o
-                WHERE o.customer.id = c.id
-            )
-        """;
+                SELECT c.companyName
+                FROM Customers c
+                WHERE NOT EXISTS (
+                    SELECT 1
+                    FROM Orders o
+                    WHERE o.customer.id = c.id
+                )
+            """;
 
         List<String> results = session.createQuery(hql, String.class).getResultList();
 

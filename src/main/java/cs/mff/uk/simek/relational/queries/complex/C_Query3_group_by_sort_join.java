@@ -1,22 +1,24 @@
 package cs.mff.uk.simek.relational.queries.complex;
 
-import cs.mff.uk.simek.relational.queries.Query;
-import org.hibernate.Session;
+import cs.mff.uk.simek.query_params.params.QX_No_Params;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
 /**
  * Order customers from most orders to least (include order count).
  */
-public class C_Query3_group_by_sort_join implements Query {
+public class C_Query3_group_by_sort_join implements RelationalQuery<QX_No_Params> {
 
     @Override
-    public void perform(Session session) {
-        String hql =    "SELECT c.customerId, c.companyName, COUNT(o.orderId) " +
-                        "FROM Customers c " +
-                        "LEFT JOIN c.orders o " +
-                        "GROUP BY c.customerId, c.companyName " +
-                        "ORDER BY COUNT(o.orderId) DESC";
+    public void run(QX_No_Params params) {
+        System.out.println("----------PostgreSQL-CQ3---------");
+
+        String hql = "SELECT c.customerId, c.companyName, COUNT(o.orderId) " +
+            "FROM Customers c " +
+            "LEFT JOIN c.orders o " +
+            "GROUP BY c.customerId, c.companyName " +
+            "ORDER BY COUNT(o.orderId) DESC";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 

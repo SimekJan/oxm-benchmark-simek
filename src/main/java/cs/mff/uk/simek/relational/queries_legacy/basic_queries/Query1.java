@@ -1,6 +1,6 @@
-package cs.mff.uk.simek.relational.queries.basic_queries;
+package cs.mff.uk.simek.relational.queries_legacy.basic_queries;
 
-import cs.mff.uk.simek.relational.queries.Query;
+import cs.mff.uk.simek.relational.queries_legacy.Query;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -12,11 +12,11 @@ public class Query1 implements Query {
 
     @Override
     public void perform(Session session) {
-        String hql =    "SELECT p.productName, p.unitsInStock, p.unitPrice " +
-                        "FROM Products p " +
-                        "WHERE p.productName LIKE 'S%' " +
-                        "AND p.unitsInStock <= 50 " +
-                        "AND p.unitPrice >= 15.0";
+        String hql = "SELECT p.productName, p.unitsInStock, p.unitPrice " +
+            "FROM Products p " +
+            "WHERE p.productName LIKE 'S%' " +
+            "AND p.unitsInStock <= 50 " +
+            "AND p.unitPrice >= 15.0";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 

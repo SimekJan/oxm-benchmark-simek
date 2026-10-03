@@ -1,7 +1,7 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public class Query05_count implements RelationalQuery<QX_No_Params> {
         System.out.println("----------PostgreSQL-Q5----------");
 
         String hql = "SELECT e.city, COUNT(e) " +
-                     "FROM Employees e " +
-                     "GROUP BY e.city";
+            "FROM Employees e " +
+            "GROUP BY e.city";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 
@@ -28,10 +28,10 @@ public class Query05_count implements RelationalQuery<QX_No_Params> {
 }
 
 /*
-*       TODO: Co čistě COUNT (a MAX) bez GROUP BY ?
-*
-*       GROUPing bude potenciálně stát další operace.
-*       COUNT samotný může mít taky rozdíly v implementaci: projít prvky / číst z metadat.
-*
-*       Ostatní články ale mají pouze verze s GROUP BY
-* */
+ *       TODO: Co čistě COUNT (a MAX) bez GROUP BY ?
+ *
+ *       GROUPing bude potenciálně stát další operace.
+ *       COUNT samotný může mít taky rozdíly v implementaci: projít prvky / číst z metadat.
+ *
+ *       Ostatní články ale mají pouze verze s GROUP BY
+ * */

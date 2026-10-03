@@ -1,8 +1,7 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
-import cs.mff.uk.simek.relational.northwind.Supplier;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -16,11 +15,11 @@ public class Query09_neighbors implements RelationalQuery<QX_No_Params> {
         System.out.println("----------PostgreSQL-Q9----------");
 
         String hql1 = """
-                    SELECT DISTINCT s, o1
-                    FROM Suppliers s
-                    JOIN s.suppliesTo o1
-                    WHERE s.id <> o1.id
-                    """;
+            SELECT DISTINCT s, o1
+            FROM Suppliers s
+            JOIN s.suppliesTo o1
+            WHERE s.id <> o1.id
+            """;
 
         List<Object[]> results1 = session.createQuery(hql1).getResultList();
 
@@ -33,12 +32,12 @@ public class Query09_neighbors implements RelationalQuery<QX_No_Params> {
         // }
 
         String hql2 = """
-            SELECT DISTINCT s, o2
-            FROM Suppliers s
-            JOIN s.suppliesTo o1
-            JOIN o1.suppliesTo o2
-            WHERE s.id <> o2.id
-        """;
+                SELECT DISTINCT s, o2
+                FROM Suppliers s
+                JOIN s.suppliesTo o1
+                JOIN o1.suppliesTo o2
+                WHERE s.id <> o2.id
+            """;
 
         List<Object[]> results2 = session.createQuery(hql2).getResultList();
 

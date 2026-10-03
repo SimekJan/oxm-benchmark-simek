@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.Q2_Params;
 import cs.mff.uk.simek.relational.northwind.Employee;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Query02_select_non_indexed implements RelationalQuery<Q2_Params> {
         System.out.println("----------PostgreSQL-Q2----------");
 
         String hql = "FROM Employees e " +
-                     "WHERE e.firstName = :first_name";
+            "WHERE e.firstName = :first_name";
 
         List<Employee> employees = session.createQuery(hql, Employee.class).setParameter("first_name", params.firstName()).getResultList();
 

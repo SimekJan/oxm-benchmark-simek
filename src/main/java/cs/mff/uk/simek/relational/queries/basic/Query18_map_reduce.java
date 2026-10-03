@@ -1,7 +1,7 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ public class Query18_map_reduce implements RelationalQuery<QX_No_Params> {
         System.out.println("----------PostgreSQL-Q18---------");
 
         String hql = "SELECT s.supplierId, s.companyName, COUNT(*) " +
-                     "FROM Suppliers s " +
-                     "       JOIN Products p ON s.supplierId = p.supplier " +
-                     "GROUP BY s.supplierId, s.companyName";
+            "FROM Suppliers s " +
+            "       JOIN Products p ON s.supplierId = p.supplier " +
+            "GROUP BY s.supplierId, s.companyName";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 

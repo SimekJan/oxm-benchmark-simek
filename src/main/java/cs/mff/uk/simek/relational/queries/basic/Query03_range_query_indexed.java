@@ -1,8 +1,8 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.Q3_Params;
 import cs.mff.uk.simek.relational.northwind.Employee;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ public class Query03_range_query_indexed implements RelationalQuery<Q3_Params> {
         System.out.println("----------PostgreSQL-Q3----------");
 
         String hql = "FROM Employees e " +
-                     "WHERE e.employeeId BETWEEN :id_min AND :id_max";
+            "WHERE e.employeeId BETWEEN :id_min AND :id_max";
 
         List<Employee> empls = session.createQuery(hql, Employee.class)
-                        .setParameter("id_min", params.employeeIdFrom())
-                        .setParameter("id_max", params.employeeIdTo())
-                        .getResultList();
+            .setParameter("id_min", params.employeeIdFrom())
+            .setParameter("id_max", params.employeeIdTo())
+            .getResultList();
 
         System.out.println("Found " + empls.size() + " employees.");
         // for (Employee e : empls) {

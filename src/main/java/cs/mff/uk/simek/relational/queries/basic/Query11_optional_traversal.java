@@ -1,7 +1,7 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -15,15 +15,15 @@ public class Query11_optional_traversal implements RelationalQuery<QX_No_Params>
         System.out.println("----------PostgreSQL-Q11---------");
 
         String sql = """
-            SELECT
-                s.id AS supplier_id,
-                s.company_name AS supplier,
-                COUNT(sr.supplied_to_id) AS supplied_count
-            FROM suppliers s
-            LEFT JOIN supplier_relationship sr
-                ON sr.supplier_id = s.id
-            GROUP BY s.id, s.company_name;
-        """;
+                SELECT
+                    s.id AS supplier_id,
+                    s.company_name AS supplier,
+                    COUNT(sr.supplied_to_id) AS supplied_count
+                FROM suppliers s
+                LEFT JOIN supplier_relationship sr
+                    ON sr.supplier_id = s.id
+                GROUP BY s.id, s.company_name;
+            """;
 
         List<Object[]> results = session.createNativeQuery(sql).getResultList();
 

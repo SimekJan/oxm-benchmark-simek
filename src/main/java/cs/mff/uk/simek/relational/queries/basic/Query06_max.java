@@ -1,7 +1,7 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public class Query06_max implements RelationalQuery<QX_No_Params> {
         System.out.println("----------PostgreSQL-Q6----------");
 
         String hql = "SELECT p.category, MAX(p.unitPrice) " +
-                     "FROM Products p " +
-                     "GROUP BY p.category";
+            "FROM Products p " +
+            "GROUP BY p.category";
 
         List<Object[]> results = session.createQuery(hql, Object[].class).getResultList();
 

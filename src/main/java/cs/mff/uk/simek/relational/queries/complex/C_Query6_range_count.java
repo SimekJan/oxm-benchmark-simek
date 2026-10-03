@@ -1,26 +1,28 @@
 package cs.mff.uk.simek.relational.queries.complex;
 
-import cs.mff.uk.simek.relational.queries.Query;
-import org.hibernate.Session;
+import cs.mff.uk.simek.query_params.params.CQ6_Params;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
 /**
  * Count products with unitPrice between 10 and 15 per category
  */
-public class C_Query6_range_count implements Query {
+public class C_Query6_range_count implements RelationalQuery<CQ6_Params> {
 
     @Override
-    public void perform(Session session) {
-        String hql =    "SELECT p.category, COUNT(p.unitPrice) " +
-                        "FROM Products p " +
-                        "WHERE p.unitPrice BETWEEN :price_min AND :price_max " +
-                        "GROUP BY p.category";
+    public void run(CQ6_Params params) {
+        System.out.println("----------PostgreSQL-CQ6---------");
+
+        String hql = "SELECT p.category, COUNT(p.unitPrice) " +
+            "FROM Products p " +
+            "WHERE p.unitPrice BETWEEN :price_min AND :price_max " +
+            "GROUP BY p.category";
 
         List<Object[]> results = session.createQuery(hql, Object[].class)
-                .setParameter("price_min", 10D)
-                .setParameter("price_max", 15D)
-                .getResultList();
+            .setParameter("price_min", params.unitPriceFrom())
+            .setParameter("price_max", params.unitPriceTo())
+            .getResultList();
 
         for (Object[] row : results) {
             String category = (String) row[0];

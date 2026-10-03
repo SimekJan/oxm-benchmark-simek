@@ -1,7 +1,7 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -14,11 +14,11 @@ public class Query13_intersect implements RelationalQuery<QX_No_Params> {
     public void run(QX_No_Params params) {
         System.out.println("----------PostgreSQL-Q13---------");
 
-        String sql =    "SELECT s.city " +
-                        "FROM Suppliers s " +
-                        "INTERSECT " +
-                        "SELECT c.city " +
-                        "FROM Customers c ";
+        String sql = "SELECT s.city " +
+            "FROM Suppliers s " +
+            "INTERSECT " +
+            "SELECT c.city " +
+            "FROM Customers c ";
 
         List<String> results = session.createNativeQuery(sql).getResultList();
 

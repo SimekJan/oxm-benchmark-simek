@@ -1,7 +1,7 @@
-package cs.mff.uk.simek.relational.queries_v2.basic;
+package cs.mff.uk.simek.relational.queries.basic;
 
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
-import cs.mff.uk.simek.relational.queries_v2.RelationalQuery;
+import cs.mff.uk.simek.relational.queries.RelationalQuery;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Query17_distinct implements RelationalQuery<QX_No_Params> {
         System.out.println("----------PostgreSQL-Q17---------");
 
         String hql = "SELECT DISTINCT (c.city) " +
-                     "FROM Customers c ";
+            "FROM Customers c ";
 
         List<String> results = session.createQuery(hql, String.class).getResultList();
 

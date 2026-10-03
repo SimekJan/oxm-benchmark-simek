@@ -1,4 +1,4 @@
-package cs.mff.uk.simek.relational.queries_v2;
+package cs.mff.uk.simek.relational.queries;
 
 import cs.mff.uk.simek.relational.HibernateSessionManager;
 import org.hibernate.Session;
