@@ -26,4 +26,5 @@ importer:
     password: oxm_password
 
 runner:
+  printOption: quiet
   numberOfRuns: 20

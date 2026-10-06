@@ -17,7 +17,7 @@ public class Importer {
      * @param args Command line params, not used
      * @throws IOException Cannot read a file
      */
-    static void main(String[] args) throws IOException {
+    static void main() throws IOException {
 
         Map<String, Object> config = ConfigLoader.getConfig();
 

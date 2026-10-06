@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Main entrypoint for the query execution
@@ -21,13 +22,12 @@ import java.util.Map;
 public class Runner {
 
     private static int DEFAULT_NUMBER_OF_RUNS = 20;
+    private static String DEFAULT_PRINT_OPTION = "quiet";
 
     /**
      * Starts the benchmark with provided parameters from config
-     *
-     * @param args Command line arguments (not used)
      */
-    static void main(String[] args) throws IOException {
+    static void main() throws IOException {
 
         Map<String, Object> config = ConfigLoader.getConfig();
 
@@ -39,6 +39,7 @@ public class Runner {
         Map<String, Object> runnerConfig = ConfigLoader.getSection("runner");
 
         Integer numberOfRuns = (Integer) runnerConfig.getOrDefault("numberOfRuns", DEFAULT_NUMBER_OF_RUNS);
+        String printOption = (String) runnerConfig.getOrDefault("printOption", DEFAULT_PRINT_OPTION);
 
         List<List<QueryResult>> results = new ArrayList<>();
 
@@ -50,7 +51,9 @@ public class Runner {
             QueriesRun run = new DocumentQueriesRun();
 
             // Warm-up
-            // runAll(run.getQueries());
+            if (Objects.equals(printOption, "quiet")) {
+                runAll(run.getQueries());
+            }
 
             // Measurement
             for (int i = 0; i < numberOfRuns; i++) {
@@ -69,7 +72,9 @@ public class Runner {
             QueriesRun run = new EmbeddedDocumentQueriesRun();
 
             // Warm-up
-            // runAll(run.getQueries());
+            if (Objects.equals(printOption, "quiet")) {
+                runAll(run.getQueries());
+            }
 
             // Measurement
             for (int i = 0; i < numberOfRuns; i++) {
@@ -88,7 +93,9 @@ public class Runner {
             QueriesRun run = new GraphQueriesRun();
 
             // Warm-up
-            // runAll(run.getQueries());
+            if (Objects.equals(printOption, "quiet")) {
+                runAll(run.getQueries());
+            }
 
             // Measurement
             for (int i = 0; i < numberOfRuns; i++) {
@@ -110,7 +117,9 @@ public class Runner {
             QueriesRun run = new RelationalQueriesRun();
 
             // Warm-up
-            runAll(run.getQueries());
+            if (Objects.equals(printOption, "quiet")) {
+                runAll(run.getQueries());
+            }
 
             // Measurement
             for (int i = 0; i < numberOfRuns; i++) {
@@ -131,6 +140,7 @@ public class Runner {
             json.writeObject(results);
         }
 
+        System.out.println("---------------------------------");
         System.out.println("Runner executed.");
     }
 

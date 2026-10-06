@@ -38,7 +38,12 @@ public class Generator {
     private static Path csvDir;
     private static Path jsonDir;
 
-    static void main(String[] args) throws Exception {
+    /**
+     * Main entrypoint to the app that generates necessary data files for running the benchmark.
+     *
+     * @throws Exception If config could not be loaded.
+     */
+    static void main() throws Exception {
 
         csvDir = ConfigLoader.getCsvDir();
         jsonDir = ConfigLoader.getJsonDir();
