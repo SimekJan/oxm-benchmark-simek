@@ -8,7 +8,6 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Order employees from most orders to least (include order count), show only employees having more than one order.
  */

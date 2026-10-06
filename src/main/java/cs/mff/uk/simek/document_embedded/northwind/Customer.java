@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,6 +15,7 @@ public class Customer {
         this.customerId = customerId;
         this.companyName = companyName;
         this.city = city;
+        this.orders = new ArrayList<>();
     }
 
     private ObjectId id;

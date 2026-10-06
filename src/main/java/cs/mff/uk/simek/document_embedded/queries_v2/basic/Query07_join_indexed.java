@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Join orders with employees on employee ID
  */
-public class Query7_join_indexed implements EmbeddedDocumentQuery<QX_No_Params> {
+public class Query07_join_indexed implements EmbeddedDocumentQuery<QX_No_Params> {
 
     @Override
     public void run(QX_No_Params params) {

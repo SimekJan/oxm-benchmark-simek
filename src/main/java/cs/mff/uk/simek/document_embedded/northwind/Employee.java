@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,6 +19,7 @@ public class Employee {
         this.birthDate = birthDate;
         this.hireDate = hireDate;
         this.city = city;
+        this.orders = new ArrayList<>();
     }
 
     private ObjectId id;

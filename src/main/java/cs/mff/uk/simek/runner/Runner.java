@@ -61,6 +61,25 @@ public class Runner {
             System.out.println("Results after MongoDB queries: " + (long) results.size());
         }
 
+        if (dbsUsed.contains("mongoEmbedded")) {
+            System.out.println("---------------------------------");
+            System.out.println("Starting Embedded MongoDB queries");
+            System.out.println("---------------------------------");
+
+            QueriesRun run = new EmbeddedDocumentQueriesRun();
+
+            // Warm-up
+            runAll(run.getQueries());
+
+            // Measurement
+            for (int i = 0; i < numberOfRuns; i++) {
+                results.add(runAll(run.getQueries()));
+            }
+
+            System.out.println("---------------------------------");
+            System.out.println("Results after Embedded MongoDB queries: " + (long) results.size());
+        }
+
         if (dbsUsed.contains("neo4j")) {
             System.out.println("---------------------------------");
             System.out.println("Starting Neo4j queries");
