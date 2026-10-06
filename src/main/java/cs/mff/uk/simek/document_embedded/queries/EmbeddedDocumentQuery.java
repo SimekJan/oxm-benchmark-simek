@@ -1,4 +1,4 @@
-package cs.mff.uk.simek.document_embedded.queries_v2;
+package cs.mff.uk.simek.document_embedded.queries;
 
 import com.mongodb.client.MongoDatabase;
 import cs.mff.uk.simek.document_embedded.EmbeddedMongoDbManager;

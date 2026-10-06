@@ -1,14 +1,13 @@
-package cs.mff.uk.simek.document_embedded.queries_v2.basic;
+package cs.mff.uk.simek.document_embedded.queries.basic;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Aggregates;
 import cs.mff.uk.simek.document_embedded.northwind.Employee;
-import cs.mff.uk.simek.document_embedded.queries_v2.EmbeddedDocumentQuery;
+import cs.mff.uk.simek.document_embedded.queries.EmbeddedDocumentQuery;
 import cs.mff.uk.simek.query_params.params.QX_No_Params;
 import org.bson.Document;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
