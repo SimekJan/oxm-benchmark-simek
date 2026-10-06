@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,10 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Order {
 
-    public Order(Long orderId, LocalDate orderDate, List<ObjectId> productIds) {
+    public Order(Long orderId, LocalDate orderDate) {
         this.orderId = orderId;
         this.orderDate = orderDate;
-        this.products = productIds;
+        this.products = new ArrayList<>();
     }
 
     private ObjectId id;
@@ -26,5 +27,5 @@ public class Order {
     private ObjectId employee;
     private ObjectId customer;
     private LocalDate orderDate;
-    private List<ObjectId> products;
+    private List<ProductSnapshot> products;
 }

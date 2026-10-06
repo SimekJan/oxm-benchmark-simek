@@ -5,7 +5,7 @@ import cs.mff.uk.simek.document_embedded.EmbeddedMongoDbManager;
 
 public class DropMongoDb {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         MongoDatabase db = EmbeddedMongoDbManager.getDb();
         db.drop();
     }

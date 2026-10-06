@@ -35,11 +35,11 @@ public class PopulateWithDummyData {
         products.createIndex(ascending("productId"));
 
         // ---------- SUPPLIERS ----------
-        Supplier alpha = new Supplier(1L, "Alpha", "Prague", List.of(new ProductSnapshot(p1), new ProductSnapshot(p2)));
-        Supplier beta = new Supplier(2L, "Beta", "Brno", List.of(new ProductSnapshot(p3)));
-        Supplier gamma = new Supplier(3L, "Gamma", "Ostrava", List.of(new ProductSnapshot(p4)));
-        Supplier delta = new Supplier(4L, "Delta", "Plzen", List.of(new ProductSnapshot(p5)));
-        Supplier epsilon = new Supplier(5L, "Epsilon", "Liberec", List.of(new ProductSnapshot(p6)));
+        Supplier alpha = new Supplier(1L, "Alpha", "Prague");
+        Supplier beta = new Supplier(2L, "Beta", "Brno");
+        Supplier gamma = new Supplier(3L, "Gamma", "Ostrava");
+        Supplier delta = new Supplier(4L, "Delta", "Plzen");
+        Supplier epsilon = new Supplier(5L, "Epsilon", "Liberec");
 
         alpha.setSuppliedBy(List.of());
         beta.setSuppliedBy(List.of(alpha.getId()));
@@ -51,12 +51,12 @@ public class PopulateWithDummyData {
         suppliers.createIndex(ascending("supplierId"));
 
         // ---------- ORDERS ----------
-        Order o1 = new Order(1L, LocalDate.of(2025, 1, 1), Arrays.asList(p1.getId(), p3.getId()));
-        Order o2 = new Order(2L, LocalDate.of(2025, 10, 11), Arrays.asList(p2.getId(), p4.getId()));
-        Order o3 = new Order(3L, LocalDate.of(2025, 8, 21), List.of(p5.getId()));
-        Order o4 = new Order(4L, LocalDate.of(2025, 9, 15), Arrays.asList(p6.getId(), p1.getId()));
-        Order o5 = new Order(5L, LocalDate.of(2025, 7, 4), Arrays.asList(p2.getId(), p3.getId()));
-        Order o6 = new Order(6L, LocalDate.of(2025, 12, 9), List.of());
+        Order o1 = new Order(1L, LocalDate.of(2025, 1, 1));
+        Order o2 = new Order(2L, LocalDate.of(2025, 10, 11));
+        Order o3 = new Order(3L, LocalDate.of(2025, 8, 21));
+        Order o4 = new Order(4L, LocalDate.of(2025, 9, 15));
+        Order o5 = new Order(5L, LocalDate.of(2025, 7, 4));
+        Order o6 = new Order(6L, LocalDate.of(2025, 12, 9));
 
         orders.insertMany(Arrays.asList(o1, o2, o3, o4, o5, o6));
         orders.createIndex(ascending("orderId"));

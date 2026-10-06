@@ -1,8 +1,5 @@
 databaseToUse:
-  - postgres
-  - mongo
   - mongoEmbedded
-  - neo4j
 
 generator:
   outputDir: /data

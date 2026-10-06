@@ -6,6 +6,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import cs.mff.uk.simek.ConfigLoader;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+@Slf4j
 public class EmbeddedMongoDbManager {
 
     private static final String DEFAULT_EMBEDDED_MONGO_CONNECTION = "mongodb://mongo:27017";

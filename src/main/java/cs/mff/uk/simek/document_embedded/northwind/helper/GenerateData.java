@@ -28,7 +28,7 @@ public class GenerateData {
 
     private static final int BATCH_SIZE = 2_000;
 
-    public static void main(String[] args) {
+    static void main() {
 
         MongoDatabase db = EmbeddedMongoDbManager.getDb();
 
@@ -100,7 +100,7 @@ public class GenerateData {
                 productsList.add(productMap.get(pid).getId());
             }
 
-            Order o = new Order(i, gen.nextOrderDate(), productsList);
+            Order o = new Order(i, gen.nextOrderDate());
 
             batch.add(o);
             map.put(i, o);
@@ -135,7 +135,7 @@ public class GenerateData {
                 snaps.add(new ProductSnapshot(productMap.get(pid)));
             }
 
-            Supplier s = new Supplier(i, gen.nextCompanyName(), gen.nextCity(), snaps);
+            Supplier s = new Supplier(i, gen.nextCompanyName(), gen.nextCity());
 
             batch.add(s);
 

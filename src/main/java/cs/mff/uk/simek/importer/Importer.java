@@ -34,6 +34,11 @@ public class Importer {
             System.out.println("Data imported to MongoDB.");
         }
 
+        if (dbsUsed.contains("mongoEmbedded")) {
+            EmbeddedMongoImporter.run();
+            System.out.print("Data imported to MongoDB in embedded schema.");
+        }
+
         if (dbsUsed.contains("neo4j")) {
             Neo4jImporter.run();
             System.out.println("Data imported to Neo4j.");

@@ -11,13 +11,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Supplier {
 
-    public Supplier(Long supplierId, String companyName, String city, List<ProductSnapshot> products) {
+    public Supplier(Long supplierId, String companyName, String city) {
         this.supplierId = supplierId;
         this.id = new ObjectId();
         this.companyName = companyName;
         this.city = city;
-        this.products = products;
-        suppliedBy = new ArrayList<>();
+        this.products = new ArrayList<>();
+        this.suppliedBy = new ArrayList<>();
     }
 
     private ObjectId id;
