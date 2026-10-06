@@ -13,17 +13,18 @@ public class Importer {
 
     /**
      * Imports data from generated files to DBs
+     *
      * @param args Command line params, not used
      * @throws IOException Cannot read a file
      */
-    public static void main(String[] args) throws IOException {
+    static void main(String[] args) throws IOException {
 
         Map<String, Object> config = ConfigLoader.getConfig();
 
         List<String> dbsUsed = ((List<?>) config.get("databaseToUse"))
-                .stream()
-                .map(String.class::cast)
-                .toList();
+            .stream()
+            .map(String.class::cast)
+            .toList();
 
         System.out.println("Importing to:");
         System.out.println(dbsUsed);

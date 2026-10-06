@@ -20,18 +20,25 @@ import java.util.Map;
 @Slf4j
 public class Runner {
 
+    private static int DEFAULT_NUMBER_OF_RUNS = 20;
+
     /**
      * Starts the benchmark with provided parameters from config
+     *
      * @param args Command line arguments (not used)
      */
-    public static void main(String[] args) throws IOException {
+    static void main(String[] args) throws IOException {
 
         Map<String, Object> config = ConfigLoader.getConfig();
 
         List<String> dbsUsed = ((List<?>) config.get("databaseToUse"))
-                .stream()
-                .map(String.class::cast)
-                .toList();
+            .stream()
+            .map(String.class::cast)
+            .toList();
+
+        Map<String, Object> runnerConfig = ConfigLoader.getSection("runner");
+
+        Integer numberOfRuns = (Integer) runnerConfig.getOrDefault("numberOfRuns", DEFAULT_NUMBER_OF_RUNS);
 
         List<List<QueryResult>> results = new ArrayList<>();
 
@@ -46,7 +53,7 @@ public class Runner {
             runAll(run.getQueries());
 
             // Measurement
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < numberOfRuns; i++) {
                 results.add(runAll(run.getQueries()));
             }
 
@@ -65,7 +72,7 @@ public class Runner {
             runAll(run.getQueries());
 
             // Measurement
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < numberOfRuns; i++) {
                 // For emptying caches
                 Neo4jSessionManager.getSession().clear();
 
@@ -87,7 +94,7 @@ public class Runner {
             runAll(run.getQueries());
 
             // Measurement
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < numberOfRuns; i++) {
                 // For emptying caches
                 HibernateSessionManager.getSession().clear();
 

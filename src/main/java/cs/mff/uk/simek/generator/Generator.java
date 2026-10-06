@@ -38,7 +38,7 @@ public class Generator {
     private static Path csvDir;
     private static Path jsonDir;
 
-    public static void main(String[] args) throws Exception {
+    static void main(String[] args) throws Exception {
 
         csvDir = ConfigLoader.getCsvDir();
         jsonDir = ConfigLoader.getJsonDir();
@@ -234,7 +234,7 @@ public class Generator {
         LocalDate hireDate = gen.nextHireDate();
         String city = gen.nextCity();
 
-        csv.printRecord( employeeId, firstName, lastName, birthDate, hireDate, city, reportsTo);
+        csv.printRecord(employeeId, firstName, lastName, birthDate, hireDate, city, reportsTo);
 
         json.writeStartObject();
         json.writeNumberField("employeeId", employeeId);

@@ -22,3 +22,6 @@ importer:
     connection: jdbc:postgresql://postgres:5432/oxm_benchmark
     username: postgres
     password: oxm_password
+
+runner:
+  numberOfRuns: 20
