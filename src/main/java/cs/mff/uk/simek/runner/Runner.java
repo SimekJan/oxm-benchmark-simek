@@ -21,11 +21,13 @@ import java.util.Objects;
 @Slf4j
 public class Runner {
 
-    private static int DEFAULT_NUMBER_OF_RUNS = 20;
-    private static String DEFAULT_PRINT_OPTION = "quiet";
+    private static final int DEFAULT_NUMBER_OF_RUNS = 20;
+    private static final String DEFAULT_PRINT_OPTION = "quiet";
 
     /**
      * Starts the benchmark with provided parameters from config
+     *
+     * @throws IOException If config file cannot be loaded.
      */
     static void main() throws IOException {
 

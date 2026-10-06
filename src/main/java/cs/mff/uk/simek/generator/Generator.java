@@ -29,11 +29,11 @@ public class Generator {
     private static final long DEFAULT_SEED = 1234567890L;
 
     // TODO: use these
-    private static int supplierCount = SUPPLIER_COUNT;
-    private static int employeeCount = EMPLOYEE_COUNT;
-    private static int productCount = PRODUCT_COUNT;
-    private static int customerCount = CUSTOMER_COUNT;
-    private static int orderCount = ORDER_COUNT;
+    private static final int supplierCount = SUPPLIER_COUNT;
+    private static final int employeeCount = EMPLOYEE_COUNT;
+    private static final int productCount = PRODUCT_COUNT;
+    private static final int customerCount = CUSTOMER_COUNT;
+    private static final int orderCount = ORDER_COUNT;
 
     private static Path csvDir;
     private static Path jsonDir;

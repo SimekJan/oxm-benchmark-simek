@@ -15,7 +15,7 @@ import java.util.Map;
 public class HibernateSessionManager {
 
     private static final String DEFAULT_POSTGRES_CONNECTION =
-            "jdbc:postgresql://postgres:5432/oxm_benchmark";
+        "jdbc:postgresql://postgres:5432/oxm_benchmark";
     private static final String DEFAULT_POSTGRES_USERNAME = "postgres";
     private static final String DEFAULT_POSTGRES_PASSWORD = "oxm_password";
 
@@ -34,7 +34,7 @@ public class HibernateSessionManager {
         try {
             Map<String, Object> config = ConfigLoader.getSection(
                 ConfigLoader.IMPORTER_SECTION,
-                ConfigLoader.POSTGRE_IMPORTER_SECTION);
+                ConfigLoader.POSTGRES_IMPORTER_SECTION);
 
             connection = (String) config.get("connection");
             username = (String) config.get("username");
@@ -49,10 +49,10 @@ public class HibernateSessionManager {
             .setProperty("hibernate.connection.password", password)
             .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
             .setProperty("hibernate.hbm2ddl.auto", "update")
-                // To avoid caching
+            // To avoid caching
             .setProperty(AvailableSettings.USE_SECOND_LEVEL_CACHE, "false")
             .setProperty(AvailableSettings.USE_QUERY_CACHE, "false")
-                //
+            //
             .addAnnotatedClass(Customer.class)
             .addAnnotatedClass(Employee.class)
             .addAnnotatedClass(Order.class)

@@ -14,7 +14,6 @@ public class Importer {
     /**
      * Imports data from generated files to DBs
      *
-     * @param args Command line params, not used
      * @throws IOException Cannot read a file
      */
     static void main() throws IOException {
