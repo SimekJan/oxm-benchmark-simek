@@ -7,7 +7,7 @@ import com.mongodb.client.model.UpdateOneModel;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.model.WriteModel;
 import cs.mff.uk.simek.generator.DataProvider;
-import cs.mff.uk.simek.document_embedded.MongoDbManger;
+import cs.mff.uk.simek.document_embedded.EmbeddedMongoDbManager;
 import cs.mff.uk.simek.document_embedded.northwind.*;
 import org.bson.types.ObjectId;
 
@@ -30,7 +30,7 @@ public class GenerateData {
 
     public static void main(String[] args) {
 
-        MongoDatabase db = MongoDbManger.getDb();
+        MongoDatabase db = EmbeddedMongoDbManager.getDb();
 
         MongoCollection<Customer> customers = db.getCollection("Customers", Customer.class);
         MongoCollection<Product> products = db.getCollection("Products", Product.class);
@@ -118,9 +118,9 @@ public class GenerateData {
     }
 
     private static Map<Long, ObjectId> generateSuppliers(
-            MongoCollection<Supplier> suppliers,
-            DataProvider gen,
-            Map<Long, Product> productMap) {
+        MongoCollection<Supplier> suppliers,
+        DataProvider gen,
+        Map<Long, Product> productMap) {
 
         Map<Long, ObjectId> ids = new HashMap<>();
         List<Supplier> batch = new ArrayList<>();
@@ -213,12 +213,12 @@ public class GenerateData {
             }
 
             Employee e = new Employee(
-                    i,
-                    gen.nextFirstName(),
-                    gen.nextLastName(),
-                    gen.nextBirthDate(),
-                    gen.nextHireDate(),
-                    gen.nextCity()
+                i,
+                gen.nextFirstName(),
+                gen.nextLastName(),
+                gen.nextBirthDate(),
+                gen.nextHireDate(),
+                gen.nextCity()
             );
 
             e.setOrders(snaps);
@@ -246,9 +246,9 @@ public class GenerateData {
     }
 
     private static void generateEmployeeHierarchy(
-            DataProvider gen,
-            MongoCollection<Employee> employees,
-            Map<Long, ObjectId> employeeIds) {
+        DataProvider gen,
+        MongoCollection<Employee> employees,
+        Map<Long, ObjectId> employeeIds) {
 
         List<WriteModel<Employee>> updates = new ArrayList<>();
 
@@ -257,17 +257,17 @@ public class GenerateData {
 
         int managerIndex = 0;
         int reportsAssigned = 0;
-        int nextReportsToAssign = gen.nextInt(3,8);
+        int nextReportsToAssign = gen.nextInt(3, 8);
 
         for (long employee = 2; employee <= EMPLOYEE_COUNT; employee++) {
 
             long manager = potentialManagers.get(managerIndex);
 
             updates.add(
-                    new UpdateOneModel<>(
-                            Filters.eq("employeeId", employee),
-                            Updates.set("reportsTo", employeeIds.get(manager))
-                    )
+                new UpdateOneModel<>(
+                    Filters.eq("employeeId", employee),
+                    Updates.set("reportsTo", employeeIds.get(manager))
+                )
             );
 
             potentialManagers.add(employee);
@@ -275,7 +275,7 @@ public class GenerateData {
             reportsAssigned++;
 
             if (reportsAssigned == nextReportsToAssign) {
-                nextReportsToAssign = gen.nextInt(3,8);
+                nextReportsToAssign = gen.nextInt(3, 8);
                 reportsAssigned = 0;
                 managerIndex++;
             }
@@ -292,9 +292,9 @@ public class GenerateData {
     }
 
     private static void generateCustomers(
-            MongoCollection<Customer> customers,
-            DataProvider gen,
-            Map<Long, Order> orderMap) {
+        MongoCollection<Customer> customers,
+        DataProvider gen,
+        Map<Long, Order> orderMap) {
 
         List<Customer> batch = new ArrayList<>();
 

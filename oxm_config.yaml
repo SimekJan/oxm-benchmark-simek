@@ -1,6 +1,7 @@
 databaseToUse:
   - postgres
   - mongo
+  - mongoEmbedded
   - neo4j
 
 generator:
@@ -14,6 +15,7 @@ importer:
   mongo:
     connection: mongodb://mongo:27017
     db_name: oxm_benchmark
+    db_name_embedded: oxm_benchmark_embedded
   neo4j:
     connection: bolt://neo4j:7687
     username: neo4j
