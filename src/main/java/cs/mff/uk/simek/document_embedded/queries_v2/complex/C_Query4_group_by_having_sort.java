@@ -46,12 +46,15 @@ public class C_Query4_group_by_having_sort implements EmbeddedDocumentQuery<QX_N
             )
         ), Document.class).into(new ArrayList<>());
 
-        for (Document row : results) {
-            String firstName = row.getString("firstName");
-            String lastName = row.getString("lastName");
-            Integer count = row.getInteger("orderCount");
+        System.out.println("Ordered employees with more than one order: " + results.size() + ".");
+        /*
+            for (Document row : results) {
+                String firstName = row.getString("firstName");
+                String lastName = row.getString("lastName");
+                Integer count = row.getInteger("orderCount");
 
-            System.out.println(firstName + " " + lastName + " - " + count);
-        }
+                System.out.println(firstName + " " + lastName + " - " + count);
+            }
+         */
     }
 }

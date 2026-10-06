@@ -1,4 +1,7 @@
 databaseToUse:
+  - postgres
+  - neo4j
+  - mongo
   - mongoEmbedded
 
 generator:

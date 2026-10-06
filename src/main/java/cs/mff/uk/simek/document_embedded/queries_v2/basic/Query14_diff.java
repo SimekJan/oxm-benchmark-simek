@@ -33,8 +33,12 @@ public class Query14_diff implements EmbeddedDocumentQuery<QX_No_Params> {
             project(fields(include("companyName")))
         ), Document.class).into(new ArrayList<>());
 
-        for (Document doc : result) {
-            System.out.println(doc.get("companyName"));
-        }
+        System.out.println("Customers without an order found: " + result.size());
+
+        /*
+            for (Document doc : result) {
+                System.out.println(doc.get("companyName"));
+            }
+         */
     }
 }

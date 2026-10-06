@@ -84,19 +84,22 @@ public class C_Query10_employee_report implements EmbeddedDocumentQuery<CQ10_Par
 
         ), Document.class).into(new ArrayList<>());
 
-        for (Document row : results) {
-            System.out.println("Employee: " +
-                row.get("employeeId") + " " +
-                row.getString("firstName") + " " +
-                row.getString("lastName")
-            );
+        System.out.println("Report included " + results.size() + " lines.");
+        /*
+            for (Document row : results) {
+                System.out.println("Employee: " +
+                    row.get("employeeId") + " " +
+                    row.getString("firstName") + " " +
+                    row.getString("lastName")
+                );
 
-            System.out.println("Manages " + row.get("orderCount") +
-                " orders, with total price of " + row.get("totalPrice"));
+                System.out.println("Manages " + row.get("orderCount") +
+                    " orders, with total price of " + row.get("totalPrice"));
 
-            System.out.println("Supervises " + row.get("subordinateCount") + " employee(s)");
-            System.out.println("Works for " + row.get("yearsWorked") + " years. Aged: " + row.get("age"));
-            System.out.println("-----------------------------------------------------------------------------------");
-        }
+                System.out.println("Supervises " + row.get("subordinateCount") + " employee(s)");
+                System.out.println("Works for " + row.get("yearsWorked") + " years. Aged: " + row.get("age"));
+                System.out.println("-----------------------------------------------------------------------------------");
+            }
+        */
     }
 }

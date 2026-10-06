@@ -50,7 +50,7 @@ public class Runner {
             QueriesRun run = new DocumentQueriesRun();
 
             // Warm-up
-            runAll(run.getQueries());
+            // runAll(run.getQueries());
 
             // Measurement
             for (int i = 0; i < numberOfRuns; i++) {
@@ -69,7 +69,7 @@ public class Runner {
             QueriesRun run = new EmbeddedDocumentQueriesRun();
 
             // Warm-up
-            runAll(run.getQueries());
+            // runAll(run.getQueries());
 
             // Measurement
             for (int i = 0; i < numberOfRuns; i++) {
@@ -88,7 +88,7 @@ public class Runner {
             QueriesRun run = new GraphQueriesRun();
 
             // Warm-up
-            runAll(run.getQueries());
+            // runAll(run.getQueries());
 
             // Measurement
             for (int i = 0; i < numberOfRuns; i++) {

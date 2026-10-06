@@ -41,11 +41,15 @@ public class C_Query5_filter_join implements EmbeddedDocumentQuery<CQ5_Params> {
             )
         ), Document.class).into(new ArrayList<>());
 
-        for (Document row : results) {
-            String product = row.getString("product");
-            String company = row.getString("company");
+        System.out.println("Suppliers-product join results: " + results.size());
 
-            System.out.println(company + " - " + product);
-        }
+        /*
+            for (Document row : results) {
+                String product = row.getString("product");
+                String company = row.getString("company");
+
+                System.out.println(company + " - " + product);
+            }
+         */
     }
 }

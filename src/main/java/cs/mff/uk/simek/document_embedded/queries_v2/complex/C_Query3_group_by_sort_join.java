@@ -38,13 +38,17 @@ public class C_Query3_group_by_sort_join implements EmbeddedDocumentQuery<QX_No_
 
         ), Document.class).into(new ArrayList<>());
 
-        for (Document row : results) {
+        System.out.println("Ordered customers size: " + results.size());
 
-            String customer = row.getString("companyName");
-            Long customerId = row.getLong("customerId");
-            Integer count = row.getInteger("orderCount");
+        /*
+            for (Document row : results) {
 
-            System.out.println(customerId + " - " + customer + " - " + count);
-        }
+                String customer = row.getString("companyName");
+                Long customerId = row.getLong("customerId");
+                Integer count = row.getInteger("orderCount");
+
+                System.out.println(customerId + " - " + customer + " - " + count);
+            }
+         */
     }
 }

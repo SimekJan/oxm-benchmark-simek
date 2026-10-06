@@ -38,12 +38,16 @@ public class C_Query2_join_sort implements EmbeddedDocumentQuery<QX_No_Params> {
 
         ), Document.class).into(new ArrayList<>());
 
-        for (Document row : results) {
-            Long orderId = row.getLong("order");
-            String firstName = row.getString("firstName");
-            String lastName = row.getString("lastName");
+        System.out.println("Joined orders and employees result size: " + results.size());
 
-            System.out.println("Order " + orderId + " -> " + firstName + " " + lastName);
-        }
+        /*
+            for (Document row : results) {
+                Long orderId = row.getLong("order");
+                String firstName = row.getString("firstName");
+                String lastName = row.getString("lastName");
+
+                System.out.println("Order " + orderId + " -> " + firstName + " " + lastName);
+            }
+         */
     }
 }

@@ -27,13 +27,17 @@ public class Query07_join_indexed implements EmbeddedDocumentQuery<QX_No_Params>
             Aggregates.unwind("$orders")
         ), Document.class).into(new ArrayList<>());
 
-        for (Document d : results) {
-            String firstName = d.getString("firstName");
-            String lastName = d.getString("lastName");
-            Document order = (Document) d.get("orders");
-            Date orderDate = order.getDate("orderDate");
+        System.out.println("Orders-employees join result size: " + results.size());
 
-            System.out.println(firstName + " " + lastName + ": " + orderDate);
-        }
+        /*
+            for (Document d : results) {
+                String firstName = d.getString("firstName");
+                String lastName = d.getString("lastName");
+                Document order = (Document) d.get("orders");
+                Date orderDate = order.getDate("orderDate");
+
+                System.out.println(firstName + " " + lastName + ": " + orderDate);
+            }
+         */
     }
 }
